@@ -23,17 +23,20 @@ class MainWindow(QMainWindow):
         #self.setGeometry(300, 150, 600, 500)
         self.setFixedSize(600, 500)
         
-        mainLabel = QLabel("ASTEROIDS", self)
-        mainLabel.resize(200,100)
-        mainLabel.setStyleSheet("color: white; font-size:32px; font:bold")
-        mainLabel.move(200, 0)
-
-
         # background image
         self.label = QLabel(self)
         self.pixmap = QPixmap('img.png')
         self.label.setPixmap(self.pixmap)
         self.label.resize(600, 500)
+
+        mainLabel = QLabel("ASTEROIDS", self)
+        mainLabel.resize(200,100)
+        mainLabel.setStyleSheet("color: white; font-size:32px; font:bold")
+        mainLabel.move(200, 0)
+        
+
+
+        
 
         newGameBtn = QPushButton("New Game",  self)
         newGameBtn.setStyleSheet("color: white; background-color: transparent; font:bold; border-style: outset; border-width: 2px; border-color: white")
@@ -115,7 +118,9 @@ class NewGameWindow(QMainWindow):
         changeWindow(window1, window)
 
     def startGame(self):
-
+        bit = window1.pos().x() + 1
+        bit2 = window1.pos().y() + 30 + 1
+        gameStart.setGeometry(bit, bit2, 600, 500)
         changeWindow(window1, gameStart)
 
 if __name__ == '__main__':
