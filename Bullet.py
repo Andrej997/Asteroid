@@ -11,7 +11,8 @@ class Bullet(QLabel):
         super.__init__()
         image = QPixmap("Images/bullet.png")
         t = QTransform(rotation)
-        rotatedImage = QPixmap.transformed(t)
+        
+        rotatedImage = image.transformed(t)
         self.setPixmap(rotatedImage)
         self.init_x = x
         self.init_y = y
