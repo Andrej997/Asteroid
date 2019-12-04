@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import QApplication, QLabel, QMainWindow, QPushButton, QWid
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPalette, QColor
 import sys
+from SpaceShuttle import *
 import multiprocessing as mp
 import time
 
@@ -74,6 +75,7 @@ class NewGameWindow(QMainWindow):
         singlPlyBtn.setStyleSheet("color: white; background-color: transparent; font:bold; border-style: outset; border-width: 2px; border-color: white")
         singlPlyBtn.resize(100, 50)
         singlPlyBtn.move(250, 100)
+        singlPlyBtn.clicked.connect(self.startGame)
 
         multiPlyBtn = QPushButton("Multiplayer", self)
         multiPlyBtn.setStyleSheet("color: white; background-color: transparent; font:bold; border-style: outset; border-width: 2px; border-color: white")
@@ -90,9 +92,15 @@ class NewGameWindow(QMainWindow):
     def returnToMain(self):
         changeWindow(window1, window)
 
+    def startGame(self):
+
+        changeWindow(window1, gameStart)
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = MainWindow()
     window.show()
     window1 = NewGameWindow()
+    gameStart = SpaceShuttle()
+   # gameStart.hide()
     app.exec_()
