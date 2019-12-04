@@ -31,7 +31,7 @@ class MainWindow(QMainWindow):
 
         # background image
         self.label = QLabel(self)
-        self.pixmap = QPixmap('img.png')
+        self.pixmap = QPixmap('Images/img.png')
         self.label.setPixmap(self.pixmap)
         self.label.resize(600, 500)
 
@@ -81,7 +81,7 @@ class NewGameWindow(QMainWindow):
 
         # background image
         self.label = QLabel(self)
-        self.pixmap = QPixmap('img.png')
+        self.pixmap = QPixmap('Images/img.png')
         self.label.setPixmap(self.pixmap)
         self.label.resize(600, 500)
 
