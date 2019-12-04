@@ -34,14 +34,6 @@ class MainWindow(QMainWindow):
         mainLabel.setStyleSheet("color: white; font-size:32px; font:bold")
         mainLabel.move(200, 0)
         
-
-
-        # background image
-        self.label = QLabel(self)
-        self.pixmap = QPixmap('Images/img.png')
-        self.label.setPixmap(self.pixmap)
-        self.label.resize(600, 500)
-
         newGameBtn = QPushButton("New Game",  self)
         newGameBtn.setStyleSheet("color: white; background-color: transparent; font:bold; border-style: outset; border-width: 2px; border-color: white")
         newGameBtn.resize(100, 50)
