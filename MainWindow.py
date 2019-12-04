@@ -6,8 +6,8 @@ import multiprocessing as mp
 import time
 
 def changeWindow(w1, w2):
-        w1.hide()
         w2.show()
+        w1.hide()
 
 class MainWindow(QMainWindow):
 
@@ -25,7 +25,7 @@ class MainWindow(QMainWindow):
         mainLabel.setStyleSheet("color: white; font-size:32px; font:bold")
         mainLabel.move(200, 0)
 
-        #label = QLabel("This is a PyQt5 window!")
+        
         newGameBtn = QPushButton("New Game", self)
         newGameBtn.setStyleSheet("color: white; background-color: transparent; font:bold; border-style: outset; border-width: 2px; border-color: white")
         newGameBtn.resize(100, 50)
@@ -54,39 +54,36 @@ class MainWindow(QMainWindow):
     def close(self):
         app.closeAllWindows()
 
-    
-    
     def startNewGameWindow(self):
         changeWindow(window, window1)
-        #self.newGameWindow.setupUI(self)
-        #self.show()
+        
     
-class NewGameWindow(object):
-    def setupUI(self, MainWindow):
-        MainWindow.setGeometry(300, 150, 600, 500)
-        MainWindow.setFixedSize(600, 500)
-        MainWindow.setWindowTitle("New game")
-        self.CentralWidget = QWidget(MainWindow)
-        MainWindow.setCentralWidget(self.CentralWidget)
-        MainWindow.returnBtn = QPushButton("Return", self.CentralWidget)
-        MainWindow.returnBtn.setStyleSheet("color: white; background-color: transparent; font:bold; border-style: outset; border-width: 2px; border-color: white")
-        MainWindow.returnBtn.resize(100, 50)
-        MainWindow.returnBtn.move(250, 165)
-        MainWindow.returnBtn.clicked.connect(self.returnToMain)
-    
-    def returnToMain(self):
-        MainWindow.__init__(self).show()
-
-class NewGameWindow1(QMainWindow):
+class NewGameWindow(QMainWindow):
     def __init__(self):
-        super(NewGameWindow1, self).__init__()
+        super(NewGameWindow, self).__init__()
         self.setStyleSheet("background-color:black")
         self.setWindowTitle("Asteroids")
         self.setGeometry(300, 150, 600, 500)
+
+        mainLabel = QLabel("Chose game mode", self)
+        mainLabel.resize(300, 100)
+        mainLabel.setStyleSheet("color: white; font-size:32px; font:bold")
+        mainLabel.move(150, 0)
+
+        singlPlyBtn = QPushButton("Single player", self)
+        singlPlyBtn.setStyleSheet("color: white; background-color: transparent; font:bold; border-style: outset; border-width: 2px; border-color: white")
+        singlPlyBtn.resize(100, 50)
+        singlPlyBtn.move(250, 100)
+
+        multiPlyBtn = QPushButton("Multiplayer", self)
+        multiPlyBtn.setStyleSheet("color: white; background-color: transparent; font:bold; border-style: outset; border-width: 2px; border-color: white")
+        multiPlyBtn.resize(100, 50)
+        multiPlyBtn.move(250, 165)
+        
         returnBtn = QPushButton("Return", self)
         returnBtn.setStyleSheet("color: white; background-color: transparent; font:bold; border-style: outset; border-width: 2px; border-color: white")
         returnBtn.resize(100, 50)
-        returnBtn.move(250, 165)
+        returnBtn.move(250, 230)
 
         returnBtn.clicked.connect(self.returnToMain)
 
@@ -97,5 +94,5 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = MainWindow()
     window.show()
-    window1 = NewGameWindow1()
+    window1 = NewGameWindow()
     app.exec_()
