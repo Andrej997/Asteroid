@@ -25,7 +25,7 @@ class MainWindow(QMainWindow):
         
         # background image
         self.label = QLabel(self)
-        self.pixmap = QPixmap('img.png')
+        self.pixmap = QPixmap('Images/img.png')
         self.label.setPixmap(self.pixmap)
         self.label.resize(600, 500)
 
@@ -36,7 +36,11 @@ class MainWindow(QMainWindow):
         
 
 
-        
+        # background image
+        self.label = QLabel(self)
+        self.pixmap = QPixmap('Images/img.png')
+        self.label.setPixmap(self.pixmap)
+        self.label.resize(600, 500)
 
         newGameBtn = QPushButton("New Game",  self)
         newGameBtn.setStyleSheet("color: white; background-color: transparent; font:bold; border-style: outset; border-width: 2px; border-color: white")
@@ -84,7 +88,7 @@ class NewGameWindow(QMainWindow):
 
         # background image
         self.label = QLabel(self)
-        self.pixmap = QPixmap('img.png')
+        self.pixmap = QPixmap('Images/img.png')
         self.label.setPixmap(self.pixmap)
         self.label.resize(600, 500)
 
