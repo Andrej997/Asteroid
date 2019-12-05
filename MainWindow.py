@@ -28,7 +28,7 @@ class MainWindow(QMainWindow):
         self.pixmap = QPixmap('Images/img.png')
         self.label.setPixmap(self.pixmap)
         self.label.resize(600, 500)
-
+        
         self.mainLabel = QLabel("ASTEROIDS", self)
         self.mainLabel.resize(200,100)
         self.mainLabel.setStyleSheet("color: white; font-size:32px; font:bold")
@@ -76,6 +76,7 @@ class MainWindow(QMainWindow):
         self.returnBtn.move(250, 230)
         self.returnBtn.hide()
         self.returnBtn.clicked.connect(self.returnToMainWindow)
+
      
         # The `Qt` namespace has a lot of attributes to customise
         # widgets. See: http://doc.qt.io/qt-5/qt.html
@@ -111,7 +112,7 @@ class MainWindow(QMainWindow):
 
     def close(self):
         app.closeAllWindows()
-    
+        
     def startGame(self):
         bit = window.pos().x() + 1
         bit2 = window.pos().y() + 30 + 1
