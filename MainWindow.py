@@ -16,7 +16,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
         
-        self.newGameWindow = NewGameWindow()
+        #self.newGameWindow = NewGameWindow()
         #self.setStyleSheet("background-image: url(C:\\Users\\Mistra\\Desktop\\Pajton\\vjezba\\asteroid.jpg)")
         #self.setStyleSheet("background-color:black")
         self.setWindowTitle("Asteroids")
@@ -29,27 +29,53 @@ class MainWindow(QMainWindow):
         self.label.setPixmap(self.pixmap)
         self.label.resize(600, 500)
 
-        mainLabel = QLabel("ASTEROIDS", self)
-        mainLabel.resize(200,100)
-        mainLabel.setStyleSheet("color: white; font-size:32px; font:bold")
-        mainLabel.move(200, 0)
+        self.mainLabel = QLabel("ASTEROIDS", self)
+        self.mainLabel.resize(200,100)
+        self.mainLabel.setStyleSheet("color: white; font-size:32px; font:bold")
+        self.mainLabel.move(200, 0)
         
-        newGameBtn = QPushButton("New Game",  self)
-        newGameBtn.setStyleSheet("color: white; background-color: transparent; font:bold; border-style: outset; border-width: 2px; border-color: white")
-        newGameBtn.resize(100, 50)
-        newGameBtn.move(250, 100)
-        newGameBtn.clicked.connect(self.startNewGameWindow)
+        self.newGameBtn = QPushButton("New Game",  self)
+        self.newGameBtn.setStyleSheet("color: white; background-color: transparent; font:bold; border-style: outset; border-width: 2px; border-color: white")
+        self.newGameBtn.resize(100, 50)
+        self.newGameBtn.move(250, 100)
+        self.newGameBtn.clicked.connect(self.startNewGameWindow)
 
-        aboutGameBtn = QPushButton("About game", self)
-        aboutGameBtn.setStyleSheet("color: white; background-color: transparent; font:bold; border-style: outset; border-width: 2px; border-color: white")
-        aboutGameBtn.resize(100, 50)
-        aboutGameBtn.move(250, 165)
+        self.aboutGameBtn = QPushButton("About game", self)
+        self.aboutGameBtn.setStyleSheet("color: white; background-color: transparent; font:bold; border-style: outset; border-width: 2px; border-color: white")
+        self.aboutGameBtn.resize(100, 50)
+        self.aboutGameBtn.move(250, 165)
 
-        exitBtn = QPushButton("Exit game", self)
-        exitBtn.setStyleSheet("color: white; background-color: transparent; font:bold; border-style: outset; border-width: 2px; border-color: white")
-        exitBtn.resize(100, 50)
-        exitBtn.move(250, 230)
-        exitBtn.clicked.connect(self.close)
+        self.exitBtn = QPushButton("Exit game", self)
+        self.exitBtn.setStyleSheet("color: white; background-color: transparent; font:bold; border-style: outset; border-width: 2px; border-color: white")
+        self.exitBtn.resize(100, 50)
+        self.exitBtn.move(250, 230)
+        self.exitBtn.clicked.connect(self.close)
+
+        self.mainLabelNewGame = QLabel("Chose game mode", self)
+        self.mainLabelNewGame.resize(300, 100)
+        self.mainLabelNewGame.setStyleSheet("color: white; font-size:32px; font:bold")
+        self.mainLabelNewGame.move(150, 0)
+        self.mainLabelNewGame.hide()
+
+        self.singlPlyBtn = QPushButton("Single player", self)
+        self.singlPlyBtn.setStyleSheet("color: white; background-color: transparent; font:bold; border-style: outset; border-width: 2px; border-color: white")
+        self.singlPlyBtn.resize(100, 50)
+        self.singlPlyBtn.move(250, 100)
+        self.singlPlyBtn.clicked.connect(self.startGame)
+        self.singlPlyBtn.hide()
+
+        self.multiPlyBtn = QPushButton("Multiplayer", self)
+        self.multiPlyBtn.setStyleSheet("color: white; background-color: transparent; font:bold; border-style: outset; border-width: 2px; border-color: white")
+        self.multiPlyBtn.resize(100, 50)
+        self.multiPlyBtn.move(250, 165)
+        self.multiPlyBtn.hide()
+        
+        self.returnBtn = QPushButton("Return", self)
+        self.returnBtn.setStyleSheet("color: white; background-color: transparent; font:bold; border-style: outset; border-width: 2px; border-color: white")
+        self.returnBtn.resize(100, 50)
+        self.returnBtn.move(250, 230)
+        self.returnBtn.hide()
+        self.returnBtn.clicked.connect(self.returnToMainWindow)
      
         # The `Qt` namespace has a lot of attributes to customise
         # widgets. See: http://doc.qt.io/qt-5/qt.html
@@ -60,70 +86,43 @@ class MainWindow(QMainWindow):
         #self.setCentralWidget(label)
 
     def startNewGameWindow(self):
-        bit = window.pos().x() + 1
-        bit2 = window.pos().y() + 30 +1
-        window1.setGeometry(bit, bit2, 600, 500)
-        changeWindow(window, window1)
+        self.mainLabel.hide()
+        self.newGameBtn.hide()
+        self.aboutGameBtn.hide()
+        self.exitBtn.hide()
+        self.mainLabelNewGame.show()
+        self.singlPlyBtn.show()
+        self.multiPlyBtn.show()
+        self.returnBtn.show()
+        #bit = window.pos().x() + 1
+        #bit2 = window.pos().y() + 30 +1
+        #window1.setGeometry(bit, bit2, 600, 500)
+        #changeWindow(window, window1)
+    
+    def returnToMainWindow(self):
+        self.mainLabel.show()
+        self.newGameBtn.show()
+        self.aboutGameBtn.show()
+        self.exitBtn.show()
+        self.mainLabelNewGame.hide()
+        self.singlPlyBtn.hide()
+        self.multiPlyBtn.hide()
+        self.returnBtn.hide()
 
     def close(self):
         app.closeAllWindows()
-
-
-
-
-class NewGameWindow(QMainWindow):
-    def __init__(self):
-        super(NewGameWindow, self).__init__()
-        #self.setStyleSheet("background-color:black")
-        self.setWindowTitle("Asteroids")
-        self.setGeometry(300, 150, 600, 500)
-
-        # background image
-        self.label = QLabel(self)
-        self.pixmap = QPixmap('Images/img.png')
-        self.label.setPixmap(self.pixmap)
-        self.label.resize(600, 500)
-
-        mainLabel = QLabel("Chose game mode", self)
-        mainLabel.resize(300, 100)
-        mainLabel.setStyleSheet("color: white; font-size:32px; font:bold")
-        mainLabel.move(150, 0)
-
-        singlPlyBtn = QPushButton("Single player", self)
-        singlPlyBtn.setStyleSheet("color: white; background-color: transparent; font:bold; border-style: outset; border-width: 2px; border-color: white")
-        singlPlyBtn.resize(100, 50)
-        singlPlyBtn.move(250, 100)
-        singlPlyBtn.clicked.connect(self.startGame)
-
-        multiPlyBtn = QPushButton("Multiplayer", self)
-        multiPlyBtn.setStyleSheet("color: white; background-color: transparent; font:bold; border-style: outset; border-width: 2px; border-color: white")
-        multiPlyBtn.resize(100, 50)
-        multiPlyBtn.move(250, 165)
-        
-        returnBtn = QPushButton("Return", self)
-        returnBtn.setStyleSheet("color: white; background-color: transparent; font:bold; border-style: outset; border-width: 2px; border-color: white")
-        returnBtn.resize(100, 50)
-        returnBtn.move(250, 230)
-
-        returnBtn.clicked.connect(self.returnToMain)
-
-    def returnToMain(self):
-        bit = window1.pos().x() + 1
-        bit2 = window1.pos().y() + 30 + 1
-        window.setGeometry(bit, bit2, 600, 500)
-        changeWindow(window1, window)
-
+    
     def startGame(self):
-        bit = window1.pos().x() + 1
-        bit2 = window1.pos().y() + 30 + 1
+        bit = window.pos().x() + 1
+        bit2 = window.pos().y() + 30 + 1
         gameStart.setGeometry(bit, bit2, 600, 500)
-        changeWindow(window1, gameStart)
+        changeWindow(window, gameStart)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = MainWindow()
     window.show()
-    window1 = NewGameWindow()
+    #window1 = NewGameWindow()
     gameStart = SpaceShuttle()
-   # gameStart.hide()
+    #gameStart.hide()
     app.exec_()
