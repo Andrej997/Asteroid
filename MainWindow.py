@@ -33,20 +33,36 @@ class MainWindow(QMainWindow):
         mainLabel.resize(200,100)
         mainLabel.setStyleSheet("color: white; font-size:32px; font:bold")
         mainLabel.move(200, 0)
-        
+
         newGameBtn = QPushButton("New Game",  self)
-        newGameBtn.setStyleSheet("color: white; background-color: transparent; font:bold; border-style: outset; border-width: 2px; border-color: white")
+        #newGameBtn.setStyleSheet("color: white; background-color: black; font:bold; border-style: outset; border-width: 2px; border-color: white")
         newGameBtn.resize(100, 50)
         newGameBtn.move(250, 100)
+        newGameBtn.setStyleSheet("QPushButton{"
+                                 "color: white; background-color: black; font:bold; border-style: outset; border-width: 2px; border-color: white"
+                                 "}"
+                                 "QPushButton:hover{"
+                                 "background-color:#6C9BD4;"
+                                 "}")
         newGameBtn.clicked.connect(self.startNewGameWindow)
 
         aboutGameBtn = QPushButton("About game", self)
-        aboutGameBtn.setStyleSheet("color: white; background-color: transparent; font:bold; border-style: outset; border-width: 2px; border-color: white")
+        aboutGameBtn.setStyleSheet("QPushButton{"
+                              "color: white; background-color: black; font:bold; border-style: outset; border-width: 2px; border-color: white"
+                              "}"
+                              "QPushButton:hover{"
+                              "background-color:#6C9BD4;"
+                              "}")
         aboutGameBtn.resize(100, 50)
         aboutGameBtn.move(250, 165)
 
         exitBtn = QPushButton("Exit game", self)
-        exitBtn.setStyleSheet("color: white; background-color: transparent; font:bold; border-style: outset; border-width: 2px; border-color: white")
+        exitBtn.setStyleSheet("QPushButton{"
+                                 "color: white; background-color: black; font:bold; border-style: outset; border-width: 2px; border-color: white"
+                                 "}"
+                                 "QPushButton:hover{"
+                                 "background-color:#DE251B;"
+                                 "}")
         exitBtn.resize(100, 50)
         exitBtn.move(250, 230)
         exitBtn.clicked.connect(self.close)
@@ -90,18 +106,33 @@ class NewGameWindow(QMainWindow):
         mainLabel.move(150, 0)
 
         singlPlyBtn = QPushButton("Single player", self)
-        singlPlyBtn.setStyleSheet("color: white; background-color: transparent; font:bold; border-style: outset; border-width: 2px; border-color: white")
+        singlPlyBtn.setStyleSheet("QPushButton{"
+                                  "color: white; background-color: black; font:bold; border-style: outset; border-width: 2px; border-color: white"
+                                  "}"
+                                  "QPushButton:hover{"
+                                  "background-color:#6C9BD4;"
+                                  "}")
         singlPlyBtn.resize(100, 50)
         singlPlyBtn.move(250, 100)
         singlPlyBtn.clicked.connect(self.startGame)
 
         multiPlyBtn = QPushButton("Multiplayer", self)
-        multiPlyBtn.setStyleSheet("color: white; background-color: transparent; font:bold; border-style: outset; border-width: 2px; border-color: white")
+        multiPlyBtn.setStyleSheet("QPushButton{"
+                                  "color: white; background-color: black; font:bold; border-style: outset; border-width: 2px; border-color: white"
+                                  "}"
+                                  "QPushButton:hover{"
+                                  "background-color:#6C9BD4;"
+                                  "}")
         multiPlyBtn.resize(100, 50)
         multiPlyBtn.move(250, 165)
         
         returnBtn = QPushButton("Return", self)
-        returnBtn.setStyleSheet("color: white; background-color: transparent; font:bold; border-style: outset; border-width: 2px; border-color: white")
+        returnBtn.setStyleSheet("QPushButton{"
+                              "color: white; background-color: black; font:bold; border-style: outset; border-width: 2px; border-color: white"
+                              "}"
+                              "QPushButton:hover{"
+                              "background-color:#DE251B;"
+                              "}")
         returnBtn.resize(100, 50)
         returnBtn.move(250, 230)
 
