@@ -15,12 +15,9 @@ class MainWindow(QMainWindow):
 
     def __init__(self):
         super(MainWindow, self).__init__()
-        
-        #self.newGameWindow = NewGameWindow()
-        #self.setStyleSheet("background-image: url(C:\\Users\\Mistra\\Desktop\\Pajton\\vjezba\\asteroid.jpg)")
-        #self.setStyleSheet("background-color:black")
+
+
         self.setWindowTitle("Asteroids")
-        #self.setGeometry(300, 150, 600, 500)
         self.setFixedSize(600, 500)
         
         # background image
