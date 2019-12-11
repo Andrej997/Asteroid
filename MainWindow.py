@@ -51,6 +51,7 @@ class MainWindow(QMainWindow):
                                       "}")
         self.aboutGameBtn.resize(100, 50)
         self.aboutGameBtn.move(250, 165)
+        self.aboutGameBtn.clicked.connect(self.aboutOurGame)
 
         self.exitBtn = QPushButton("Exit game", self)
         self.exitBtn.setStyleSheet("QPushButton{"
@@ -126,13 +127,26 @@ class MainWindow(QMainWindow):
         #bit2 = window.pos().y() + 30 +1
         #window1.setGeometry(bit, bit2, 600, 500)
         #changeWindow(window, window1)
-    
+
+    def aboutOurGame(self):
+        self.mainLabel.hide()
+        self.newGameBtn.hide()
+        self.aboutGameBtn.hide()
+        self.exitBtn.hide()
+        self.returnBtn.show()
+        self.labelKeys = QLabel(self)
+        self.pixmapKeys = QPixmap('Images/keyBoard.png')
+        self.labelKeys.setPixmap(self.pixmapKeys)
+        self.labelKeys.resize(600, 200)
+        self.labelKeys.show()
+
     def returnToMainWindow(self):
         self.mainLabel.show()
         self.newGameBtn.show()
         self.aboutGameBtn.show()
         self.exitBtn.show()
         self.mainLabelNewGame.hide()
+        self.labelKeys.hide()
         self.singlPlyBtn.hide()
         self.multiPlyBtn.hide()
         self.returnBtn.hide()
