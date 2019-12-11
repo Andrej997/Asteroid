@@ -105,7 +105,18 @@ class MainWindow(QMainWindow):
         self.returnBtn.hide()
         self.returnBtn.clicked.connect(self.returnToMainWindow)
 
-     
+        self.returnBtn2 = QPushButton("Return2", self)
+        self.returnBtn2.setStyleSheet("QPushButton{"
+                                     "color: white; background-color: transparent; font:bold; border-style: outset; border-width: 2px; border-color: white"
+                                     "}"
+                                     "QPushButton:hover{"
+                                     "background-color: #C14242"
+                                     "}")
+        self.returnBtn2.resize(100, 50)
+        self.returnBtn2.move(250, 300)
+        self.returnBtn2.hide()
+        self.returnBtn2.clicked.connect(self.returnToMainWindow2)
+
         # The `Qt` namespace has a lot of attributes to customise
         # widgets. See: http://doc.qt.io/qt-5/qt.html
         #label.setAlignment(Qt.AlignCenter)
@@ -123,6 +134,7 @@ class MainWindow(QMainWindow):
         self.singlPlyBtn.show()
         self.multiPlyBtn.show()
         self.returnBtn.show()
+        self.returnBtn2.hide()
         #bit = window.pos().x() + 1
         #bit2 = window.pos().y() + 30 +1
         #window1.setGeometry(bit, bit2, 600, 500)
@@ -133,7 +145,7 @@ class MainWindow(QMainWindow):
         self.newGameBtn.hide()
         self.aboutGameBtn.hide()
         self.exitBtn.hide()
-        self.returnBtn.show()
+        self.returnBtn2.show()
         self.labelKeys = QLabel(self)
         self.pixmapKeys = QPixmap('Images/keyBoard.png')
         self.labelKeys.setPixmap(self.pixmapKeys)
@@ -146,10 +158,22 @@ class MainWindow(QMainWindow):
         self.aboutGameBtn.show()
         self.exitBtn.show()
         self.mainLabelNewGame.hide()
+        self.singlPlyBtn.hide()
+        self.multiPlyBtn.hide()
+        self.returnBtn.hide()
+        self.returnBtn2.hide()
+
+    def returnToMainWindow2(self):
+        self.mainLabel.show()
+        self.newGameBtn.show()
+        self.aboutGameBtn.show()
+        self.exitBtn.show()
+        self.mainLabelNewGame.hide()
         self.labelKeys.hide()
         self.singlPlyBtn.hide()
         self.multiPlyBtn.hide()
         self.returnBtn.hide()
+        self.returnBtn2.hide()
 
     def close(self):
         app.closeAllWindows()
