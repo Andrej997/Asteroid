@@ -6,7 +6,7 @@ import sys
 from SpaceShuttle import *
 import multiprocessing as mp
 import time
-import pygame
+#import pygame
 
 
 
@@ -135,7 +135,7 @@ class MainWindow(QMainWindow):
         self.exitBtn.hide()
         self.mainLabelNewGame.show()
         self.singlPlyBtn.show()
-        self.multiPlyBtn.show()
+        self.multiPlyBtn.show() 
         self.returnBtn.show()
         self.returnBtn2.hide()
         #bit = window.pos().x() + 1
@@ -185,14 +185,15 @@ class MainWindow(QMainWindow):
     def startGame(self):
         bit = window.pos().x() + 1
         bit2 = window.pos().y() + 30 + 1
-        gameStart.setGeometry(bit, bit2, 600, 500)
-        changeWindow(window, gameStart)
+        self.gameStart = SpaceShuttle()
+        self.gameStart.setGeometry(bit, bit2, 600, 500)
+        changeWindow(window, self.gameStart)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = MainWindow()
     window.show()
     #window1 = NewGameWindow()
-    gameStart = SpaceShuttle()
+    #gameStart = SpaceShuttle()
     #gameStart.hide()
     app.exec_()
