@@ -1,14 +1,16 @@
 from PyQt5.QtWidgets import QApplication, QLabel, QMainWindow, QPushButton, QWidget
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QImage, QPalette, QBrush, QIcon, QPixmap, QMoveEvent
+from PyQt5 import  QtCore
 
+from MainWindow import *
 import sys
 import multiprocessing as mp
 import time
 
 
 class PauseWindow(QMainWindow):
-    def __init__(self):
+    def __init__(self, window):
         super(PauseWindow, self).__init__()
 
         self.setWindowTitle("Paused")
@@ -23,6 +25,7 @@ class PauseWindow(QMainWindow):
         self.mainLabel.resize(235, 100)
         self.mainLabel.setStyleSheet("color: white; font-size:32px; font:bold")
         self.mainLabel.move(235, 0)
+        self.backToMain = MainWindow()
 
         self.returnBtn = QPushButton("Return to game", self)
         self.returnBtn.setStyleSheet("QPushButton{"
@@ -46,3 +49,7 @@ class PauseWindow(QMainWindow):
         self.exitBtn.resize(100, 50)
         self.exitBtn.move(250, 230)
         self.exitBtn.clicked.connect(self.close)
+
+    def keyPressEvent(self, event):
+        if event.key() == QtCore.Qt.Key_Escape:
+          self.window().hide()

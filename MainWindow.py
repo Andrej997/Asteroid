@@ -6,6 +6,9 @@ import sys
 from SpaceShuttle import *
 import multiprocessing as mp
 import time
+import pygame
+
+
 
 def changeWindow(w1, w2):
         w2.show()
@@ -149,7 +152,8 @@ class MainWindow(QMainWindow):
         self.labelKeys = QLabel(self)
         self.pixmapKeys = QPixmap('Images/keyBoard.png')
         self.labelKeys.setPixmap(self.pixmapKeys)
-        self.labelKeys.resize(600, 200)
+        self.labelKeys.resize(590, 200)
+        self.labelKeys.move(5, 20)
         self.labelKeys.show()
 
     def returnToMainWindow(self):
