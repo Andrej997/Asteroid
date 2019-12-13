@@ -4,14 +4,16 @@ from PyQt5.QtGui import QImage, QPalette, QBrush, QIcon, QPixmap, QMoveEvent
 
 import sys
 from SpaceShuttle import *
+from Asteroid import *
 import multiprocessing as mp
 import time
 #import pygame
 
 
 
-def changeWindow(w1, w2):
+def changeWindow(w1, w2, w3):
         w2.show()
+        w3.show()
         w1.hide()
 
 class MainWindow(QMainWindow):
@@ -185,15 +187,18 @@ class MainWindow(QMainWindow):
     def startGame(self):
         bit = window.pos().x() + 1
         bit2 = window.pos().y() + 30 + 1
-        self.gameStart = SpaceShuttle()
-        self.gameStart.setGeometry(bit, bit2, 600, 500)
-        changeWindow(window, self.gameStart)
+        #self.gameStart = SpaceShuttle()
+        #self.gameStart.setGeometry(bit, bit2, 600, 500)
+        gameStart.setGeometry(bit, bit2, 600, 500)
+        asteroidStart.setGeometry(bit, bit2, 600, 500)
+        changeWindow(window, gameStart, asteroidStart)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = MainWindow()
     window.show()
     #window1 = NewGameWindow()
-    #gameStart = SpaceShuttle()
+    gameStart = SpaceShuttle()
+    asteroidStart = Asteroid()
     #gameStart.hide()
     app.exec_()
