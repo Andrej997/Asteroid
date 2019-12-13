@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d38018df-b388-4fa6-b4dd-34c1cdb8e34e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Asteroid.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Asteroid.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainWindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainWindow.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SpaceShuttle.py" beforeDir="false" afterPath="$PROJECT_DIR$/SpaceShuttle.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />

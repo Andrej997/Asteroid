@@ -124,9 +124,25 @@ class Mover(QtWidgets.QLabel):
         else:
             QtWidgets.QLabel.keyPressEvent(self, event)
         self.update()
-           
+
+    def infiniteMoveShip(self):
+        self.yFull = float(self.yFull).__sub__(self.moveY * 5)
+        self.xFull = float(self.xFull).__add__(self.moveX * 5)
+        # round(self.geometry().x(),2) + round(self.moveX,2)
+        # round(self.geometry().y(),2) - round(self.moveY,2)
+        self.move(self.xFull, self.yFull)
+        print(self.xFull, self.yFull)
+        if (math.floor(self.yFull) <= -250):
+            self.yFull = (self.yFull * -1) - 1.0
+        elif (math.floor(self.yFull) >= 250):
+            self.yFull = (self.yFull * -1) + 1.0
+        elif (math.floor(self.xFull) <= -22):
+            self.xFull = 559
+        elif (math.floor(self.xFull) >= 560):
+            self.xFull = -21.0
         
     def timerEvent(self, a0: 'QTimerEvent'):
+        self.infiniteMoveShip()
         if len(self.meci) > 0:
             for metak in self.meci:
                   metak.kreni.emit()
