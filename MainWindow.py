@@ -202,3 +202,225 @@ if __name__ == '__main__':
     asteroidStart = Asteroid()
     #gameStart.hide()
     app.exec_()
+
+
+'''
+
+from PyQt5.QtWidgets import QApplication, QLabel, QMainWindow, QPushButton, QWidget, QGraphicsView, QGraphicsScene
+from PyQt5.QtCore import Qt, QRectF
+from PyQt5.QtGui import QImage, QPalette, QBrush, QIcon, QPixmap, QMoveEvent
+from PyQt5.QtGui import QKeyEvent
+import sys
+from SpaceShuttle import Player
+#from Asteroid import *
+import multiprocessing as mp
+import time
+
+
+# import pygame
+
+
+def changeWindow(w1, w2, w3):
+    w2.show()
+    w3.show()
+    w1.hide()
+
+
+class MainWindow(QGraphicsView):
+
+    def __init__(self):
+        super(MainWindow, self).__init__()
+        self.win_w = 600
+        self.win_h = 560
+
+        self.scene = QGraphicsScene(self)
+        self.setWindowTitle("Asteroids")
+        self.setFixedSize(self.win_w, self.win_h)
+        self.scene.setSceneRect(QRectF(0, 0, 600.0, 560.0))
+        self.rect().center()
+
+        self.scene = QGraphicsScene(self)
+        self.setScene(self.scene)
+
+        self.player = Player(self.win_w, self.win_h)
+
+
+        # background image
+        #self.setPixmap(QPixmap("Images/img.png"))
+        # self.label = QLabel(self)
+        # self.pixmap = QPixmap('Images/img.png')
+        # self.label.setPixmap(self.pixmap)
+        # self.label.resize(600, 500)
+
+        self.mainLabel = QLabel("ASTEROIDS", self)
+        self.mainLabel.resize(200, 100)
+        self.mainLabel.setStyleSheet("color: white; font-size:32px; font:bold")
+        self.mainLabel.move(200, 0)
+
+        self.newGameBtn = QPushButton("New Game", self)
+        self.newGameBtn.setStyleSheet("QPushButton{"
+                                      "color: white; background-color: black; font:bold; border-style: outset; border-width: 2px; border-color: white"
+                                      "}"
+                                      "QPushButton:hover{"
+                                      "background-color: #3F7FBF"
+                                      "}")
+        self.newGameBtn.resize(100, 50)
+        self.newGameBtn.move(250, 100)
+        self.newGameBtn.clicked.connect(self.startNewGameWindow)
+
+        self.aboutGameBtn = QPushButton("About game", self)
+        self.aboutGameBtn.setStyleSheet("QPushButton{"
+                                        "color: white; background-color: black; font:bold; border-style: outset; border-width: 2px; border-color: white"
+                                        "}"
+                                        "QPushButton:hover{"
+                                        "background-color: #3F7FBF"
+                                        "}")
+        self.aboutGameBtn.resize(100, 50)
+        self.aboutGameBtn.move(250, 165)
+        self.aboutGameBtn.clicked.connect(self.aboutOurGame)
+
+        self.exitBtn = QPushButton("Exit game", self)
+        self.exitBtn.setStyleSheet("QPushButton{"
+                                   "color: white; background-color: black; font:bold; border-style: outset; border-width: 2px; border-color: white"
+                                   "}"
+                                   "QPushButton:hover{"
+                                   "background-color: #C14242"
+                                   "}")
+        self.exitBtn.resize(100, 50)
+        self.exitBtn.move(250, 230)
+        self.exitBtn.clicked.connect(self.close)
+
+        self.mainLabelNewGame = QLabel("Chose game mode", self)
+        self.mainLabelNewGame.resize(300, 100)
+        self.mainLabelNewGame.setStyleSheet("color: white; font-size:32px; font:bold")
+        self.mainLabelNewGame.move(150, 0)
+        self.mainLabelNewGame.hide()
+
+        self.singlPlyBtn = QPushButton("Single player", self)
+        self.singlPlyBtn.setStyleSheet("QPushButton{"
+                                       "color: white; background-color: black; font:bold; border-style: outset; border-width: 2px; border-color: white"
+                                       "}"
+                                       "QPushButton:hover{"
+                                       "background-color: #3F7FBF"
+                                       "}")
+        self.singlPlyBtn.resize(100, 50)
+        self.singlPlyBtn.move(250, 100)
+        self.singlPlyBtn.clicked.connect(self.startGame)
+        self.singlPlyBtn.hide()
+
+        self.multiPlyBtn = QPushButton("Multiplayer", self)
+        self.multiPlyBtn.setStyleSheet("QPushButton{"
+                                       "color: white; background-color: black; font:bold; border-style: outset; border-width: 2px; border-color: white"
+                                       "}"
+                                       "QPushButton:hover{"
+                                       "background-color: #3F7FBF"
+                                       "}")
+        self.multiPlyBtn.resize(100, 50)
+        self.multiPlyBtn.move(250, 165)
+        self.multiPlyBtn.hide()
+
+        self.returnBtn = QPushButton("Return", self)
+        self.returnBtn.setStyleSheet("QPushButton{"
+                                     "color: white; background-color: black; font:bold; border-style: outset; border-width: 2px; border-color: white"
+                                     "}"
+                                     "QPushButton:hover{"
+                                     "background-color: #C14242"
+                                     "}")
+        self.returnBtn.resize(100, 50)
+        self.returnBtn.move(250, 230)
+        self.returnBtn.hide()
+        self.returnBtn.clicked.connect(self.returnToMainWindow)
+
+        self.returnBtn2 = QPushButton("Return2", self)
+        self.returnBtn2.setStyleSheet("QPushButton{"
+                                      "color: white; background-color: transparent; font:bold; border-style: outset; border-width: 2px; border-color: white"
+                                      "}"
+                                      "QPushButton:hover{"
+                                      "background-color: #C14242"
+                                      "}")
+        self.returnBtn2.resize(100, 50)
+        self.returnBtn2.move(250, 300)
+        self.returnBtn2.hide()
+        self.returnBtn2.clicked.connect(self.returnToMainWindow2)
+
+
+        self.show()
+
+    def keyPressEvent(self, e: QKeyEvent):
+        if e.key() == Qt.Key_Up:
+            self.player.up.emit()
+        elif e.key() == Qt.Key_Left:
+            self.player.left.emit()
+        elif e.key() == Qt.Key_Right:
+            self.player.right.emit()
+        elif e.key() == Qt.Key_Space:
+            self.player.fire.emit()
+        # elif e.key() == Qt.Key_D:
+        #   self.player.fire.emit(self.scene)
+
+
+    def startNewGameWindow(self):
+        self.mainLabel.hide()
+        self.newGameBtn.hide()
+        self.aboutGameBtn.hide()
+        self.exitBtn.hide()
+        self.mainLabelNewGame.show()
+        self.singlPlyBtn.show()
+        self.multiPlyBtn.show()
+        self.returnBtn.show()
+        self.returnBtn2.hide()
+
+    def aboutOurGame(self):
+        self.mainLabel.hide()
+        self.newGameBtn.hide()
+        self.aboutGameBtn.hide()
+        self.exitBtn.hide()
+        self.returnBtn2.show()
+        self.labelKeys = QLabel(self)
+        self.pixmapKeys = QPixmap('Images/keyBoard.png')
+        self.labelKeys.setPixmap(self.pixmapKeys)
+        self.labelKeys.resize(590, 200)
+        self.labelKeys.move(5, 20)
+        self.labelKeys.show()
+
+    def returnToMainWindow(self):
+        self.mainLabel.show()
+        self.newGameBtn.show()
+        self.aboutGameBtn.show()
+        self.exitBtn.show()
+        self.mainLabelNewGame.hide()
+        self.singlPlyBtn.hide()
+        self.multiPlyBtn.hide()
+        self.returnBtn.hide()
+        self.returnBtn2.hide()
+
+    def returnToMainWindow2(self):
+        self.mainLabel.show()
+        self.newGameBtn.show()
+        self.aboutGameBtn.show()
+        self.exitBtn.show()
+        self.mainLabelNewGame.hide()
+        self.labelKeys.hide()
+        self.singlPlyBtn.hide()
+        self.multiPlyBtn.hide()
+        self.returnBtn.hide()
+        self.returnBtn2.hide()
+
+    def close(self):
+        app.closeAllWindows()
+
+    def startGame(self):
+        self.mainLabelNewGame.hide()
+        self.singlPlyBtn.hide()
+        self.multiPlyBtn.hide()
+        self.returnBtn.hide()
+        # inicilizacija igraca
+        self.scene.addWidget(self.player)
+        self.player.initialize()
+
+if __name__ == '__main__':
+    app = QApplication([])
+    window = MainWindow()
+    sys.exit(app.exec_())
+
+'''
