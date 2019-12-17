@@ -9,25 +9,21 @@ import sys
 import math
 import time
 
+import  Server
+
 i = 1
 ast_0 = 0
+tmp = []
 
 
 class Asteroid(QMainWindow):
-    def __init__(self):
+    def __init__(self, spaceShuttleWindow):
         super().__init__()
-        centralWidget = QtWidgets.QWidget()
+        Server.initialize()
+        centralWidget = spaceShuttleWindow
         self.setGeometry(300, 150, 600, 500)
         self.setCentralWidget(centralWidget)
-        # self.label = QLabel(centralWidget)
-        # self.pixmap = QPixmap('Images/img.png')
-        # self.label.setPixmap(self.pixmap)
-        # self.label.resize(600, 500)
         label = QLabel(centralWidget)
-        pixmap = QPixmap('Images/img.png')
-        label.setPixmap(pixmap)
-        label.resize(600, 500)
-        # label.move(120, 160)
 
         self.asteroid_0 = StartAsteroid(centralWidget)
         self.asteroid_0.setFocus()
@@ -39,8 +35,8 @@ class Asteroid(QMainWindow):
         self.asteroid_2 = StartAsteroid(centralWidget)
         self.asteroid_2.setFocus()
 
-        self.asteroid_3 = StartAsteroid(centralWidget)
-        self.asteroid_3.setFocus()
+
+
 
         self.initUI()
 
@@ -55,6 +51,7 @@ class Asteroid(QMainWindow):
 
 class StartAsteroid(QtWidgets.QLabel):
     def __init__(self, parent=None):
+
         super().__init__(parent)
         self.setGeometry(270, 0, 600, 500)
         global i
@@ -64,7 +61,7 @@ class StartAsteroid(QtWidgets.QLabel):
         self.xFull = float(270)
         self.yFull = float(0)
         self.angle = 90
-        self.setImage("Images/AsteroidsImg/small/a10000.png")
+        #self.setImage("Images/AsteroidsImg/large/c10004.png")
         self.timer = QBasicTimer()
         self.timer.start(30, self)
         self.scene = QGraphicsScene()
@@ -75,12 +72,15 @@ class StartAsteroid(QtWidgets.QLabel):
     def whileTrue(self):
         global i
         global ast_0
+        global tmp
+        global coordinatesOfRocketsss
+
         ast_0 += 1
         # if(numberObj == 3):
         # numberObj = 0
-        ast_0 = ast_0 % 4
-        print(ast_0)
-        startPath = "Images/AsteroidsImg/small/a100"
+        ast_0 = ast_0 % 2
+#        print(ast_0)
+        startPath = "Images/AsteroidsImg/large/c100"
         endPath = ".png"
         # if(numberObj % 2 == 0):
         #     i = (i - 1) % 16
@@ -91,21 +91,38 @@ class StartAsteroid(QtWidgets.QLabel):
         else:
             fullPath = (startPath + str(i) + endPath)
         bigImage = QPixmap(fullPath)
-        # cropedImage = bigImage.scaled(80, 80, Qt.IgnoreAspectRatio, Qt.FastTransformation)
-        # cropedImage = bigImage.scaled(50, 50, Qt.IgnoreAspectRatio, Qt.FastTransformation)
-        cropedImage = bigImage.scaled(30, 30, Qt.IgnoreAspectRatio, Qt.FastTransformation)
+        #cropedImage = bigImage.scaled(80, 80, Qt.IgnoreAspectRatio, Qt.FastTransformation)
+        cropedImage = bigImage.scaled(50, 50, Qt.IgnoreAspectRatio, Qt.FastTransformation)
+       # cropedImage = bigImage.scaled(30, 30, Qt.IgnoreAspectRatio, Qt.FastTransformation)
         self.setImage(cropedImage)
         if (ast_0 % 2 == 0):
             self.angle = self.angle - ast_0
         else:
             self.angle = self.angle + ast_0
 
+
+
         self.moveX = cos(radians(self.angle))
         self.moveY = sin(radians(self.angle))
         self.yFull = float(self.yFull).__sub__(self.moveY * 9)
         self.xFull = float(self.xFull).__add__(self.moveX * 6)
         self.move(self.xFull, self.yFull)
-        print(self.xFull, self.yFull)
+
+        inttX = int(round(self.xFull))
+        inttY = int(round(self.yFull))
+
+
+        if (inttX == Server.rocket1xCoordinates):
+            #ovde bi trebala logika da se proverava i x i y koordinate da li su se poklopile
+            #alii to onda gleda samo taj 1 pixel, treba da vidimo da to nekako proveravamo za vise piksela jer je kamen tipa 20x20 px
+            #i ovako radi samo kada mu se bax x koordinata
+            #znaci trebalo bi ici if(inttX +- 20px == Server.rocket1xCoordinates and inttY +- 20px == Server.rokcet1yCoordinates)
+            Server.isRocketDead()
+            Server.rocket1IsDestroyed = 2
+            print("Destroyed asteroid.")
+            #self.hide()
+
+
         if (math.floor(self.yFull) <= -250):
             self.yFull = (self.yFull * -1) - 1.0
         elif (math.floor(self.yFull) >= 250):
@@ -118,12 +135,10 @@ class StartAsteroid(QtWidgets.QLabel):
         # time.sleep(0.049)
         # time.sleep(0.039)
         # time.sleep(0.029)
-        # time.sleep(0.019)
-        # time.sleep(0.009)
-        time.sleep(0.005)
+        #time.sleep(0.019)
+        time.sleep(0.007)
+        #time.sleep(0.005)
 
     def timerEvent(self, a0: 'QTimerEvent'):
         self.whileTrue()
-
-
 

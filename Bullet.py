@@ -29,7 +29,7 @@ class Bullet(QLabel):
 
     def moveSelf(self):
         self.init_x = float(self.init_x).__add__(self.xMovement * 5)
-        print(self.init_x)
+#        print(self.init_x)
         self.init_y = float(self.init_y).__sub__(self.yMovement * 5)
         if floor(self.init_x) <= - 22 or floor(self.init_x) >= 600 or floor(self.init_y) <= -250 or floor(self.init_y) >= 300:
              self.kreni.disconnect()
