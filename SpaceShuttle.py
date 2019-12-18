@@ -34,7 +34,6 @@ rocketsList = ['Images/rocketship.png', 'Images/rocketship (1).png', 'Images/roc
                'Images/rocketship (65).png', 'Images/rocketship (66).png', 'Images/rocketship (67).png',
                'Images/rocketship (68).png', 'Images/rocketship (69).png', 'Images/rocketship (70).png',
                'Images/rocketship (71).png']
-i = 1
 paused = 1
 counter = 0
 
@@ -49,7 +48,8 @@ class SpaceShuttle(QGraphicsView):
         self.scene = QGraphicsScene(self)
         self.scene.setSceneRect(QRectF(0, -220, 590, 490))
         self.setScene(self.scene)
-        self.mover = Mover(self.w, self.h)
+        #self.mover = Mover(270, 0, self.scene)
+        self.mover = Mover(270, 0)
         self.labels = QLabel()
         self.pixmap = QPixmap('Images/img.png')
         self.labels.setPixmap(self.pixmap)
@@ -59,56 +59,59 @@ class SpaceShuttle(QGraphicsView):
         self.scene.addWidget(self.labels)
         self.scene.addWidget(self.mover)
         #self.mover.setPixmap(QPixmap('Images/img.png'))
-
         self.init()
 
     def init(self):
         self.mover.initialize()
         self.show()
-
+    
     def keyPressEvent(self, event):
         self.mover.KeyPressEvent(event, self.scene)
+    
 
 class Mover(QtWidgets.QLabel):
     moveImg = pyqtSignal(QGraphicsScene)
 
-    def __init__(self, h, w):
+    def __del__(self):
+        print("Mover deleted")
+
+    def __init__(self, w, h, player):
         super().__init__()
+        global rocketsList
+        self.i = 1
+        self.myLives = 3
+        self.score = 0
         self.meci = []
-        self.w = w
-        self.h = h
         self.moveX = float(0)
         self.moveY = float(1)
-        self.xFull = float(270)
-        self.yFull = float(0)
+        self.xFull = float(w)
+        self.yFull = float(h)
         self.angle = 90
-        self.move(270, 0)
-        self.moveImg.connect(self.KeyPressEvent)
+        self.move(w, h)
+        self.setPixmap(QPixmap('Images/img.png'))
+        if player == 1:
+            self.moveImg.connect(self.KeyPressEvent1)
+        else:
+            self.moveImg.connect(self.KeyPressEvent2)
         self.setStyleSheet("background-color: transparent")
         self.timer = QBasicTimer()
         self.timer.start(30, self)
-
-        self.pause = PauseWindow(self)
-
-    def initialize(self):
-        global rocketsList
-        global i
-        self.setMoverImage(rocketsList[i])
+        self.setMoverImage(rocketsList[self.i])
+        self.pause = PauseWindow(self)        
+        
 
     def setMoverImage(self, param):
         self.setPixmap(QtGui.QPixmap(param))
 
-    def KeyPressEvent(self, event, q: QGraphicsScene):
+    def KeyPressEvent1(self, event, q: QGraphicsScene):
         global rocketsList
-        global i
         global paused
 
         xxx = int(round(self.x()))
         yyy = int(round(self.y()))
         Server.initialize()
         print(Server.rocket1IsDestroyed)
-        if (Server.rocket1IsDestroyed == 2):
-            self.hide()
+        
         Server.rocket1xCoordinates = xxx
         Server.rocket1yCoordinates = yyy
 
@@ -116,15 +119,15 @@ class Mover(QtWidgets.QLabel):
         print(Server.rocket1yCoordinates)
 
         if event.key() == QtCore.Qt.Key_Left:
-            i = (i + 1) % 72
-            self.setMoverImage(rocketsList[i])
+            self.i = (self.i + 1) % 72
+            self.setMoverImage(rocketsList[self.i])
             self.angle = self.angle + 5
             self.moveX = cos(radians(self.angle))
             self.moveY = sin(radians(self.angle))
         elif event.key() == QtCore.Qt.Key_Right:
-            i = (i - 1) % 72
+            self.i = (self.i - 1) % 72
             self.angle = self.angle - 5
-            self.setMoverImage(rocketsList[i])
+            self.setMoverImage(rocketsList[self.i])
             self.moveX = cos(radians(self.angle))
             self.moveY = sin(radians(self.angle))
         elif event.key() == QtCore.Qt.Key_Up:
@@ -143,7 +146,60 @@ class Mover(QtWidgets.QLabel):
             elif (math.floor(self.xFull) >= 560):
                 self.xFull = -21.0
             # ovde treba za gas logika
-        elif event.key() == QtCore.Qt.Key_Space:
+        elif event.key() == QtCore.Qt.Key_0:
+            metak = Bullet(self.x(), self.y(), self.angle, i, q)
+            self.meci.append(metak)
+        elif event.key() == QtCore.Qt.Key_Escape:
+            self.hide()
+            self.pause.show()
+        else:
+            QtWidgets.QLabel.keyPressEvent(self, event)
+        self.update()
+    
+    def KeyPressEvent2(self, event, q: QGraphicsScene):
+        global rocketsList
+        global paused
+
+        xxx = int(round(self.x()))
+        yyy = int(round(self.y()))
+        Server.initialize()
+        print(Server.rocket1IsDestroyed)
+        
+        Server.rocket1xCoordinates = xxx
+        Server.rocket1yCoordinates = yyy
+
+        print(Server.rocket1xCoordinates)
+        print(Server.rocket1yCoordinates)
+
+        if event.key() == QtCore.Qt.Key_A:
+            self.i = (self.i + 1) % 72
+            self.setMoverImage(rocketsList[self.i])
+            self.angle = self.angle + 5
+            self.moveX = cos(radians(self.angle))
+            self.moveY = sin(radians(self.angle))
+        elif event.key() == QtCore.Qt.Key_D:
+            self.i = (self.i - 1) % 72
+            self.angle = self.angle - 5
+            self.setMoverImage(rocketsList[self.i])
+            self.moveX = cos(radians(self.angle))
+            self.moveY = sin(radians(self.angle))
+        elif event.key() == QtCore.Qt.Key_W:
+            self.yFull = float(self.yFull).__sub__(self.moveY * 5)
+            self.xFull = float(self.xFull).__add__(self.moveX * 5)
+            # round(self.geometry().x(),2) + round(self.moveX,2)
+            # round(self.geometry().y(),2) - round(self.moveY,2)
+            self.move(self.xFull, self.yFull)
+#            print(self.xFull, self.yFull)
+            if (math.floor(self.yFull) <= -250):
+                self.yFull = (self.yFull * -1) - 1.0
+            elif (math.floor(self.yFull) >= 250):
+                self.yFull = (self.yFull * -1) + 1.0
+            elif (math.floor(self.xFull) <= -22):
+                self.xFull = 559
+            elif (math.floor(self.xFull) >= 560):
+                self.xFull = -21.0
+            # ovde treba za gas logika
+        elif event.key() == QtCore.Qt.Key_G:
             metak = Bullet(self.x(), self.y(), self.angle, i, q)
             self.meci.append(metak)
         elif event.key() == QtCore.Qt.Key_Escape:
@@ -154,6 +210,15 @@ class Mover(QtWidgets.QLabel):
         self.update()
 
     def timerEvent(self, a0: 'QTimerEvent'):
+        global Server
         if len(self.meci) > 0:
             for metak in self.meci:
                 metak.kreni.emit()
+        #if (Server.rocket1IsDestroyed == 2):
+         #   self.hide()  
+         #   del self.meci
+        #    del self     
+            
+            
+            
+            

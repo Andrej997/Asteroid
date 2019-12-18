@@ -3,10 +3,11 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QImage, QPalette, QBrush, QIcon, QPixmap, QMoveEvent
 
 import sys
-from SpaceShuttle import *
+#from SpaceShuttle import *
 import multiprocessing as mp
 import time
 from Asteroid import *
+from GameMaker import *
 
 
 def changeWindow(w1, w2):
@@ -186,12 +187,14 @@ class MainWindow(QMainWindow):
 
     def startGame(self):
         global coordinatesOfRocket
-        bit = window.pos().x() + 1
-        bit2 = window.pos().y() + 30 + 1
-        self.gameStart = SpaceShuttle()
-        self.asteroids = Asteroid(self.gameStart)
-        self.asteroids.setGeometry(bit, bit2, 600, 500)
-        testWindow(window, self.asteroids)
+        #bit = window.pos().x() + 1
+        #bit2 = window.pos().y() + 30 + 1
+        #self.gameStart = SpaceShuttle()
+        #self.asteroids = Asteroid(self.gameStart)
+        #self.asteroids.setGeometry(bit, bit2, 600, 500)
+        #testWindow(window, self.asteroids)
+        self.gameStart = GameMaker(2)
+        testWindow(window, self.gameStart)
 
 
 if __name__ == '__main__':
