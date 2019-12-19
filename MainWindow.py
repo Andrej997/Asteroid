@@ -188,10 +188,20 @@ class MainWindow(QMainWindow):
         global coordinatesOfRocket
         bit = window.pos().x() + 1
         bit2 = window.pos().y() + 30 + 1
+        self.mainLabel.show()
+        self.newGameBtn.show()
+        self.aboutGameBtn.show()
+        self.exitBtn.show()
+        self.mainLabelNewGame.hide()
+        self.singlPlyBtn.hide()
+        self.multiPlyBtn.hide()
+        self.returnBtn.hide()
+        self.returnBtn2.hide()
         self.gameStart = SpaceShuttle()
         self.asteroids = Asteroid(self.gameStart)
         self.asteroids.setGeometry(bit, bit2, 600, 500)
         testWindow(window, self.asteroids)
+
 
 
 if __name__ == '__main__':
