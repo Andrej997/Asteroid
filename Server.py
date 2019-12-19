@@ -1,4 +1,5 @@
-coordinatesOfRocketsss = []
+coordinatesOfRocketsX = []
+coordinatesOfRocketsY = []
 rocket1xCoordinates = 0
 rocket1yCoordinates = 0
 rocket1IsDestroyed = 0
@@ -7,6 +8,8 @@ rocket1IsDestroyed = 0
 def initialize():
     global rocket1xCoordinates
     global rocket1yCoordinates
+    global coordinatesOfRocketsX
+    global coordinatesOfRocketsY
     rocket1xCoordinates = 1
     rocket1yCoordinates = 1
 

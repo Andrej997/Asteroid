@@ -112,6 +112,31 @@ class Mover(QtWidgets.QLabel):
         Server.rocket1xCoordinates = xxx
         Server.rocket1yCoordinates = yyy
 
+        Server.coordinatesOfRocketsX.clear()
+        Server.coordinatesOfRocketsY.clear()
+
+        #region ->logika da se raketa gleda kao 20x20 px po x i y koordinati
+
+        for r in range(10):
+            tmp = r + Server.rocket1xCoordinates
+            Server.coordinatesOfRocketsX.append(tmp)
+            r = r + 1
+
+        for p in range(10):
+            tmp = Server.rocket1xCoordinates - p
+            Server.coordinatesOfRocketsX.append(tmp)
+            p = p + 1
+
+        for qll in range(10):
+            tmp = qll + Server.rocket1yCoordinates
+            Server.coordinatesOfRocketsY.append(tmp)
+            qll = qll + 1
+
+        for s in range(10):
+            tmp = Server.rocket1yCoordinates - s
+            Server.coordinatesOfRocketsY.append(tmp)
+            s = s + 1
+        #end region
         print(Server.rocket1xCoordinates)
         print(Server.rocket1yCoordinates)
 

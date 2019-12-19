@@ -111,17 +111,34 @@ class StartAsteroid(QtWidgets.QLabel):
         inttX = int(round(self.xFull))
         inttY = int(round(self.yFull))
 
+        # region /logika da se asteroid gleda kao 20x20 px po x i y koordinati
+        ccc = -10
+        vvv = -10
+        thisAsteroidXCoords = []
+        thisAsteroidYCoords = []
 
-        if (inttX == Server.rocket1xCoordinates):
-            #ovde bi trebala logika da se proverava i x i y koordinate da li su se poklopile
-            #alii to onda gleda samo taj 1 pixel, treba da vidimo da to nekako proveravamo za vise piksela jer je kamen tipa 20x20 px
-            #i ovako radi samo kada mu se bax x koordinata
-            #znaci trebalo bi ici if(inttX +- 20px == Server.rocket1xCoordinates and inttY +- 20px == Server.rokcet1yCoordinates)
-            Server.isRocketDead()
-            Server.rocket1IsDestroyed = 2
-            print("Destroyed asteroid.")
-            #self.hide()
+        thisAsteroidXCoords.clear()
+        thisAsteroidYCoords.clear()
 
+        for ccc in range(10):
+            tmpss = inttX + ccc
+            thisAsteroidXCoords.append(tmpss)
+            ccc = ccc + 1
+
+        for vvv in range(10):
+            tmpss2 = inttY + vvv
+            thisAsteroidYCoords.append(tmpss2)
+            vvv = vvv + 1
+
+        if(any(checkXCords in thisAsteroidXCoords for checkXCords in Server.coordinatesOfRocketsX) and any(checkYCords in thisAsteroidYCoords for checkYCords in Server.coordinatesOfRocketsY)):
+            #    Server.isRocketDead()
+            #    Server.rocket1IsDestroyed = 2
+            #    print("Destroyed asteroid.")
+            #    #self.hide()
+            self.hide()
+            print("ASTEROID IS DESTROYED TOO!!!")
+
+        #end region
 
         if (math.floor(self.yFull) <= -250):
             self.yFull = (self.yFull * -1) - 1.0
