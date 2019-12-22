@@ -67,22 +67,22 @@ class SpaceShuttle(QLabel):
 
         # region ->logika da se raketa gleda kao 20x20 px po x i y koordinati
         tmp = 0
-        for tmpX1 in range(10):
+        for tmpX1 in range(20):
             tmp = tmpX1 + current_x_coords
             server.coordinatesOfRocketsX.append(tmp)
             tmpX1 = tmpX1 + 1
         tmp = 0
-        for tmpX2 in range(10):
+        for tmpX2 in range(20):
             tmp = current_x_coords - tmpX2
             server.coordinatesOfRocketsX.append(tmp)
             tmpX2 = tmpX2 + 1
         tmp = 0
-        for tmpY1 in range(10):
+        for tmpY1 in range(20):
             tmp = tmpY1 + current_y_coords
             server.coordinatesOfRocketsY.append(tmp)
             tmpY1 = tmpY1 + 1
         tmp = 0
-        for tmpY2 in range(10):
+        for tmpY2 in range(20):
             tmp = current_y_coords - tmpY2
             server.coordinatesOfRocketsY.append(tmp)
             tmpY2 = tmpY2 + 1
