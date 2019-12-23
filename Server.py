@@ -15,3 +15,7 @@ player4Score = 0
 
 #metkoviCoordsX = []
 #metkoviCoordsY = []
+
+bulletsCollectionX = {}
+bulletsCollectionY = {}
+bulletIDS = 0

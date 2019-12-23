@@ -84,8 +84,8 @@ class Asteroid(QLabel):
 
             self.moveX = cos(radians(self.angle))
             self.moveY = sin(radians(self.angle))
-            self.yFull = float(self.yFull).__sub__(self.moveY * 10)
-            self.xFull = float(self.xFull).__add__(self.moveX * 5)
+            self.yFull = float(self.yFull).__sub__(self.moveY * 6)
+            self.xFull = float(self.xFull).__add__(self.moveX * 9)
             self.move(self.xFull, self.yFull)
 
             #region unistavanje asteroida
@@ -94,12 +94,12 @@ class Asteroid(QLabel):
 
             ccc = 0
             vvv = 0
+            tmpss = 0
             thisAsteroidXCoords = []
             thisAsteroidYCoords = []
 
             thisAsteroidXCoords.clear()
             thisAsteroidYCoords.clear()
-
             for ccc in range(20):
                 tmpss = inttX + ccc
                 thisAsteroidXCoords.append(tmpss)
@@ -121,19 +121,37 @@ class Asteroid(QLabel):
 
             if (any(checkXCords in thisAsteroidXCoords for checkXCords in server.coordinatesOfRocketsX) and any(
                     checkYCords in thisAsteroidYCoords for checkYCords in server.coordinatesOfRocketsY)):
-                if server.player1Lives == 0:#ako je izgubio sve zivote da iskoci iz igrce
-                    self.myScene.game_is_over()
                 server.player1Lives = server.player1Lives - 1
                 self.myScene.label2.setText("Player1 lives--->[" + server.player1Lives.__str__() + "] score--->[" + server.player1Score.__str__() + "]")
                 server.activeAsteroids[self.uniqueIdenfier] = 1
                 self.hide()
                 print("ASTEROID IS DESTROYED TOO!!!")
+                if server.player1Lives == 0:#ako je izgubio sve zivote da iskoci iz igrce
+                    self.myScene.game_is_over()
             #endRegion
 
-            #if(any(checkXCords in thisAsteroidXCoords for checkXCords in server.metkoviCoordsX) and any(
-            #    checkYCords in thisAsteroidYCoords for checkYCords in server.metkoviCoordsY)):
-            #    server.activeAsteroids[self.uniqueIdenfier] = 1
-            #    self.hide()
+            expandBulletX = []
+            expandBulletY = []
+
+            for key, value in server.bulletsCollectionX.items():
+                omega = 0
+                for omega in range(5):
+                    expandBulletX.append(omega + value)
+                    omega = omega + 1
+                if any(cx in expandBulletX for cx in thisAsteroidXCoords):
+                    for key2, val2 in server.bulletsCollectionY.items():
+                        omega2 = 0
+                        for omega2 in range(5):
+                            expandBulletY.append(omega2 + val2)
+                            omega2 = omega2 + 1
+                        if any(cy in expandBulletY for cy in thisAsteroidYCoords) and key == key2:
+                            server.activeAsteroids[self.uniqueIdenfier] = 1
+                            server.player1Score = server.player1Score + 300
+                            self.myScene.label2.setText("Player1 lives--->[" + server.player1Lives.__str__() + "] score--->[" + server.player1Score.__str__() + "]")
+                            self.hide()
+                    break
+            expandBulletY.clear()
+            expandBulletX.clear()
 
             if (math.floor(self.yFull) <= -10):
                 self.yFull = 500
@@ -144,8 +162,8 @@ class Asteroid(QLabel):
             elif (math.floor(self.xFull) >= 600):
                 self.xFull = -21.0
         else:
-            self.yFull = 1000
-            self.xFull = 1000
+            self.yFull = 50000
+            self.xFull = 19052
 
     def timerEvent(self, a0: 'QTimerEvent'):
         self.whileTrue()

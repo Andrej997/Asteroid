@@ -13,7 +13,7 @@ class AboutScene(QGraphicsScene):
         self.label = QLabel()
         self.pixmap = QPixmap('Images/img.png')
         self.label.setPixmap(self.pixmap)
-        self.label.resize(600, 500)
+        self.label.resize(self.width-2, self.height-2)
         self.addWidget(self.label)
 
         self.mainLabel = QLabel("CONTROLS")

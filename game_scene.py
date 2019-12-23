@@ -17,7 +17,7 @@ class GameScene(QGraphicsScene):
         global activeSmallAsteroids
         self.width = width
         self.height = height
-        self.setSceneRect(QRectF(0, 0, self.width - 2, self.height - 2))
+        self.setSceneRect(0, 0, self.width-2, self.height-2)
         self.sceneParent = parent#
 
         self.label = QLabel()

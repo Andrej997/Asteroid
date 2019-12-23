@@ -3,6 +3,7 @@ from PyQt5.QtGui import QBrush, QFont, QPalette, QFontDatabase, QImage, QPixmap
 from PyQt5.QtWidgets import QGraphicsView, QGraphicsScene, QApplication, QPushButton, QLabel
 import  server
 
+
 class GameOver(QGraphicsScene):
     def __init__(self, parent, width, height):
         super().__init__(parent)

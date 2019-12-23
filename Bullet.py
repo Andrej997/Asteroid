@@ -16,6 +16,15 @@ class Bullet(QLabel):
         self.setPixmap(self.image)
         self.init_x = x + 20 + 30 * float(cos(radians(rotation)))
         self.init_y = y + 20 - 30 * float(sin(radians(rotation)))
+        self.IDS = server.bulletIDS
+        server.bulletIDS = server.bulletIDS + 1
+        inttX = int(round(self.init_x))
+        inttY = int(round(self.init_y))
+        server.bulletsCollectionX[self.IDS] = 0
+        server.bulletsCollectionY[self.IDS] = 0
+        server.bulletsCollectionX[self.IDS] = inttX
+        server.bulletsCollectionY[self.IDS] = inttY
+
         self.scene = scene
         self.xMovement = float(cos(radians(rotation)))
         self.yMovement = float(sin(radians(rotation)))
@@ -30,17 +39,16 @@ class Bullet(QLabel):
     def moveSelf(self):
         self.init_x = float(self.init_x).__add__(self.xMovement * 3)
         self.init_y = float(self.init_y).__sub__(self.yMovement * 3)
-        if floor(self.init_x) <= - 22 or floor(self.init_x) >= 620 or floor(self.init_y) <= -250 or floor(
-                self.init_y) >= 520:
+        if floor(self.init_x) <= -20 or floor(self.init_x) >= 603 or floor(self.init_y) <= -20 or floor(
+                self.init_y) >= 503:
+            server.bulletsCollectionX[self.IDS] = 99999
+            server.bulletsCollectionY[self.IDS] = 99999
             self.kreni.disconnect()
             self.destroy()
             self.hide()
         else:
             self.move(self.init_x, self.init_y)
-            #server.metkoviCoordsX.append(self.init_x)logika za metkove
-            #server.metkoviCoordsY.append(self.init_y)
-
-
-
-
-
+            inttXXX = int(round(self.init_x))
+            inttYYY = int(round(self.init_y))
+            server.bulletsCollectionX[self.IDS] = inttXXX
+            server.bulletsCollectionY[self.IDS] = inttYYY
