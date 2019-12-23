@@ -30,6 +30,7 @@ class MainWindow(QGraphicsView):
         self.modeScene = ModeScene(self, self.widths, self.heights)
         self.modeScene.singlPlyBtn.clicked.connect(self.Singleplayer)
         self.modeScene.returnBtn.clicked.connect(self.ReturnToWelcome)
+        self.modeScene.multiPlayerBtn.clicked.connect(self.Multiplayer)
         self.setScene(self.modeScene)
 
     def AboutGame(self):
@@ -41,7 +42,11 @@ class MainWindow(QGraphicsView):
         self.close()
 
     def Singleplayer(self):
-        self.gameScene = GameScene(self, self.widths, self.heights)
+        self.gameScene = GameScene(self, self.widths, self.heights, 1)#last parameter is number of players
+        self.setScene(self.gameScene)
+
+    def Multiplayer(self):
+        self.gameScene = GameScene(self, self.widths, self.heights, 2)#last parameter is number of players
         self.setScene(self.gameScene)
 
     def ReturnToWelcome(self):

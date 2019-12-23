@@ -32,10 +32,19 @@ rocketsList = ['Images/rocketship.png', 'Images/rocketship (1).png', 'Images/roc
                'Images/rocketship (68).png', 'Images/rocketship (69).png', 'Images/rocketship (70).png',
                'Images/rocketship (71).png']
 
-i = 1
+i = 1#rocket1 angle
+i2 = 1 #rocket2 angle
 
 
 class SpaceShuttle(QLabel):
+    upRocket1 = pyqtSignal()
+    fireRocket1 = pyqtSignal()
+    leftRocket1 = pyqtSignal()
+    rightRocket1 = pyqtSignal()
+    upRocket2 = pyqtSignal()
+    fireRocket2 = pyqtSignal()
+    leftRocket2 = pyqtSignal()
+    rightRocket2 = pyqtSignal()
     def __init__(self, w, h, scene: QGraphicsScene, num):
         super().__init__()
         self.meci = []
@@ -50,15 +59,24 @@ class SpaceShuttle(QLabel):
         self.yFull = float(200)
         self.angle = 90
         self.move(270, 200)
+        #region inizilatioin of signals for rocket1 and rocket2
+        self.upRocket1.connect(self.up1_function)
+        self.leftRocket1.connect(self.left1_function)
+        self.rightRocket1.connect(self.right1_function)
+        self.fireRocket1.connect(self.fire1_function)
+        self.upRocket2.connect(self.up2_function)
+        self.leftRocket2.connect(self.left2_function)
+        self.rightRocket2.connect(self.right2_function)
+        self.fireRocket2.connect(self.fire2_function)
+        #endregion
         self.timer = QBasicTimer()
         self.timer.start(30, self)
 
     def setRocketImage(self, param):
         self.setPixmap(QtGui.QPixmap(param))
 
-    def keyPressEvent(self, event):
-        global i
 
+    def positionsExpand(self):
         current_x_coords = int(round(self.x()))
         current_y_coords = int(round(self.y()))
 
@@ -88,40 +106,92 @@ class SpaceShuttle(QLabel):
             tmpY2 = tmpY2 + 1
         # end region
 
-        if event.key() == QtCore.Qt.Key_Left:
-            i = (i + 1) % 72
-            self.setRocketImage(rocketsList[i])
-            self.angle = self.angle + 5
-            self.moveX = cos(radians(self.angle))
-            self.moveY = sin(radians(self.angle))
-        elif event.key() == QtCore.Qt.Key_Right:
-            i = (i - 1) % 72
-            self.angle = self.angle - 5
-            self.setRocketImage(rocketsList[i])
-            self.moveX = cos(radians(self.angle))
-            self.moveY = sin(radians(self.angle))
-        elif event.key() == QtCore.Qt.Key_Up:
-            self.yFull = float(self.yFull).__sub__(self.moveY * 8)
-            self.xFull = float(self.xFull).__add__(self.moveX * 8)
-            # round(self.geometry().x(),2) + round(self.moveX,2)
-            # round(self.geometry().y(),2) - round(self.moveY,2)
-            self.move(self.xFull, self.yFull)
-            #            print(self.xFull, self.yFull)
-            if (math.floor(self.yFull) <= -20):
-                self.yFull = 500
-            elif (math.floor(self.yFull) >= 500):
-                self.yFull = 0
-            elif (math.floor(self.xFull) <= -22):
-                self.xFull = 559
-            elif (math.floor(self.xFull) >= 560):
-                self.xFull = -21.0
-        elif event.key() == QtCore.Qt.Key_Space:
-            metak = Bullet(self.x(), self.y(), self.angle, i, self.myScene)
-            self.meci.append(metak)
-
-        else:
-            QtWidgets.QLabel.keyPressEvent(self, event)
+    def up1_function(self):
+        global  i
+        self.positionsExpand()
+        self.yFull = float(self.yFull).__sub__(self.moveY * 4)
+        self.xFull = float(self.xFull).__add__(self.moveX * 4)
+        self.move(self.xFull, self.yFull)
+        if (math.floor(self.yFull) <= -20):
+            self.yFull = 500
+        elif (math.floor(self.yFull) >= 500):
+            self.yFull = 0
+        elif (math.floor(self.xFull) <= -22):
+            self.xFull = 559
+        elif (math.floor(self.xFull) >= 560):
+            self.xFull = -21.0
         self.update()
+
+    def up2_function(self):
+        global i2
+        self.yFull = float(self.yFull).__sub__(self.moveY * 8)
+        self.xFull = float(self.xFull).__add__(self.moveX * 8)
+        self.move(self.xFull, self.yFull)
+        if (math.floor(self.yFull) <= -20):
+            self.yFull = 500
+        elif (math.floor(self.yFull) >= 500):
+            self.yFull = 0
+        elif (math.floor(self.xFull) <= -22):
+            self.xFull = 559
+        elif (math.floor(self.xFull) >= 560):
+            self.xFull = -21.0
+        self.update()
+
+    def left1_function(self):
+        global i
+        self.positionsExpand()
+
+        i = (i + 1) % 72
+        self.setRocketImage(rocketsList[i])
+        self.angle = self.angle + 5
+        self.moveX = cos(radians(self.angle))
+        self.moveY = sin(radians(self.angle))
+        self.update()
+
+    def right1_function(self):
+        global i
+        self.positionsExpand()
+        i = (i - 1) % 72
+        self.angle = self.angle - 5
+        self.setRocketImage(rocketsList[i])
+        self.moveX = cos(radians(self.angle))
+        self.moveY = sin(radians(self.angle))
+        self.update()
+
+    def fire1_function(self):
+        global i
+        self.positionsExpand()
+        metak = Bullet(self.x(), self.y(), self.angle, i, self.myScene)
+        self.meci.append(metak)
+        self.update()
+
+    def left2_function(self):
+        global i2
+        self.positionsExpand()
+        i2 = (i2 + 1) % 72
+        self.setRocketImage(rocketsList[i2])
+        self.angle = self.angle + 5
+        self.moveX = cos(radians(self.angle))
+        self.moveY = sin(radians(self.angle))
+        self.update()
+
+    def right2_function(self):
+        global i2
+        self.positionsExpand()
+        i2 = (i2 - 1) % 72
+        self.angle = self.angle - 5
+        self.setRocketImage(rocketsList[i2])
+        self.moveX = cos(radians(self.angle))
+        self.moveY = sin(radians(self.angle))
+        self.update()
+
+    def fire2_function(self):
+        global i2
+        self.positionsExpand()
+        metak = Bullet(self.x(), self.y(), self.angle, i2, self.myScene)
+        self.meci.append(metak)
+        self.update()
+
 
     def timerEvent(self, a0: 'QTimerEvent'):
         if len(self.meci) > 0:

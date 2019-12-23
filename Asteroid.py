@@ -104,20 +104,11 @@ class Asteroid(QLabel):
                 tmpss = inttX + ccc
                 thisAsteroidXCoords.append(tmpss)
                 ccc = ccc + 1
-            ccc = 0
-            for ccc in range(20):
-                tmpss = inttX - ccc
-                thisAsteroidXCoords.append(tmpss)
-                ccc = ccc + 1
             for vvv in range(20):
                 tmpss2 = inttY + vvv
                 thisAsteroidYCoords.append(tmpss2)
                 vvv = vvv + 1
             vvv = 0
-            for vvv in range(20):
-                tmpss2 = inttY - vvv
-                thisAsteroidYCoords.append(tmpss2)
-                vvv = vvv + 1
 
             if (any(checkXCords in thisAsteroidXCoords for checkXCords in Server.coordinatesOfRocketsX) and any(
                     checkYCords in thisAsteroidYCoords for checkYCords in Server.coordinatesOfRocketsY)):

@@ -19,3 +19,4 @@ player4Score = 0
 bulletsCollectionX = {}
 bulletsCollectionY = {}
 bulletIDS = 0
+bulletsCounter = 0

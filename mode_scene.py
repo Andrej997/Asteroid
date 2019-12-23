@@ -8,7 +8,7 @@ class ModeScene(QGraphicsScene):
         super().__init__(parent)
         self.width = width
         self.height = height
-        self.prnt = parent
+        self.parent = parent
 
         self.label = QLabel()
         self.pixmap = QPixmap('Images/img.png')
@@ -56,4 +56,3 @@ class ModeScene(QGraphicsScene):
         self.returnBtn.move(250, 230)
         self.addWidget(self.returnBtn)
 
-#        self.prnt.setScene(self.prnt.modeScene)
