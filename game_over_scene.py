@@ -1,7 +1,7 @@
 from PyQt5.QtCore import QSize, QDir, Qt
 from PyQt5.QtGui import QBrush, QFont, QPalette, QFontDatabase, QImage, QPixmap
 from PyQt5.QtWidgets import QGraphicsView, QGraphicsScene, QApplication, QPushButton, QLabel
-import  server
+import Server
 
 
 class GameOver(QGraphicsScene):

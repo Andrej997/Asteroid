@@ -6,7 +6,7 @@ from PyQt5.QtGui import QPixmap, QTransform, QKeySequence
 from math import cos, sin, radians
 import  math
 import random
-import server
+import Server
 from game_over_scene import *
 i = 1
 ast_0 = 0
@@ -58,7 +58,7 @@ class Asteroid(QLabel):
         global coordinatesOfRocketsss
         global levelOfAsteroid
         global isDestroyedThisObj1
-        if server.activeAsteroids[self.uniqueIdenfier] == 0:
+        if Server.activeAsteroids[self.uniqueIdenfier] == 0:
             ast_0 += 1
             # if(numberObj == 3):
             # numberObj = 0
@@ -119,35 +119,35 @@ class Asteroid(QLabel):
                 thisAsteroidYCoords.append(tmpss2)
                 vvv = vvv + 1
 
-            if (any(checkXCords in thisAsteroidXCoords for checkXCords in server.coordinatesOfRocketsX) and any(
-                    checkYCords in thisAsteroidYCoords for checkYCords in server.coordinatesOfRocketsY)):
-                server.player1Lives = server.player1Lives - 1
-                self.myScene.label2.setText("Player1 lives--->[" + server.player1Lives.__str__() + "] score--->[" + server.player1Score.__str__() + "]")
-                server.activeAsteroids[self.uniqueIdenfier] = 1
+            if (any(checkXCords in thisAsteroidXCoords for checkXCords in Server.coordinatesOfRocketsX) and any(
+                    checkYCords in thisAsteroidYCoords for checkYCords in Server.coordinatesOfRocketsY)):
+                Server.player1Lives = Server.player1Lives - 1
+                self.myScene.label2.setText("Player1 lives--->[" + Server.player1Lives.__str__() + "] score--->[" + Server.player1Score.__str__() + "]")
+                Server.activeAsteroids[self.uniqueIdenfier] = 1
                 self.hide()
                 print("ASTEROID IS DESTROYED TOO!!!")
-                if server.player1Lives == 0:#ako je izgubio sve zivote da iskoci iz igrce
+                if Server.player1Lives == 0:#ako je izgubio sve zivote da iskoci iz igrce
                     self.myScene.game_is_over()
             #endRegion
 
             expandBulletX = []
             expandBulletY = []
 
-            for key, value in server.bulletsCollectionX.items():
+            for key, value in Server.bulletsCollectionX.items():
                 omega = 0
                 for omega in range(5):
                     expandBulletX.append(omega + value)
                     omega = omega + 1
                 if any(cx in expandBulletX for cx in thisAsteroidXCoords):
-                    for key2, val2 in server.bulletsCollectionY.items():
+                    for key2, val2 in Server.bulletsCollectionY.items():
                         omega2 = 0
                         for omega2 in range(5):
                             expandBulletY.append(omega2 + val2)
                             omega2 = omega2 + 1
                         if any(cy in expandBulletY for cy in thisAsteroidYCoords) and key == key2:
-                            server.activeAsteroids[self.uniqueIdenfier] = 1
-                            server.player1Score = server.player1Score + 300
-                            self.myScene.label2.setText("Player1 lives--->[" + server.player1Lives.__str__() + "] score--->[" + server.player1Score.__str__() + "]")
+                            Server.activeAsteroids[self.uniqueIdenfier] = 1
+                            Server.player1Score = Server.player1Score + 300
+                            self.myScene.label2.setText("Player1 lives--->[" + Server.player1Lives.__str__() + "] score--->[" + Server.player1Score.__str__() + "]")
                             self.hide()
                     break
             expandBulletY.clear()

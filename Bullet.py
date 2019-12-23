@@ -2,7 +2,7 @@ from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtWidgets import QLabel, QGraphicsScene
 from PyQt5.QtGui import QPixmap, QTransform
 from math import cos, sin, radians, floor
-import server
+import Server
 
 class Bullet(QLabel):
     kreni = pyqtSignal()
@@ -16,14 +16,14 @@ class Bullet(QLabel):
         self.setPixmap(self.image)
         self.init_x = x + 20 + 30 * float(cos(radians(rotation)))
         self.init_y = y + 20 - 30 * float(sin(radians(rotation)))
-        self.IDS = server.bulletIDS
-        server.bulletIDS = server.bulletIDS + 1
+        self.IDS = Server.bulletIDS
+        Server.bulletIDS = Server.bulletIDS + 1
         inttX = int(round(self.init_x))
         inttY = int(round(self.init_y))
-        server.bulletsCollectionX[self.IDS] = 0
-        server.bulletsCollectionY[self.IDS] = 0
-        server.bulletsCollectionX[self.IDS] = inttX
-        server.bulletsCollectionY[self.IDS] = inttY
+        Server.bulletsCollectionX[self.IDS] = 0
+        Server.bulletsCollectionY[self.IDS] = 0
+        Server.bulletsCollectionX[self.IDS] = inttX
+        Server.bulletsCollectionY[self.IDS] = inttY
 
         self.scene = scene
         self.xMovement = float(cos(radians(rotation)))
@@ -41,8 +41,8 @@ class Bullet(QLabel):
         self.init_y = float(self.init_y).__sub__(self.yMovement * 3)
         if floor(self.init_x) <= -20 or floor(self.init_x) >= 603 or floor(self.init_y) <= -20 or floor(
                 self.init_y) >= 503:
-            server.bulletsCollectionX[self.IDS] = 99999
-            server.bulletsCollectionY[self.IDS] = 99999
+            Server.bulletsCollectionX[self.IDS] = 99999
+            Server.bulletsCollectionY[self.IDS] = 99999
             self.kreni.disconnect()
             self.destroy()
             self.hide()
@@ -50,5 +50,5 @@ class Bullet(QLabel):
             self.move(self.init_x, self.init_y)
             inttXXX = int(round(self.init_x))
             inttYYY = int(round(self.init_y))
-            server.bulletsCollectionX[self.IDS] = inttXXX
-            server.bulletsCollectionY[self.IDS] = inttYYY
+            Server.bulletsCollectionX[self.IDS] = inttXXX
+            Server.bulletsCollectionY[self.IDS] = inttYYY

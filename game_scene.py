@@ -1,4 +1,4 @@
-from spaceShuttle import *
+from SpaceShuttle import *
 from asteroid import *
 from game_over_scene import *
 from welcome_scene import *
@@ -40,19 +40,19 @@ class GameScene(QGraphicsScene):
             self.asteroid_0.resize(60, 50)
             self.addWidget(self.asteroid_0)
             activeBigAsteroids.append(self.asteroid_0)
-            server.activeAsteroids[o.__str__()] = 0
+            Server.activeAsteroids[o.__str__()] = 0
 
         print("DONE")
 
         self.label2 = QLabel(
-            "Player1 lives--->[" + server.player1Lives.__str__() + "] score--->[" + server.player1Score.__str__() + "]")
+            "Player1 lives--->[" + Server.player1Lives.__str__() + "] score--->[" + Server.player1Score.__str__() + "]")
         self.label2.resize(400, 30)
         self.label2.move(5, 440)
         self.label2.setStyleSheet("font: 12pt; color: #f03a54; font:bold; background-color: transparent; ")
         self.addWidget(self.label2)
 
         self.label3 = QLabel(
-            "Player2 lives--->[" + server.player2Lives.__str__() + "] score--->[" + server.player2Score.__str__() + "]")
+            "Player2 lives--->[" + Server.player2Lives.__str__() + "] score--->[" + Server.player2Score.__str__() + "]")
         self.label3.resize(400, 30)
         self.label3.move(5, 470)
         self.label3.setStyleSheet("font: 12pt; color: yellow; font:bold; background-color: transparent; ")

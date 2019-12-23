@@ -3,8 +3,8 @@ from datetime import time
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import pyqtSignal, QBasicTimer, QRectF, QPoint, QTimerEvent
 import  math
-from bullet import *
-import  server
+from Bullet import *
+import Server
 
 rocketsList = ['Images/rocketship.png', 'Images/rocketship (1).png', 'Images/rocketship (3).png',
                'Images/rocketship (4).png', 'Images/rocketship (5).png', 'Images/rocketship (6).png',
@@ -62,29 +62,29 @@ class SpaceShuttle(QLabel):
         current_x_coords = int(round(self.x()))
         current_y_coords = int(round(self.y()))
 
-        server.coordinatesOfRocketsX.clear()
-        server.coordinatesOfRocketsY.clear()
+        Server.coordinatesOfRocketsX.clear()
+        Server.coordinatesOfRocketsY.clear()
 
         # region ->logika da se raketa gleda kao 20x20 px po x i y koordinati
         tmp = 0
         for tmpX1 in range(20):
             tmp = tmpX1 + current_x_coords
-            server.coordinatesOfRocketsX.append(tmp)
+            Server.coordinatesOfRocketsX.append(tmp)
             tmpX1 = tmpX1 + 1
         tmp = 0
         for tmpX2 in range(20):
             tmp = current_x_coords - tmpX2
-            server.coordinatesOfRocketsX.append(tmp)
+            Server.coordinatesOfRocketsX.append(tmp)
             tmpX2 = tmpX2 + 1
         tmp = 0
         for tmpY1 in range(20):
             tmp = tmpY1 + current_y_coords
-            server.coordinatesOfRocketsY.append(tmp)
+            Server.coordinatesOfRocketsY.append(tmp)
             tmpY1 = tmpY1 + 1
         tmp = 0
         for tmpY2 in range(20):
             tmp = current_y_coords - tmpY2
-            server.coordinatesOfRocketsY.append(tmp)
+            Server.coordinatesOfRocketsY.append(tmp)
             tmpY2 = tmpY2 + 1
         # end region
 

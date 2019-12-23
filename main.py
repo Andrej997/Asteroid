@@ -3,7 +3,7 @@ from welcome_scene import *
 from mode_scene import *
 from game_scene import *
 from about_scene import *
-import server
+import Server
 
 
 class MainWindow(QGraphicsView):
