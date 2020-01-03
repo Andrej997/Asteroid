@@ -1,5 +1,5 @@
 from SpaceShuttle import *
-from asteroid import *
+from Asteroid import *
 from game_over_scene import *
 from welcome_scene import *
 from main import *
@@ -51,7 +51,7 @@ class GameScene(QGraphicsScene):
         tt.start()
 
         o = 0
-        for o in range(5):
+        for o in range(Server.level + 200):
             self.asteroid_0 = Asteroid(self.width, self.height, self, o.__str__())
             self.asteroid_0.setFocus()#mozda i ne mora posto je timer tamo
             self.asteroid_0.setStyleSheet("background:transparent")

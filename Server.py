@@ -20,3 +20,6 @@ bulletsCollectionX = {}
 bulletsCollectionY = {}
 bulletIDS = 0
 bulletsCounter = 0
+
+level = 1   #globalna promenljiva koja odredjuje trenutni nivo
+            #i na osnovu nje se kreiraju asteroidi
