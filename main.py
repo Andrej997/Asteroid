@@ -4,7 +4,10 @@ from mode_scene import *
 from game_scene import *
 from about_scene import *
 import Server
-
+from  music import musicPlayer
+from multiprocessing import Process
+from threading import Thread
+from PyQt5.QtCore import QThread, QProcess
 
 class MainWindow(QGraphicsView):
 
@@ -22,9 +25,8 @@ class MainWindow(QGraphicsView):
         self.modeScene = None
         self.gameScene = None
         self.aboutScene = None
-
         self.setScene(self.welcomeScene)
-        self.show()
+        self.show()        
 
     def GameMode(self):
         self.modeScene = ModeScene(self, self.widths, self.heights)
@@ -56,5 +58,9 @@ class MainWindow(QGraphicsView):
 if __name__ == '__main__':
     app = QApplication([])
     mw = MainWindow()
+    mp = musicPlayer()
+    musicProces = QProcess(mp)
+    musicProces.start()
     sys.exit(app.exec_())
+    
 
