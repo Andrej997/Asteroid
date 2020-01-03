@@ -18,3 +18,9 @@
 # broj metkova ograniciti na 20-30 da moze svaki igrac maximalno da ima ispaljeno u jednom trenutku (imam resenje za ovo iskucano pusujem sutra)
 # treba srediti kretanje u multiplayeru, ima neki bugg da li sa queue ili sa metodama keyPresedEvent i keyReleasedEvent
 # fixati velicine rakete, asteroida i metka, idalje se nekad desava da asteroid prodje kroz raketu a da je ne unisti i da metak prodje kroz asteroid a da ga ne unisti
+
+# RAD
+
+# Andrej:
+    # dodacu labelu koja pokazu koji je trenutno level
+    # i da se poveca nivo i broj asteroida za jedan
