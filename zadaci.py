@@ -2,12 +2,19 @@
 # game_scene.py
 
 # treba da se obezbedi da se stalno proverava koji je ostalo asteroida u polju i kad dodje do nule
-# da se poveca Server.level i da se ponovo pozove f-ja za generisanje asteroida
+# da se poveca Server.level i da se ponovo pozove f-ja za generisanje asteroida, i da se ubrzava brzina kretanja asteroida + rakete
 
-# ako se izgubi u single player modu, treba da na klik exit dugmeta igrica kroz ugasi da ne ostane aktivna
+#RESENO# ako se izgubi u single player modu, treba da na klik exit dugmeta igrica kroz ugasi da ne ostane aktivna ~~~ stavljeno da thread bude daemon da bi se i on ugasio kada i main
 
 # prenos Server.py preko neta, to se moramo naci da bi mogli da testiramo
 
-# pnije dobro odradjeno zatvaranje programa nakon kraja igre (samo se sakrije prozor)
+#RESENO# pnije dobro odradjeno zatvaranje programa nakon kraja igre (samo se sakrije prozor)~~~ stavljeno da thread bude daemon da bi se i on ugasio kada i main
 
 # takmicenje
+# skriveni bonus
+# treba napraviti da asteroidi idu veliki, srednji, mali i logika da se manji asteroidi stvore na mestu gde je unisten stari
+# da asteroidi idu nekom konstantnom putanjom, da svaki klijent fakticki zna kuda idu asteroidi a ne da mora i to preko mreze da se salje(mada ovo mozemo srediti samo za mod preko mreze, a single i multiplayer da ostanu isti)
+# napraviti da ima 4 * slike raketa pa za svakog playera druga boja i srediti skor da se pamti odvojeno
+# broj metkova ograniciti na 20-30 da moze svaki igrac maximalno da ima ispaljeno u jednom trenutku (imam resenje za ovo iskucano pusujem sutra)
+# treba srediti kretanje u multiplayeru, ima neki bugg da li sa queue ili sa metodama keyPresedEvent i keyReleasedEvent
+# fixati velicine rakete, asteroida i metka, idalje se nekad desava da asteroid prodje kroz raketu a da je ne unisti i da metak prodje kroz asteroid a da ga ne unisti

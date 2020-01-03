@@ -48,10 +48,11 @@ class GameScene(QGraphicsScene):
 
         self.queue.put('go')
         tt = Thread(target=self.infiniteFunction)
+        tt.daemon = True
         tt.start()
 
         o = 0
-        for o in range(Server.level + 200):
+        for o in range(Server.level + 3):
             self.asteroid_0 = Asteroid(self.width, self.height, self, o.__str__())
             self.asteroid_0.setFocus()#mozda i ne mora posto je timer tamo
             self.asteroid_0.setStyleSheet("background:transparent")
