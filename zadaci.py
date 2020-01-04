@@ -24,3 +24,10 @@
 # Andrej:
     # dodacu labelu koja pokazu koji je trenutno level
     # i da se poveca nivo i broj asteroida za jedan
+
+# Marko M
+    # poradicu na bojama raketa za svakog igraca posebna
+    # i velicini asteroida veliki/srednji/mali, radio sam nesto ali cim se tipa unisti veliki svi postaju srednji, tako sigurno ne treba xD
+    
+    # da bi znali konstantnu kretnju asteroida morali bi onda njihovu logiku kretanja da menjamo jer smo napravili 
+    #   random kretnju, tako da videti ako moze da se salje tako ako ne onda menjamo
