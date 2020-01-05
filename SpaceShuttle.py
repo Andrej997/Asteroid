@@ -161,7 +161,7 @@ class SpaceShuttle(QLabel):
     def fire1_function(self):
         global i
         self.positionsExpand()
-        metak = Bullet(self.x(), self.y(), self.angle, i, self.myScene)
+        metak = Bullet(self.x(), self.y(), self.angle, i, self.myScene, 1)#last parameter is rocket id
         self.meci.append(metak)
         self.update()
 
@@ -188,7 +188,7 @@ class SpaceShuttle(QLabel):
     def fire2_function(self):
         global i2
         self.positionsExpand()
-        metak = Bullet(self.x(), self.y(), self.angle, i2, self.myScene)
+        metak = Bullet(self.x(), self.y(), self.angle, i2, self.myScene, 2)#last parameter is rocket id
         self.meci.append(metak)
         self.update()
 

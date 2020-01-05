@@ -31,3 +31,8 @@
     
     # da bi znali konstantnu kretnju asteroida morali bi onda njihovu logiku kretanja da menjamo jer smo napravili 
     #   random kretnju, tako da videti ako moze da se salje tako ako ne onda menjamo
+
+# Tatic:
+    # ograniciti da svaki igrac moze da ima max 30 metkova u jednom trenutku aktivnih
+    # dodacu ono za dodatnu silu sto ima kao da bude da se pokupi zivot
+    # pokusacu na kopiji nekoj malo server-client da vidim kako funckionise
