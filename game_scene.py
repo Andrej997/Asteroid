@@ -3,6 +3,7 @@ from Asteroid import *
 from game_over_scene import *
 from welcome_scene import *
 from main import *
+from PyQt5.QtCore import pyqtSignal, QBasicTimer, QRectF, QPoint, QTimerEvent, Qt
 import multiprocessing as mp
 from threading import Thread
 
@@ -47,19 +48,12 @@ class GameScene(QGraphicsScene):
 
 
         self.queue.put('go')
+
+        self.createAsteroids()
+
         tt = Thread(target=self.infiniteFunction)
         tt.daemon = True
         tt.start()
-
-        o = 0
-        for o in range(Server.level + 3):
-            self.asteroid_0 = Asteroid(self.width, self.height, self, o.__str__())
-            self.asteroid_0.setFocus()#mozda i ne mora posto je timer tamo
-            self.asteroid_0.setStyleSheet("background:transparent")
-            self.asteroid_0.resize(60, 50)
-            self.addWidget(self.asteroid_0)
-            activeBigAsteroids.append(self.asteroid_0)
-            Server.activeAsteroids[o.__str__()] = 0
 
         print("DONE")
 
@@ -77,6 +71,23 @@ class GameScene(QGraphicsScene):
         self.label3.setStyleSheet("font: 12pt; color: yellow; font:bold; background-color: transparent; ")
         self.addWidget(self.label3)
 
+        self.label4 = QLabel("Level : " + Server.level.__str__())
+        self.label4.resize(400, 30)
+        self.label4.move(500, 10)
+        self.label4.setStyleSheet("font: 12pt; color: white; font: bold; background-color: transparent;")
+        self.addWidget(self.label4)
+
+    def createAsteroids(self):
+        o = 0
+        for o in range(Server.level):
+            self.asteroid_0 = Asteroid(self.width, self.height, self, o.__str__())
+            self.asteroid_0.setFocus()  # mozda i ne mora posto je timer tamo
+            self.asteroid_0.setStyleSheet("background:transparent")
+            self.asteroid_0.resize(60, 50)
+            self.addWidget(self.asteroid_0)
+            activeBigAsteroids.append(self.asteroid_0)
+            Server.activeAsteroids[o.__str__()] = 0
+
     def game_is_over(self):#ako je game over
         self.gameOverScene = GameOver(self, self.width, self.height)
         self.gameOverScene.returnBtn.clicked.connect(self.menus)
@@ -85,9 +96,20 @@ class GameScene(QGraphicsScene):
     def menus(self):
         self.sceneParent.ExitGame()
 
-
     def infiniteFunction(self):
         while True:
+            if Server.activeAsteroids.__len__() > 0:
+                counterActAst = 0
+                for ast in Server.activeAsteroids:
+                    if (Server.activeAsteroids[ast] == 1) :
+                        counterActAst = counterActAst + 1
+                if counterActAst == Server.activeAsteroids.__len__():
+                   #Server.activeAsteroids.clear()
+                   Server.level = Server.level + 1
+                   #self.createAsteroids()
+                   #continue
+
+
             num = self.queue.get()
             print("Got {0}".format(num))
             if num == 1:
