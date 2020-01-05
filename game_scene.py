@@ -1,11 +1,14 @@
 from SpaceShuttle import *
 from Asteroid import *
+from bonus import *
 from game_over_scene import *
 from welcome_scene import *
 from main import *
 from PyQt5.QtCore import pyqtSignal, QBasicTimer, QRectF, QPoint, QTimerEvent, Qt
 import multiprocessing as mp
 from threading import Thread
+import time
+import  random
 
 activeBigAsteroids = []
 activeMediumAsteroids = []
@@ -26,13 +29,19 @@ class GameScene(QGraphicsScene):
         self.queue = mp.Queue()
         self.firstrelease = False
         self.keyList = []
-
+        self.timer = QBasicTimer()
+        self.timer.start(2000, self)
+        #threadForBonus = Thread(target=self.bonusCheck)
+        #threadForBonus.daemon = True
+        #threadForBonus.start()
 
         self.label = QLabel()
         self.pixmap = QPixmap('Images/img.png')
         self.label.setPixmap(self.pixmap)
         self.label.resize(600, 500)
         self.addWidget(self.label)
+
+        # self.bonus = None
 
         self.rocketnumber1 = SpaceShuttle(self.width, self.height, self, 1)
         self.rocketnumber1.resize(60, 50)#slika je 50x50 ali se glupo okrece tako da je bolje ovako da bi se uvek videla cela
@@ -48,13 +57,10 @@ class GameScene(QGraphicsScene):
 
 
         self.queue.put('go')
-
         self.createAsteroids()
-
         tt = Thread(target=self.infiniteFunction)
         tt.daemon = True
         tt.start()
-
         print("DONE")
 
         self.label2 = QLabel(
@@ -76,6 +82,7 @@ class GameScene(QGraphicsScene):
         self.label4.move(500, 10)
         self.label4.setStyleSheet("font: 12pt; color: white; font: bold; background-color: transparent;")
         self.addWidget(self.label4)
+
 
     def createAsteroids(self):
         o = 0
@@ -160,3 +167,42 @@ class GameScene(QGraphicsScene):
             if 83 in keyspressed:#2Fire
                 self.queue.put(8)
         print(keyspressed)
+
+    def bonusCheck(self):
+        while True:
+            time.sleep(5)#evry 30 seconds set bonus
+            randomW = random.randrange(0, 500)
+            randomH = random.randrange(0, 450)
+            self.bonus = Bonus(self.width, self.height, randomW, randomH, self)
+            self.bonus.setStyleSheet("background:transparent")
+            self.addWidget(self.bonus)
+            print("sleep")
+            #time.sleep(2)#wait for two seconds and than check coordinates of rockets
+            #self.bonus.hide()
+
+    def timerEvent(self, a0: 'QTimerEvent'):#timer je na 2 sekunde gore, zato su ove provere, tako da se na svakih 30 sekundi stvori bonus i da igrac ima 2 sekunde da stane na njega pa se vrsi provera i resetuje se
+        if Server.bonus_time < 15:
+            Server.bonus_time = Server.bonus_time + 1
+        elif Server.bonus_time == 15:
+            Server.bonus_x_coordinate = random.randrange(0, 500)
+            Server.bonus_y_coordinate = random.randrange(0, 450)
+            Server.bonus_x_expanded.clear()
+            Server.bonus_y_expanded.clear()
+            tmpXX = 0
+            for tmpXX in range(50):
+                Server.bonus_x_expanded.append(tmpXX + Server.bonus_x_coordinate)#prosirivanje koordinata bonusa
+            tmpYY = 0
+            for tmpYY in range(50):
+                Server.bonus_y_expanded.append(tmpYY + Server.bonus_y_coordinate)#prosirivanje koordinata bonusa
+            self.bonus = Bonus(self.width, self.height, Server.bonus_x_coordinate, Server.bonus_y_coordinate, self)
+            self.bonus.setStyleSheet("background:transparent")
+            self.addWidget(self.bonus)
+            Server.bonus_time = Server.bonus_time + 1
+        elif Server.bonus_time == 16:
+            if (any(checkXCords in Server.bonus_x_expanded for checkXCords in Server.coordinatesOfRocketsX) and any(
+                    checkYCords in Server.bonus_y_expanded for checkYCords in Server.coordinatesOfRocketsY)):
+                    Server.player1Lives = Server.player1Lives + 1
+                    self.label2.setText("Player1 lives--->[" + Server.player1Lives.__str__() + "] score--->[" + Server.player1Score.__str__() + "]")
+            self.bonus.hide()
+            self.bonus.move(1234, 1234)
+            Server.bonus_time = 0
