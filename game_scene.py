@@ -9,6 +9,7 @@ import multiprocessing as mp
 from threading import Thread
 import time
 import  random
+from key_notifier import KeyNotifier
 
 activeBigAsteroids = []
 activeMediumAsteroids = []
@@ -31,9 +32,10 @@ class GameScene(QGraphicsScene):
         self.keyList = []
         self.timer = QBasicTimer()
         self.timer.start(2000, self)
-        #threadForBonus = Thread(target=self.bonusCheck)
-        #threadForBonus.daemon = True
-        #threadForBonus.start()
+
+        self.key_notifier = KeyNotifier()
+        self.key_notifier.key_signal.connect(self.__update_position__)
+        self.key_notifier.start()
 
         self.label = QLabel()
         self.pixmap = QPixmap('Images/img.png')
@@ -58,9 +60,9 @@ class GameScene(QGraphicsScene):
 
         self.queue.put('go')
         self.createAsteroids()
-        tt = Thread(target=self.infiniteFunction)
-        tt.daemon = True
-        tt.start()
+        #tt = Thread(target=self.infiniteFunction)
+        #tt.daemon = True
+        #tt.start()
         print("DONE")
 
         self.label2 = QLabel(
@@ -103,7 +105,7 @@ class GameScene(QGraphicsScene):
     def menus(self):
         self.sceneParent.ExitGame()
 
-    def infiniteFunction(self):
+    def infiniteFunction(self):#probaj da izmestis logiku iz ove funkcije, jer sam ja proveru za keyPress prebacio u drugi thread u key_notifier skriptu, tako da ovu funkciju treba skroz izbrisati, poziv je zakomentarisan trenutno
         while True:
             if Server.activeAsteroids.__len__() > 0:
                 counterActAst = 0
@@ -116,69 +118,31 @@ class GameScene(QGraphicsScene):
                    #self.createAsteroids()
                    #continue
 
-
-            num = self.queue.get()
-            print("Got {0}".format(num))
-            if num == 1:
-                self.rocketnumber1.leftRocket1.emit()
-            elif num == 2:
-                self.rocketnumber1.upRocket1.emit()
-            elif num == 3:
-                self.rocketnumber1.rightRocket1.emit()
-            elif num == 4:
-                self.rocketnumber1.fireRocket1.emit()
-            elif num == 5 and self.players_number == 2:
-                self.rocketnumber2.leftRocket2.emit()
-            elif num == 6 and self.players_number == 2:
-                self.rocketnumber2.upRocket2.emit()
-            elif num == 7 and self.players_number == 2:
-                self.rocketnumber2.rightRocket2.emit()
-            elif num == 8 and self.players_number == 2:
-                self.rocketnumber2.fireRocket2.emit()
-
     def keyPressEvent(self, event):
-        self.firstrelease = True
-        my_key = event.key()
-        self.keyList.append(my_key)
+        self.key_notifier.add_key(event.key())
 
     def keyReleaseEvent(self, event):
-        if self.firstrelease == True:
-            self.processmultikeys(self.keyList)
+        self.key_notifier.rem_key(event.key())
 
-        self.firstrelease = False
-        del self.keyList[-1]
-
-    def processmultikeys(self, keyspressed):
-        if 16777234 in keyspressed:#1L
-            self.queue.put(1)
-        if 16777235 in keyspressed:#1Up
-            self.queue.put(2)
-        if 16777236 in keyspressed:#1R
-            self.queue.put(3)
-        if 32 in keyspressed:#1Fire
-            self.queue.put(4)
-        if self.players_number == 2:
-            if 65 in keyspressed:#2L
-                self.queue.put(5)
-            if 87 in keyspressed:#2Up
-                self.queue.put(6)
-            if 68 in keyspressed:#2R
-                self.queue.put(7)
-            if 83 in keyspressed:#2Fire
-                self.queue.put(8)
-        print(keyspressed)
-
-    def bonusCheck(self):
-        while True:
-            time.sleep(5)#evry 30 seconds set bonus
-            randomW = random.randrange(0, 500)
-            randomH = random.randrange(0, 450)
-            self.bonus = Bonus(self.width, self.height, randomW, randomH, self)
-            self.bonus.setStyleSheet("background:transparent")
-            self.addWidget(self.bonus)
-            print("sleep")
-            #time.sleep(2)#wait for two seconds and than check coordinates of rockets
-            #self.bonus.hide()
+    def __update_position__(self, key):
+        # time.sleep(1)
+        print("MARKO test")
+        if key == Qt.Key_W and self.players_number == 2:
+            self.rocketnumber2.upRocket2.emit()
+        elif key == Qt.Key_A and self.players_number == 2:
+            self.rocketnumber2.leftRocket2.emit()
+        elif key == Qt.Key_D and self.players_number == 2:
+            self.rocketnumber2.rightRocket2.emit()
+        elif key == Qt.Key_S and self.players_number == 2:
+            self.rocketnumber2.fireRocket2.emit()
+        elif key == Qt.Key_Up:
+            self.rocketnumber1.upRocket1.emit()
+        elif key == Qt.Key_Right:
+            self.rocketnumber1.rightRocket1.emit()
+        elif key == Qt.Key_Left:
+            self.rocketnumber1.leftRocket1.emit()
+        elif key == Qt.Key_Space:
+            self.rocketnumber1.fireRocket1.emit()
 
     def timerEvent(self, a0: 'QTimerEvent'):#timer je na 2 sekunde gore, zato su ove provere, tako da se na svakih 30 sekundi stvori bonus i da igrac ima 2 sekunde da stane na njega pa se vrsi provera i resetuje se
         if Server.bonus_time < 15:

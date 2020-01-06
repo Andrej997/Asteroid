@@ -109,8 +109,8 @@ class SpaceShuttle(QLabel):
     def up1_function(self):
         global  i
         self.positionsExpand()
-        self.yFull = float(self.yFull).__sub__(self.moveY * 4)
-        self.xFull = float(self.xFull).__add__(self.moveX * 4)
+        self.yFull = float(self.yFull).__sub__(self.moveY * 8)
+        self.xFull = float(self.xFull).__add__(self.moveX * 8)
         self.move(self.xFull, self.yFull)
         if (math.floor(self.yFull) <= -20):
             self.yFull = 500
