@@ -62,6 +62,8 @@ class Bullet(QLabel):
             self.kreni.disconnect()
             self.destroy()
             self.hide()
+            del Server.bulletsCollectionX[self.IDS]
+            del Server.bulletsCollectionY[self.IDS]
         else:
             self.move(self.init_x, self.init_y)
             inttXXX = int(round(self.init_x))

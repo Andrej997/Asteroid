@@ -84,8 +84,8 @@ class Asteroid(QLabel):
 
             self.moveX = cos(radians(self.angle))
             self.moveY = sin(radians(self.angle))
-            self.yFull = float(self.yFull).__sub__(self.moveY * 6)
-            self.xFull = float(self.xFull).__add__(self.moveX * 9)
+            self.yFull = float(self.yFull).__sub__(self.moveY * 3)
+            self.xFull = float(self.xFull).__add__(self.moveX * 2)
             self.move(self.xFull, self.yFull)
 
             #region unistavanje asteroida
@@ -126,27 +126,27 @@ class Asteroid(QLabel):
 
             expandBulletX = []
             expandBulletY = []
-
+            params3 = False
             for key, value in Server.bulletsCollectionX.items():
-                omega = 0
-                for omega in range(5):
-                    expandBulletX.append(omega + value)
-                    omega = omega + 1
+                if params3 == True:
+                    break
+                expandBulletX.clear()
+                expandBulletX.append(value)
                 if any(cx in expandBulletX for cx in thisAsteroidXCoords):
                     for key2, val2 in Server.bulletsCollectionY.items():
-                        omega2 = 0
-                        for omega2 in range(5):
-                            expandBulletY.append(omega2 + val2)
-                            omega2 = omega2 + 1
+                        expandBulletY.clear()
+                        expandBulletY.append(val2)
                         if any(cy in expandBulletY for cy in thisAsteroidYCoords) and key == key2:
                             Server.activeAsteroids[self.uniqueIdenfier] = 1
                             Server.player1Score = Server.player1Score + 300
                             self.myScene.label2.setText("Player1 lives--->[" + Server.player1Lives.__str__() + "] score--->[" + Server.player1Score.__str__() + "]")
                             self.hide()
-
+                            self.yFull = 1234
+                            self.xFull = 1234
                             self.check_for_level_up()
+                            params3 = True
+                            break
 
-                    break
             expandBulletY.clear()
             expandBulletX.clear()
 

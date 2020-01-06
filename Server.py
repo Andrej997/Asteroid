@@ -25,7 +25,7 @@ bulletIDS = 0
 bulletsCounter = 0
 rocket1_bulletsCounter = 0
 rocket2_bulletsCounter = 0
-maximum_of_bullets = 31
+maximum_of_bullets = 16
 
 level = 1   #globalna promenljiva koja odredjuje trenutni nivo
             #i na osnovu nje se kreiraju asteroidi
