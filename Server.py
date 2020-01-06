@@ -26,6 +26,7 @@ maximum_of_bullets = 31
 
 level = 1   #globalna promenljiva koja odredjuje trenutni nivo
             #i na osnovu nje se kreiraju asteroidi
+create = False
 
 bonus_time = 0 #bonus dolazi na svakih 10 sekundi [5*2]
 bonus_x_coordinate = 0

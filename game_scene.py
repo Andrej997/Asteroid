@@ -4,12 +4,13 @@ from bonus import *
 from game_over_scene import *
 from welcome_scene import *
 from main import *
-from PyQt5.QtCore import pyqtSignal, QBasicTimer, QRectF, QPoint, QTimerEvent, Qt
+from PyQt5.QtCore import pyqtSignal, QBasicTimer, QRectF, QPoint, QTimerEvent, Qt, pyqtSlot
 import multiprocessing as mp
 from threading import Thread
 import time
-import  random
+import random
 from key_notifier import KeyNotifier
+#from checker import Checker
 
 activeBigAsteroids = []
 activeMediumAsteroids = []
@@ -17,11 +18,14 @@ activeSmallAsteroids = []
 
 
 class GameScene(QGraphicsScene):
+    create_signal = pyqtSignal("""int""")
+
     def __init__(self, parent, width, height, num_of_players):
         super().__init__(parent)
         global activeBigAsteroids
         global activeMediumAsteroids
         global activeSmallAsteroids
+        self.create_signal = pyqtSignal("""int""")
         self.width = width
         self.height = height
         self.setSceneRect(0, 0, self.width-2, self.height-2)
@@ -60,9 +64,13 @@ class GameScene(QGraphicsScene):
 
         self.queue.put('go')
         self.createAsteroids()
-        #tt = Thread(target=self.infiniteFunction)
-        #tt.daemon = True
-        #tt.start()
+
+        tt = Thread(target=self.checkAstDickt)
+        tt.daemon = True
+        tt.start()
+
+        #self.asteroidChecker = Checker()
+
         print("DONE")
 
         self.label2 = QLabel(
@@ -87,7 +95,7 @@ class GameScene(QGraphicsScene):
 
 
     def createAsteroids(self):
-        o = 0
+        o = Server.activeAsteroids.__len__()
         for o in range(Server.level):
             self.asteroid_0 = Asteroid(self.width, self.height, self, o.__str__())
             self.asteroid_0.setFocus()  # mozda i ne mora posto je timer tamo
@@ -105,18 +113,37 @@ class GameScene(QGraphicsScene):
     def menus(self):
         self.sceneParent.ExitGame()
 
-    def infiniteFunction(self):#probaj da izmestis logiku iz ove funkcije, jer sam ja proveru za keyPress prebacio u drugi thread u key_notifier skriptu, tako da ovu funkciju treba skroz izbrisati, poziv je zakomentarisan trenutno
+
+    def checkAstDickt(self):
         while True:
+            time.sleep(0.5)
             if Server.activeAsteroids.__len__() > 0:
                 counterActAst = 0
                 for ast in Server.activeAsteroids:
-                    if (Server.activeAsteroids[ast] == 1) :
+                    if (Server.activeAsteroids[ast] == 1):
                         counterActAst = counterActAst + 1
                 if counterActAst == Server.activeAsteroids.__len__():
-                   #Server.activeAsteroids.clear()
-                   Server.level = Server.level + 1
-                   #self.createAsteroids()
-                   #continue
+                    Server.level = Server.level + 1
+                    Server.create = True
+                else :
+                    Server.create = False
+            if (Server.create == True):
+                for ast in Server.activeAsteroids:
+                    Server.activeAsteroids[ast.__str__()] = 0
+                o = Server.activeAsteroids.__len__()
+                Server.activeAsteroids.clear()
+                print(Server.activeAsteroids.__str__())
+                #self.createAsteroids()
+                """for o in range(Server.level):
+                    self.asteroid_0 = Asteroid(self.width, self.height, self, o.__str__())
+                    self.asteroid_0.setFocus()  # mozda i ne mora posto je timer tamo
+                    self.asteroid_0.setStyleSheet("background:transparent")
+                    self.asteroid_0.resize(60, 50)
+                    print("OVDE PUKNEM")
+                    self.addWidget(self.asteroid_0)
+                    activeBigAsteroids.append(self.asteroid_0)
+                    Server.activeAsteroids[o.__str__()] = 0"""
+                #Server.create = False
 
     def keyPressEvent(self, event):
         self.key_notifier.add_key(event.key())
@@ -126,7 +153,7 @@ class GameScene(QGraphicsScene):
 
     def __update_position__(self, key):
         # time.sleep(1)
-        print("MARKO test")
+        #print("MARKO test")
         if key == Qt.Key_W and self.players_number == 2:
             self.rocketnumber2.upRocket2.emit()
         elif key == Qt.Key_A and self.players_number == 2:
