@@ -2,6 +2,9 @@ coordinatesOfRocketsX = []
 coordinatesOfRocketsY = []
 
 activeAsteroids = {}
+bar_jedan_je_ziv_asteroid = False
+asteroid_id = 0
+num_of_active_asteroids = 1
 
 player1Lives = 3
 player1Hitted = 0
@@ -26,7 +29,6 @@ maximum_of_bullets = 31
 
 level = 1   #globalna promenljiva koja odredjuje trenutni nivo
             #i na osnovu nje se kreiraju asteroidi
-create = False
 
 bonus_time = 0 #bonus dolazi na svakih 10 sekundi [5*2]
 bonus_x_coordinate = 0

@@ -53,8 +53,8 @@ class Bullet(QLabel):
         self.init_y = float(self.init_y).__sub__(self.yMovement * 3)
         if floor(self.init_x) <= -50 or floor(self.init_x) >= 603 or floor(self.init_y) <= -50 or floor(#vece dimenzije za metak jer bagguje nestoo ako se samnje , tj bug je u tome da se fakticki puca van scene
                 self.init_y) >= 555:
-            Server.bulletsCollectionX[self.IDS] = 99999
-            Server.bulletsCollectionY[self.IDS] = 99999
+            Server.bulletsCollectionX[self.IDS] = 2222
+            Server.bulletsCollectionY[self.IDS] = 2222
             if self.rocket_id == 1:
                 Server.rocket1_bulletsCounter = Server.rocket1_bulletsCounter - 1
             elif self.rocket_id == 2:
