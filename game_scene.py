@@ -65,9 +65,9 @@ class GameScene(QGraphicsScene):
         self.queue.put('go')
         self.createAsteroids()
 
-        tt = Thread(target=self.checkAstDickt)
+        """tt = Thread(target=self.checkAstDickt)
         tt.daemon = True
-        tt.start()
+        tt.start()"""
 
         #self.asteroidChecker = Checker()
 
