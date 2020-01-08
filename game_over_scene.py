@@ -46,3 +46,15 @@ class GameOver(QGraphicsScene):
         self.label3.move(5, 470)
         self.label3.setStyleSheet("font: 12pt; color: yellow; font:bold; background-color: transparent; ")
         self.addWidget(self.label3)
+
+        self.label4 = QLabel("WINNER!!!")#winner player 2
+        self.label4.resize(150, 30)
+        self.label4.move(400, 470)
+        self.label4.setStyleSheet("font: 14pt; color: purple; font:bold; background-color: transparent; ")
+        self.addWidget(self.label4)
+
+        self.label5 = QLabel("WINNER!!!")#winner player 1
+        self.label5.resize(150, 30)
+        self.label5.move(400, 440)
+        self.label5.setStyleSheet("font: 14pt; color: purple; font:bold; background-color: transparent; ")
+        self.addWidget(self.label5)

@@ -110,15 +110,29 @@ class Asteroid(QLabel):
                 vvv = vvv + 1
             vvv = 0
 
-            if (any(checkXCords in thisAsteroidXCoords for checkXCords in Server.coordinatesOfRocketsX) and any(
-                    checkYCords in thisAsteroidYCoords for checkYCords in Server.coordinatesOfRocketsY)):
+            if (any(checkXCords in thisAsteroidXCoords for checkXCords in Server.coordinatesOfRocket1X) and any(
+                    checkYCords in thisAsteroidYCoords for checkYCords in Server.coordinatesOfRocket1Y)):#provera za raketu1 da li je udarena
                 Server.player1Lives = Server.player1Lives - 1
                 self.myScene.label2.setText("Player1 lives--->[" + Server.player1Lives.__str__() + "] score--->[" + Server.player1Score.__str__() + "]")
                 Server.activeAsteroids[self.uniqueIdenfier] = 1
                 self.hide()
                 print("ASTEROID IS DESTROYED TOO!!!")
                 if Server.player1Lives == 0:#ako je izgubio sve zivote da iskoci iz igrce
-                    self.myScene.game_is_over()
+                    player_id = 1
+                    self.myScene.game_is_over(player_id)
+
+                self.check_for_level_up()
+
+            if (any(checkXCords in thisAsteroidXCoords for checkXCords in Server.coordinatesOfRocket2X) and any(
+                    checkYCords in thisAsteroidYCoords for checkYCords in Server.coordinatesOfRocket2Y)):#provera za raketu2 da li je udarena
+                Server.player2Lives = Server.player2Lives - 1
+                self.myScene.label3.setText("Player2 lives--->[" + Server.player2Lives.__str__() + "] score--->[" + Server.player2Score.__str__() + "]")
+                Server.activeAsteroids[self.uniqueIdenfier] = 1
+                self.hide()
+                print("ASTEROID IS DESTROYED TOO!!!")
+                if Server.player2Lives == 0:#ako je izgubio sve zivote da iskoci iz igrce
+                    player_id = 2
+                    self.myScene.game_is_over(player_id)
 
                 self.check_for_level_up()
 
@@ -127,19 +141,41 @@ class Asteroid(QLabel):
             expandBulletX = []
             expandBulletY = []
             params3 = False
-            for key, value in Server.bulletsCollectionX.items():
+            for key, value in Server.bulletsCollection1X.items():#provera da li je asteroid udario u metak od rakete1
                 if params3 == True:
                     break
                 expandBulletX.clear()
                 expandBulletX.append(value)
                 if any(cx in expandBulletX for cx in thisAsteroidXCoords):
-                    for key2, val2 in Server.bulletsCollectionY.items():
+                    for key2, val2 in Server.bulletsCollection1Y.items():
                         expandBulletY.clear()
                         expandBulletY.append(val2)
                         if any(cy in expandBulletY for cy in thisAsteroidYCoords) and key == key2:
                             Server.activeAsteroids[self.uniqueIdenfier] = 1
                             Server.player1Score = Server.player1Score + 300
                             self.myScene.label2.setText("Player1 lives--->[" + Server.player1Lives.__str__() + "] score--->[" + Server.player1Score.__str__() + "]")
+                            self.hide()
+                            self.yFull = 1234
+                            self.xFull = 1234
+                            self.check_for_level_up()
+                            params3 = True
+                            break
+
+            expandBulletY.clear()
+            expandBulletX.clear()
+            for key, value in Server.bulletsCollection2X.items():#provera da li je asteroid udario u metak od rakete2
+                if params3 == True:
+                    break
+                expandBulletX.clear()
+                expandBulletX.append(value)
+                if any(cx in expandBulletX for cx in thisAsteroidXCoords):
+                    for key2, val2 in Server.bulletsCollection2Y.items():
+                        expandBulletY.clear()
+                        expandBulletY.append(val2)
+                        if any(cy in expandBulletY for cy in thisAsteroidYCoords) and key == key2:
+                            Server.activeAsteroids[self.uniqueIdenfier] = 1
+                            Server.player2Score = Server.player2Score + 300
+                            self.myScene.label3.setText("Player2 lives--->[" + Server.player2Lives.__str__() + "] score--->[" + Server.player2Score.__str__() + "]")
                             self.hide()
                             self.yFull = 1234
                             self.xFull = 1234

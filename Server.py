@@ -1,5 +1,7 @@
-coordinatesOfRocketsX = []
-coordinatesOfRocketsY = []
+coordinatesOfRocket1X = []
+coordinatesOfRocket1Y = []
+coordinatesOfRocket2X = []
+coordinatesOfRocket2Y = []
 
 activeAsteroids = {}
 bar_jedan_je_ziv_asteroid = False
@@ -19,8 +21,10 @@ player4Score = 0
 #metkoviCoordsX = []
 #metkoviCoordsY = []
 
-bulletsCollectionX = {}
-bulletsCollectionY = {}
+bulletsCollection1X = {}
+bulletsCollection1Y = {}
+bulletsCollection2X = {}
+bulletsCollection2Y = {}
 bulletIDS = 0
 bulletsCounter = 0
 rocket1_bulletsCounter = 0

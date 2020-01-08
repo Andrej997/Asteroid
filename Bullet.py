@@ -28,10 +28,16 @@ class Bullet(QLabel):
             Server.bulletIDS = Server.bulletIDS + 1
             inttX = int(round(self.init_x))
             inttY = int(round(self.init_y))
-            Server.bulletsCollectionX[self.IDS] = 0
-            Server.bulletsCollectionY[self.IDS] = 0
-            Server.bulletsCollectionX[self.IDS] = inttX
-            Server.bulletsCollectionY[self.IDS] = inttY
+            if self.rocket_id == 1:# u odnosu na to koja raketa je ispalila metak svrstaj ga u odredjen kolekciju
+                Server.bulletsCollection1X[self.IDS] = 0
+                Server.bulletsCollection1Y[self.IDS] = 0
+                Server.bulletsCollection1X[self.IDS] = inttX
+                Server.bulletsCollection1Y[self.IDS] = inttY
+            elif self.rocket_id == 2:
+                Server.bulletsCollection2X[self.IDS] = 0
+                Server.bulletsCollection2Y[self.IDS] = 0
+                Server.bulletsCollection2X[self.IDS] = inttX
+                Server.bulletsCollection2Y[self.IDS] = inttY
 
             self.scene = scene
             self.xMovement = float(cos(radians(rotation)))
@@ -53,20 +59,30 @@ class Bullet(QLabel):
         self.init_y = float(self.init_y).__sub__(self.yMovement * 3)
         if floor(self.init_x) <= -50 or floor(self.init_x) >= 603 or floor(self.init_y) <= -50 or floor(#vece dimenzije za metak jer bagguje nestoo ako se samnje , tj bug je u tome da se fakticki puca van scene
                 self.init_y) >= 555:
-            Server.bulletsCollectionX[self.IDS] = 2222
-            Server.bulletsCollectionY[self.IDS] = 2222
-            if self.rocket_id == 1:
+            if self.rocket_id == 1:#ako je metak od rakete 1 izbaci ga iz niza i unisti objekat
+                Server.bulletsCollection1X[self.IDS] = 2222
+                Server.bulletsCollection1Y[self.IDS] = 2222
                 Server.rocket1_bulletsCounter = Server.rocket1_bulletsCounter - 1
-            elif self.rocket_id == 2:
+            elif self.rocket_id == 2:#ako je metak od rakete 2 izbaci ga iz niza i unisti objekat
+                Server.bulletsCollection2X[self.IDS] = 2222
+                Server.bulletsCollection2Y[self.IDS] = 2222
                 Server.rocket2_bulletsCounter = Server.rocket2_bulletsCounter - 1
             self.kreni.disconnect()
             self.destroy()
             self.hide()
-            del Server.bulletsCollectionX[self.IDS]
-            del Server.bulletsCollectionY[self.IDS]
+            if self.rocket_id == 1:
+                del Server.bulletsCollection1X[self.IDS]
+                del Server.bulletsCollection1Y[self.IDS]
+            elif self.rocket_id == 2:
+                del Server.bulletsCollection2X[self.IDS]
+                del Server.bulletsCollection2Y[self.IDS]
         else:
             self.move(self.init_x, self.init_y)
             inttXXX = int(round(self.init_x))
             inttYYY = int(round(self.init_y))
-            Server.bulletsCollectionX[self.IDS] = inttXXX
-            Server.bulletsCollectionY[self.IDS] = inttYYY
+            if self.rocket_id == 1:#ako je metak od rakete 1 pomeri ga
+                Server.bulletsCollection1X[self.IDS] = inttXXX
+                Server.bulletsCollection1Y[self.IDS] = inttYYY
+            elif self.rocket_id == 2:#ako je metak od rakete2 pomeri ga u njegovom nizu
+                Server.bulletsCollection2X[self.IDS] = inttXXX
+                Server.bulletsCollection2Y[self.IDS] = inttYYY

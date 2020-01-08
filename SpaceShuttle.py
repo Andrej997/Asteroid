@@ -79,32 +79,56 @@ class SpaceShuttle(QLabel):
     def positionsExpand(self):
         current_x_coords = int(round(self.x()))
         current_y_coords = int(round(self.y()))
-
-        Server.coordinatesOfRocketsX.clear()
-        Server.coordinatesOfRocketsY.clear()
-
-        # region ->logika da se raketa gleda kao 20x20 px po x i y koordinati
-        tmp = 0
-        for tmpX1 in range(20):
-            tmp = tmpX1 + current_x_coords
-            Server.coordinatesOfRocketsX.append(tmp)
-            tmpX1 = tmpX1 + 1
-        tmp = 0
-        for tmpX2 in range(20):
-            tmp = current_x_coords - tmpX2
-            Server.coordinatesOfRocketsX.append(tmp)
-            tmpX2 = tmpX2 + 1
-        tmp = 0
-        for tmpY1 in range(20):
-            tmp = tmpY1 + current_y_coords
-            Server.coordinatesOfRocketsY.append(tmp)
-            tmpY1 = tmpY1 + 1
-        tmp = 0
-        for tmpY2 in range(20):
-            tmp = current_y_coords - tmpY2
-            Server.coordinatesOfRocketsY.append(tmp)
-            tmpY2 = tmpY2 + 1
-        # end region
+        if self.numJMBG == 1:
+            Server.coordinatesOfRocket1X.clear()
+            Server.coordinatesOfRocket1Y.clear()
+            # region ->logika da se raketa gleda kao 20x20 px po x i y koordinati
+            tmp = 0
+            for tmpX1 in range(20):
+                tmp = tmpX1 + current_x_coords
+                Server.coordinatesOfRocket1X.append(tmp)
+                tmpX1 = tmpX1 + 1
+            tmp = 0
+            for tmpX2 in range(20):
+                tmp = current_x_coords - tmpX2
+                Server.coordinatesOfRocket1X.append(tmp)
+                tmpX2 = tmpX2 + 1
+            tmp = 0
+            for tmpY1 in range(20):
+                tmp = tmpY1 + current_y_coords
+                Server.coordinatesOfRocket1Y.append(tmp)
+                tmpY1 = tmpY1 + 1
+            tmp = 0
+            for tmpY2 in range(20):
+                tmp = current_y_coords - tmpY2
+                Server.coordinatesOfRocket1Y.append(tmp)
+                tmpY2 = tmpY2 + 1
+            # end region
+        elif self.numJMBG == 2:
+            Server.coordinatesOfRocket2X.clear()
+            Server.coordinatesOfRocket2Y.clear()
+            # region ->logika da se raketa gleda kao 20x20 px po x i y koordinati
+            tmp = 0
+            for tmpX1 in range(20):
+                tmp = tmpX1 + current_x_coords
+                Server.coordinatesOfRocket2X.append(tmp)
+                tmpX1 = tmpX1 + 1
+            tmp = 0
+            for tmpX2 in range(20):
+                tmp = current_x_coords - tmpX2
+                Server.coordinatesOfRocket2X.append(tmp)
+                tmpX2 = tmpX2 + 1
+            tmp = 0
+            for tmpY1 in range(20):
+                tmp = tmpY1 + current_y_coords
+                Server.coordinatesOfRocket2Y.append(tmp)
+                tmpY1 = tmpY1 + 1
+            tmp = 0
+            for tmpY2 in range(20):
+                tmp = current_y_coords - tmpY2
+                Server.coordinatesOfRocket2Y.append(tmp)
+                tmpY2 = tmpY2 + 1
+            # end region
 
     def up1_function(self):
         global  i
