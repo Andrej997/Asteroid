@@ -9,9 +9,10 @@ class GameOver(QGraphicsScene):
         super().__init__(parent)
         self.width = width
         self.height = height
+        self.setSceneRect(0, 0, self.width - 2, self.height - 2)
 
         self.label = QLabel()
-        self.pixmap = QPixmap('Images/img.png')
+        self.pixmap = QPixmap('Images/img2.png')
         self.label.setPixmap(self.pixmap)
         self.label.resize(600, 500)
         self.addWidget(self.label)
@@ -37,24 +38,24 @@ class GameOver(QGraphicsScene):
             "Player1 lives--->[" + Server.player1Lives.__str__() + "] score--->[" + Server.player1Score.__str__() + "]")
         self.label2.resize(400, 30)
         self.label2.move(5, 440)
-        self.label2.setStyleSheet("font: 12pt; color: #f03a54; font:bold; background-color: transparent; ")
+        self.label2.setStyleSheet("font: 9pt; color: #f03a54; font:bold; background-color: transparent; ")
         self.addWidget(self.label2)
 
         self.label3 = QLabel(
             "Player2 lives--->[" + Server.player2Lives.__str__() + "] score--->[" + Server.player2Score.__str__() + "]")
         self.label3.resize(400, 30)
         self.label3.move(5, 470)
-        self.label3.setStyleSheet("font: 12pt; color: yellow; font:bold; background-color: transparent; ")
+        self.label3.setStyleSheet("font: 9pt; color: yellow; font:bold; background-color: transparent; ")
         self.addWidget(self.label3)
 
         self.label4 = QLabel("WINNER!!!")#winner player 2
         self.label4.resize(150, 30)
         self.label4.move(400, 470)
-        self.label4.setStyleSheet("font: 14pt; color: purple; font:bold; background-color: transparent; ")
+        self.label4.setStyleSheet("font: 12pt; color: yellow; font:bold; background-color: transparent; ")
         self.addWidget(self.label4)
 
         self.label5 = QLabel("WINNER!!!")#winner player 1
         self.label5.resize(150, 30)
         self.label5.move(400, 440)
-        self.label5.setStyleSheet("font: 14pt; color: purple; font:bold; background-color: transparent; ")
+        self.label5.setStyleSheet("font: 12pt; color: #f03a54; font:bold; background-color: transparent; ")
         self.addWidget(self.label5)

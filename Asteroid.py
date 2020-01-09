@@ -100,11 +100,11 @@ class Asteroid(QLabel):
 
             thisAsteroidXCoords.clear()
             thisAsteroidYCoords.clear()
-            for ccc in range(20):
+            for ccc in range(30):
                 tmpss = inttX + ccc
                 thisAsteroidXCoords.append(tmpss)
                 ccc = ccc + 1
-            for vvv in range(20):
+            for vvv in range(30):
                 tmpss2 = inttY + vvv
                 thisAsteroidYCoords.append(tmpss2)
                 vvv = vvv + 1
@@ -145,11 +145,13 @@ class Asteroid(QLabel):
                 if params3 == True:
                     break
                 expandBulletX.clear()
-                expandBulletX.append(value)
+                for xb in range(3):
+                    expandBulletX.append(value + xb)
                 if any(cx in expandBulletX for cx in thisAsteroidXCoords):
                     for key2, val2 in Server.bulletsCollection1Y.items():
                         expandBulletY.clear()
-                        expandBulletY.append(val2)
+                        for yb in range(3):
+                            expandBulletY.append(val2 + yb)
                         if any(cy in expandBulletY for cy in thisAsteroidYCoords) and key == key2:
                             Server.activeAsteroids[self.uniqueIdenfier] = 1
                             Server.player1Score = Server.player1Score + 300

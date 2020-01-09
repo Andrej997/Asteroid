@@ -57,8 +57,8 @@ class Bullet(QLabel):
     def moveSelf(self):
         self.init_x = float(self.init_x).__add__(self.xMovement * 3)
         self.init_y = float(self.init_y).__sub__(self.yMovement * 3)
-        if floor(self.init_x) <= -50 or floor(self.init_x) >= 603 or floor(self.init_y) <= -50 or floor(#vece dimenzije za metak jer bagguje nestoo ako se samnje , tj bug je u tome da se fakticki puca van scene
-                self.init_y) >= 555:
+        if floor(self.init_x) <= -50 or floor(self.init_x) >= 623 or floor(self.init_y) <= -50 or floor(#vece dimenzije za metak jer bagguje nestoo ako se samnje , tj bug je u tome da se fakticki puca van scene
+                self.init_y) >= 570:
             if self.rocket_id == 1:#ako je metak od rakete 1 izbaci ga iz niza i unisti objekat
                 Server.bulletsCollection1X[self.IDS] = 2222
                 Server.bulletsCollection1Y[self.IDS] = 2222
