@@ -52,3 +52,6 @@ currentRound = 0 # oznacava koja je runda
                     # 2 - Win0 vs. Win1
 
 tournamentActivated = False
+
+i = 1
+i2 = 1

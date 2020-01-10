@@ -32,9 +32,6 @@ rocketsList = ['Images/rocketship.png', 'Images/rocketship (1).png', 'Images/roc
                'Images/rocketship (68).png', 'Images/rocketship (69).png', 'Images/rocketship (70).png',
                'Images/rocketship (71).png']
 
-i = 1#rocket1 angle
-i2 = 1 #rocket2 angle
-
 
 class SpaceShuttle(QLabel):
     upRocket1 = pyqtSignal()
@@ -113,7 +110,6 @@ class SpaceShuttle(QLabel):
             # end region
 
     def up1_function(self):
-        global  i
         self.positionsExpand()
         self.yFull = float(self.yFull).__sub__(self.moveY * 8)
         self.xFull = float(self.xFull).__add__(self.moveX * 8)
@@ -129,7 +125,6 @@ class SpaceShuttle(QLabel):
         self.update()
 
     def up2_function(self):
-        global i2
         self.yFull = float(self.yFull).__sub__(self.moveY * 8)
         self.xFull = float(self.xFull).__add__(self.moveX * 8)
         self.move(self.xFull, self.yFull)
@@ -144,57 +139,51 @@ class SpaceShuttle(QLabel):
         self.update()
 
     def left1_function(self):
-        global i
         self.positionsExpand()
 
-        i = (i + 1) % 72
-        self.setRocketImage(rocketsList[i])
+        Server.i = (Server.i + 1) % 72
+        self.setRocketImage(rocketsList[Server.i])
         self.angle = self.angle + 5
         self.moveX = cos(radians(self.angle))
         self.moveY = sin(radians(self.angle))
         self.update()
 
     def right1_function(self):
-        global i
         self.positionsExpand()
-        i = (i - 1) % 72
+        Server.i = (Server.i - 1) % 72
         self.angle = self.angle - 5
-        self.setRocketImage(rocketsList[i])
+        self.setRocketImage(rocketsList[Server.i])
         self.moveX = cos(radians(self.angle))
         self.moveY = sin(radians(self.angle))
         self.update()
 
     def fire1_function(self):
-        global i
         self.positionsExpand()
-        metak = Bullet(self.x(), self.y(), self.angle, i, self.myScene, 1)#last parameter is rocket id
+        metak = Bullet(self.x(), self.y(), self.angle, Server.i, self.myScene, 1)#last parameter is rocket id
         self.meci.append(metak)
         self.update()
 
     def left2_function(self):
-        global i2
         self.positionsExpand()
-        i2 = (i2 + 1) % 72
-        self.setRocketImage(rocketsList[i2])
+        Server.i2 = (Server.i2 + 1) % 72
+        self.setRocketImage(rocketsList[Server.i2])
         self.angle = self.angle + 5
         self.moveX = cos(radians(self.angle))
         self.moveY = sin(radians(self.angle))
         self.update()
 
     def right2_function(self):
-        global i2
         self.positionsExpand()
-        i2 = (i2 - 1) % 72
+        Server.i2 = (Server.i2 - 1) % 72
         self.angle = self.angle - 5
-        self.setRocketImage(rocketsList[i2])
+        self.setRocketImage(rocketsList[Server.i2])
         self.moveX = cos(radians(self.angle))
         self.moveY = sin(radians(self.angle))
         self.update()
 
     def fire2_function(self):
-        global i2
         self.positionsExpand()
-        metak = Bullet(self.x(), self.y(), self.angle, i2, self.myScene, 2)#last parameter is rocket id
+        metak = Bullet(self.x(), self.y(), self.angle, Server.i2, self.myScene, 2)#last parameter is rocket id
         self.meci.append(metak)
         self.update()
 

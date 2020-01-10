@@ -123,8 +123,12 @@ class Asteroid(QLabel):
                     Server.activeAsteroids[self.uniqueIdenfier] = 1
                     self.hide()
                 print("ASTEROID IS DESTROYED TOO!!!")
-                if Server.player1Lives == 0 or Server.player3Lives == 0:#ako je izgubio sve zivote da iskoci iz igrce
+                if (Server.player1Lives == 0 and Server.currentRound == 0):#ako je izgubio sve zivote da iskoci iz igrce
                     player_id = 1
+                    self.tounamentCheck()
+                    self.myScene.game_is_over(player_id)
+                elif (Server.player3Lives == 0 and Server.currentRound == 1):
+                    player_id = 3
                     self.tounamentCheck()
                     self.myScene.game_is_over(player_id)
 
@@ -145,8 +149,12 @@ class Asteroid(QLabel):
                     Server.activeAsteroids[self.uniqueIdenfier] = 1
                     self.hide()
                 print("ASTEROID IS DESTROYED TOO!!!")
-                if Server.player2Lives == 0 or Server.player4Lives == 0:#ako je izgubio sve zivote da iskoci iz igrce
+                if (Server.player2Lives == 0 and Server.currentRound == 0):#ako je izgubio sve zivote da iskoci iz igrce
                     player_id = 2
+                    self.tounamentCheck()
+                    self.myScene.game_is_over(player_id)
+                elif (Server.player4Lives == 0 and Server.currentRound == 1):
+                    player_id = 4
                     self.tounamentCheck()
                     self.myScene.game_is_over(player_id)
 
@@ -268,4 +276,7 @@ class Asteroid(QLabel):
             self.myScene.label6.show()
             self.myScene.label7.show()
             self.myScene.setPlayers(self.myScene.label2, self.myScene.label3)
+        elif Server.currentRound == 1 and Server.player3Lives == 0 and Server.player4Lives == 0:
+            Server.currentRound = 2
+            self.myScene.setPlayers(self.myScene.label6, self.myScene.label7)
 
