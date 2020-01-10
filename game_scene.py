@@ -38,7 +38,7 @@ class GameScene(QGraphicsScene):
         self.key_notifier.start()
 
         self.label = QLabel()
-        self.pixmap = QPixmap('Images/img.png')
+        self.pixmap = QPixmap('Images/img2.png')
         self.label.setPixmap(self.pixmap)
         self.label.resize(600, 500)
         self.addWidget(self.label)
@@ -67,14 +67,14 @@ class GameScene(QGraphicsScene):
             "Player1 lives--->[" + Server.player1Lives.__str__() + "] score--->[" + Server.player1Score.__str__() + "]")
         self.label2.resize(400, 30)
         self.label2.move(5, 440)
-        self.label2.setStyleSheet("font: 12pt; color: #f03a54; font:bold; background-color: transparent; ")
+        self.label2.setStyleSheet("font: 9pt; color: #f03a54; font:bold; background-color: transparent; ")
         self.addWidget(self.label2)
 
         self.label3 = QLabel(
             "Player2 lives--->[" + Server.player2Lives.__str__() + "] score--->[" + Server.player2Score.__str__() + "]")
         self.label3.resize(400, 30)
         self.label3.move(5, 470)
-        self.label3.setStyleSheet("font: 12pt; color: yellow; font:bold; background-color: transparent; ")
+        self.label3.setStyleSheet("font: 9pt; color: yellow; font:bold; background-color: transparent; ")
 
         if self.players_number == 1:
             self.label3.hide()
@@ -183,8 +183,8 @@ class GameScene(QGraphicsScene):
                     checkYCords in Server.bonus_y_expanded for checkYCords in Server.coordinatesOfRocket1Y)):
                     Server.player1Lives = Server.player1Lives + 1
                     self.label2.setText("Player1 lives--->[" + Server.player1Lives.__str__() + "] score--->[" + Server.player1Score.__str__() + "]")
-            if (any(checkXCords in Server.bonus_x_expanded for checkXCords in Server.coordinatesOfRocket1X) and any(
-                    checkYCords in Server.bonus_y_expanded for checkYCords in Server.coordinatesOfRocket1Y)):
+            if (any(checkXCords in Server.bonus_x_expanded for checkXCords in Server.coordinatesOfRocket2X) and any(
+                    checkYCords in Server.bonus_y_expanded for checkYCords in Server.coordinatesOfRocket2Y)):
                     Server.player2Lives = Server.player2Lives + 1
                     self.label3.setText("Player2 lives--->[" + Server.player2Lives.__str__() + "] score--->[" + Server.player2Score.__str__() + "]")
             self.bonus.hide()
