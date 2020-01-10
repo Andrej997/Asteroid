@@ -199,45 +199,48 @@ class Tournament(QGraphicsScene):
 
     def __update_position__(self, key):
         # time.sleep(1)
-        if key == Qt.Key_W and (Server.player2Lives or Server.player4Lives) > 0:  # dodata logika da moze da se pomera samo ako je idalje ziva ta raketa
-            if Server.currentRound == 0 or Server.Win0 == 2:
+        if key == Qt.Key_W:  # dodata logika da moze da se pomera samo ako je idalje ziva ta raketa
+            if (Server.currentRound == 0 or Server.Win0 == 2) and Server.player2Lives > 0:
                 self.rocketnumber2.upRocket2.emit()
-            elif Server.currentRound == 1 or Server.Win1 == 4:
+            elif (Server.currentRound == 1 or Server.Win1 == 4) and Server.player4Lives > 0:
                 self.rocketnumber4.upRocket2.emit()
-        elif key == Qt.Key_A and (Server.player2Lives or Server.player4Lives) > 0:
-            if Server.currentRound == 0 or Server.Win0 == 2:
+        elif key == Qt.Key_A:
+            if (Server.currentRound == 0 or Server.Win0 == 2) and Server.player2Lives > 0:
                 self.rocketnumber2.leftRocket2.emit()
-            elif Server.currentRound == 1 or Server.Win1 == 4:
+            elif (Server.currentRound == 1 or Server.Win1 == 4) and Server.player4Lives > 0:
                 self.rocketnumber4.leftRocket2.emit()
-        elif key == Qt.Key_D and (Server.player2Lives or Server.player4Lives) > 0:
-            if Server.currentRound == 0 or Server.Win0 == 2:
+        elif key == Qt.Key_D:
+            if (Server.currentRound == 0 or Server.Win0 == 2) and Server.player2Lives > 0:
                 self.rocketnumber2.rightRocket2.emit()
-            elif Server.currentRound == 1 or Server.Win1 == 4:
+            elif (Server.currentRound == 1 or Server.Win1 == 4) and Server.player4Lives > 0:
                 self.rocketnumber4.rightRocket2.emit()
-        elif key == Qt.Key_S and (Server.player2Lives or Server.player4Lives) > 0:
-            if Server.currentRound == 0 or Server.Win0 == 2:
+        elif key == Qt.Key_S:
+            if (Server.currentRound == 0 or Server.Win0 == 2) and Server.player2Lives > 0:
                 self.rocketnumber2.fireRocket2.emit()
-            elif Server.currentRound == 1 or Server.Win1 == 4:
+            elif (Server.currentRound == 1 or Server.Win1 == 4) and Server.player4Lives > 0:
                 self.rocketnumber4.fireRocket2.emit()
-        elif key == Qt.Key_Up and (Server.player1Lives or Server.player3Lives) > 0:
-            if Server.currentRound == 0 or Server.Win0 == 1:
+        elif key == Qt.Key_Up:
+            print(Server.player1Lives)
+            if (Server.currentRound == 0 or Server.Win0 == 1) and Server.player1Lives > 0:
+                print("1")
                 self.rocketnumber1.upRocket1.emit()
-            elif Server.currentRound == 1 or Server.Win1 == 3:
+            elif (Server.currentRound == 1 or Server.Win1 == 3) and Server.player3Lives > 0:
+                print("2")
                 self.rocketnumber3.upRocket1.emit()
-        elif key == Qt.Key_Right and (Server.player1Lives or Server.player3Lives) > 0:
-            if Server.currentRound == 0 or Server.Win0 == 1:
+        elif key == Qt.Key_Right:
+            if Server.currentRound == 0 or Server.Win0 == 1 and Server.player1Lives > 0:
                 self.rocketnumber1.rightRocket1.emit()
-            elif Server.currentRound == 1 or Server.Win1 == 3:
+            elif Server.currentRound == 1 or Server.Win1 == 3 and Server.player3Lives > 0:
                 self.rocketnumber3.rightRocket1.emit()
-        elif key == Qt.Key_Left and (Server.player1Lives or Server.player3Lives) > 0:
-            if Server.currentRound == 0 or Server.Win0 == 1:
+        elif key == Qt.Key_Left:
+            if Server.currentRound == 0 or Server.Win0 == 1 and Server.player1Lives > 0:
                 self.rocketnumber1.leftRocket1.emit()
-            elif Server.currentRound == 1 or Server.Win1 == 3:
+            elif Server.currentRound == 1 or Server.Win1 == 3 and Server.player3Lives > 0:
                 self.rocketnumber3.leftRocket1.emit()
-        elif key == Qt.Key_Space and (Server.player1Lives or Server.player3Lives) > 0:
-            if Server.currentRound == 0 or Server.Win0 == 1:
+        elif key == Qt.Key_Space:
+            if (Server.currentRound == 0 or Server.Win0 == 1) and Server.player1Lives > 0:
                 self.rocketnumber1.fireRocket1.emit()
-            elif Server.currentRound == 1 or Server.Win1 == 3:
+            elif (Server.currentRound == 1 or Server.Win1 == 3) and Server.player3Lives > 0:
                 self.rocketnumber3.fireRocket1.emit()
 
     def timerEvent(self, a0: 'QTimerEvent'):

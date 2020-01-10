@@ -125,6 +125,7 @@ class Asteroid(QLabel):
                 print("ASTEROID IS DESTROYED TOO!!!")
                 if Server.player1Lives == 0 or Server.player3Lives == 0:#ako je izgubio sve zivote da iskoci iz igrce
                     player_id = 1
+                    self.tounamentCheck()
                     self.myScene.game_is_over(player_id)
 
                 self.check_for_level_up()
@@ -146,6 +147,7 @@ class Asteroid(QLabel):
                 print("ASTEROID IS DESTROYED TOO!!!")
                 if Server.player2Lives == 0 or Server.player4Lives == 0:#ako je izgubio sve zivote da iskoci iz igrce
                     player_id = 2
+                    self.tounamentCheck()
                     self.myScene.game_is_over(player_id)
 
                 self.check_for_level_up()
@@ -236,8 +238,8 @@ class Asteroid(QLabel):
             self.yFull = 1234
             self.xFull = 1234
 
-        if Server.tournamentActivated == True:
-            self.tounamentCheck()
+        #if Server.tournamentActivated == True:
+            #self.tounamentCheck()
 
     def timerEvent(self, a0: 'QTimerEvent'):
         self.whileTrue()
