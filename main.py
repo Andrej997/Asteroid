@@ -34,7 +34,7 @@ class MainWindow(QGraphicsView):
         self.modeScene.singlPlyBtn.clicked.connect(self.Singleplayer)
         self.modeScene.returnBtn.clicked.connect(self.ReturnToWelcome)
         self.modeScene.multiPlayerBtn.clicked.connect(self.Multiplayer)
-        #self.modeScene.tournamentBtn.clicked.connect(self.MultiplayerTournament)
+        self.modeScene.tournamentBtn.clicked.connect(self.MultiplayerTournament)
         self.setScene(self.modeScene)
 
     def AboutGame(self):

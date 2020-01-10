@@ -18,6 +18,7 @@ activeSmallAsteroids = []
 class Tournament(QGraphicsScene):
     def __init__(self, parent, width, height):
         super().__init__(parent)
+        Server.tournamentActivated = True
         global activeBigAsteroids
         global activeMediumAsteroids
         global activeSmallAsteroids
@@ -37,7 +38,7 @@ class Tournament(QGraphicsScene):
         self.key_notifier.start()
 
         self.label = QLabel()
-        self.pixmap = QPixmap('Images/img.png')
+        self.pixmap = QPixmap('Images/img2.png')
         self.label.setPixmap(self.pixmap)
         self.label.resize(600, 500)
         self.addWidget(self.label)
@@ -71,6 +72,7 @@ class Tournament(QGraphicsScene):
         self.queue.put('go')
         self.createAsteroids()
 
+
         print("DONE")
 
         self.label2 = QLabel(
@@ -78,28 +80,30 @@ class Tournament(QGraphicsScene):
         self.label2.resize(400, 30)
         self.label2.move(5, 440)
         self.label2.setStyleSheet("font: 12pt; color: #f03a54; font:bold; background-color: transparent; ")
-
+        self.addWidget(self.label2)
 
         self.label3 = QLabel(
             "Player2 lives--->[" + Server.player2Lives.__str__() + "] score--->[" + Server.player2Score.__str__() + "]")
         self.label3.resize(400, 30)
         self.label3.move(5, 470)
         self.label3.setStyleSheet("font: 12pt; color: yellow; font:bold; background-color: transparent; ")
-
+        self.addWidget(self.label3)
 
         self.label6 = QLabel(
             "Player3 lives--->[" + Server.player3Lives.__str__() + "] score--->[" + Server.player3Score.__str__() + "]")
         self.label6.resize(400, 30)
         self.label6.move(5, 440)
         self.label6.setStyleSheet("font: 12pt; color: #f03a54; font:bold; background-color: transparent; ")
-
+        self.addWidget(self.label6)
 
         self.label7 = QLabel(
             "Player4 lives--->[" + Server.player4Lives.__str__() + "] score--->[" + Server.player4Score.__str__() + "]")
         self.label7.resize(400, 30)
         self.label7.move(5, 470)
         self.label7.setStyleSheet("font: 12pt; color: yellow; font:bold; background-color: transparent; ")
+        self.addWidget(self.label7)
 
+        self.setPlayers(self.label6, self.label7)
 
         self.label4 = QLabel("Level : " + Server.level.__str__())
         self.label4.resize(400, 30)
@@ -107,32 +111,30 @@ class Tournament(QGraphicsScene):
         self.label4.setStyleSheet("font: 12pt; color: white; font: bold; background-color: transparent;")
         self.addWidget(self.label4)
 
-    def setPlayers(self):
+    def setPlayers(self, label1Hide, label2Hide):
         if Server.currentRound == 0:
             self.addWidget(self.rocketnumber1)
-            self.addWidget(self.label2)
             self.addWidget(self.rocketnumber2)
-            self.addWidget(self.label3)
+            label1Hide.hide()
+            label2Hide.hide()
+
         elif Server.currentRound == 1:
             self.addWidget(self.rocketnumber3)
-            self.addWidget(self.label6)
             self.addWidget(self.rocketnumber4)
-            self.addWidget(self.label7)
+            label1Hide.hide()
+            label2Hide.hide()
+
         elif Server.currentRound == 2:
             # postavlja pobednika iz prvog meca
             if Server.Win0 == 1:
                 self.addWidget(self.rocketnumber1)
-                self.addWidget(self.label2)
             elif Server.Win0 == 2:
                 self.addWidget(self.rocketnumber2)
-                self.addWidget(self.label3)
             # postavlja pobednika iz drugog meca
             if Server.Win1 == 3:
                 self.addWidget(self.rocketnumber3)
-                self.addWidget(self.label6)
             elif Server.Win1 == 4:
                 self.addWidget(self.rocketnumber4)
-                self.addWidget(self.label7)
 
     def createAsteroids(self):
         o = 0
@@ -146,25 +148,35 @@ class Tournament(QGraphicsScene):
             Server.activeAsteroids[Server.asteroid_id.__str__()] = 0
             Server.asteroid_id = Server.asteroid_id.__int__() + 1
 
-    def game_is_over(self, playerId):
-        self.gameOverScene = GameOver(self, self.width, self.height)
-        self.gameOverScene.returnBtn.clicked.connect(self.menus)
-        self.gameOverScene.label4.hide()  # hide that player2 is winner
-        self.gameOverScene.label3.hide()  # hide player2 score bcs this is singleplayer
-        self.sceneParent.setScene(self.gameOverScene)
+    def game_is_over(self,
+                     playerId):  # ako je game over proveri za kog igraca je game over ako je multiplayer, onog drugog pusti da jos igra
+        """if self.players_number == 1:  # ako je singleplyaer cim ima 0 lives znaci mrtav je znaci game_over je
+            self.gameOverScene = GameOver(self, self.width, self.height)
+            self.gameOverScene.returnBtn.clicked.connect(self.menus)
+            self.gameOverScene.label4.hide()  # hide that player2 is winner
+            self.gameOverScene.label3.hide()  # hide player2 score bcs this is singleplayer
+            self.sceneParent.setScene(self.gameOverScene)"""
 
         if playerId == 1:
             Server.coordinatesOfRocket1X.clear()
             Server.coordinatesOfRocket1Y.clear()
-            self.rocketnumber1.hide()
-            self.rocketnumber1.move(1000, 1000)
+            if Server.currentRound == 0 or Server.Win0 == 1:
+                self.rocketnumber1.hide()
+                self.rocketnumber1.move(1000, 1000)
+            elif Server.currentRound == 1 or Server.Win1 == 3:
+                self.rocketnumber3.hide()
+                self.rocketnumber3.move(1000, 1000)
         elif playerId == 2:
             Server.coordinatesOfRocket2X.clear()
             Server.coordinatesOfRocket2Y.clear()
-            self.rocketnumber2.hide()
-            self.rocketnumber2.move(1000, 1000)
+            if Server.currentRound == 0 or Server.Win0 == 2:
+                self.rocketnumber2.hide()
+                self.rocketnumber2.move(1000, 1000)
+            elif Server.currentRound == 1 or Server.Win1 == 4:
+                self.rocketnumber4.hide()
+                self.rocketnumber4.move(1000, 1000)
 
-        if Server.player1Lives == 0 and Server.player2Lives == 0:  # ako su dva playera, tek kada su oba mrtva prebaci na game_over_scene
+        """if Server.player1Lives == 0 and Server.player2Lives == 0:  # ako su dva playera, tek kada su oba mrtva prebaci na game_over_scene
             self.gameOverScene = GameOver(self, self.width, self.height)
             self.gameOverScene.returnBtn.clicked.connect(self.menus)
             if Server.player1Score > Server.player2Score:
@@ -174,7 +186,7 @@ class Tournament(QGraphicsScene):
             elif Server.player1Score == Server.player2Score:
                 self.gameOverScene.label4.hide()
                 self.gameOverScene.label5.hide()
-            self.sceneParent.setScene(self.gameOverScene)
+            self.sceneParent.setScene(self.gameOverScene)"""
 
     def menus(self):
         self.sceneParent.ExitGame()
@@ -188,24 +200,47 @@ class Tournament(QGraphicsScene):
     def __update_position__(self, key):
         # time.sleep(1)
         if key == Qt.Key_W and (Server.player2Lives or Server.player4Lives) > 0:  # dodata logika da moze da se pomera samo ako je idalje ziva ta raketa
-            self.rocketnumber2.upRocket2.emit()
-        elif key == Qt.Key_A  and (Server.player2Lives or Server.player4Lives) > 0:
-            self.rocketnumber2.leftRocket2.emit()
-        elif key == Qt.Key_D  and (Server.player2Lives or Server.player4Lives) > 0:
-            self.rocketnumber2.rightRocket2.emit()
+            if Server.currentRound == 0 or Server.Win0 == 2:
+                self.rocketnumber2.upRocket2.emit()
+            elif Server.currentRound == 1 or Server.Win1 == 4:
+                self.rocketnumber4.upRocket2.emit()
+        elif key == Qt.Key_A and (Server.player2Lives or Server.player4Lives) > 0:
+            if Server.currentRound == 0 or Server.Win0 == 2:
+                self.rocketnumber2.leftRocket2.emit()
+            elif Server.currentRound == 1 or Server.Win1 == 4:
+                self.rocketnumber4.leftRocket2.emit()
+        elif key == Qt.Key_D and (Server.player2Lives or Server.player4Lives) > 0:
+            if Server.currentRound == 0 or Server.Win0 == 2:
+                self.rocketnumber2.rightRocket2.emit()
+            elif Server.currentRound == 1 or Server.Win1 == 4:
+                self.rocketnumber4.rightRocket2.emit()
         elif key == Qt.Key_S and (Server.player2Lives or Server.player4Lives) > 0:
-            self.rocketnumber2.fireRocket2.emit()
+            if Server.currentRound == 0 or Server.Win0 == 2:
+                self.rocketnumber2.fireRocket2.emit()
+            elif Server.currentRound == 1 or Server.Win1 == 4:
+                self.rocketnumber4.fireRocket2.emit()
         elif key == Qt.Key_Up and (Server.player1Lives or Server.player3Lives) > 0:
-            self.rocketnumber1.upRocket1.emit()
+            if Server.currentRound == 0 or Server.Win0 == 1:
+                self.rocketnumber1.upRocket1.emit()
+            elif Server.currentRound == 1 or Server.Win1 == 3:
+                self.rocketnumber3.upRocket1.emit()
         elif key == Qt.Key_Right and (Server.player1Lives or Server.player3Lives) > 0:
-            self.rocketnumber1.rightRocket1.emit()
+            if Server.currentRound == 0 or Server.Win0 == 1:
+                self.rocketnumber1.rightRocket1.emit()
+            elif Server.currentRound == 1 or Server.Win1 == 3:
+                self.rocketnumber3.rightRocket1.emit()
         elif key == Qt.Key_Left and (Server.player1Lives or Server.player3Lives) > 0:
-            self.rocketnumber1.leftRocket1.emit()
+            if Server.currentRound == 0 or Server.Win0 == 1:
+                self.rocketnumber1.leftRocket1.emit()
+            elif Server.currentRound == 1 or Server.Win1 == 3:
+                self.rocketnumber3.leftRocket1.emit()
         elif key == Qt.Key_Space and (Server.player1Lives or Server.player3Lives) > 0:
-            self.rocketnumber1.fireRocket1.emit()
+            if Server.currentRound == 0 or Server.Win0 == 1:
+                self.rocketnumber1.fireRocket1.emit()
+            elif Server.currentRound == 1 or Server.Win1 == 3:
+                self.rocketnumber3.fireRocket1.emit()
 
-    def timerEvent(self,
-                   a0: 'QTimerEvent'):  # timer je na 2 sekunde gore, zato su ove provere, tako da se na svakih 30 sekundi stvori bonus i da igrac ima 2 sekunde da stane na njega pa se vrsi provera i resetuje se
+    def timerEvent(self, a0: 'QTimerEvent'):
         if Server.bonus_time < 15:
             Server.bonus_time = Server.bonus_time + 1
         elif Server.bonus_time == 15:
@@ -223,17 +258,55 @@ class Tournament(QGraphicsScene):
             self.bonus.setStyleSheet("background:transparent")
             self.addWidget(self.bonus)
             Server.bonus_time = Server.bonus_time + 1
-        elif Server.bonus_time == 16:
+        elif Server.bonus_time == 16 and Server.currentRound == 0: # ako igraju P1 i P2
             if (any(checkXCords in Server.bonus_x_expanded for checkXCords in Server.coordinatesOfRocket1X) and any(
                     checkYCords in Server.bonus_y_expanded for checkYCords in Server.coordinatesOfRocket1Y)):
                 Server.player1Lives = Server.player1Lives + 1
                 self.label2.setText(
                     "Player1 lives--->[" + Server.player1Lives.__str__() + "] score--->[" + Server.player1Score.__str__() + "]")
-            if (any(checkXCords in Server.bonus_x_expanded for checkXCords in Server.coordinatesOfRocket1X) and any(
-                    checkYCords in Server.bonus_y_expanded for checkYCords in Server.coordinatesOfRocket1Y)):
+            if (any(checkXCords in Server.bonus_x_expanded for checkXCords in Server.coordinatesOfRocket2X) and any(
+                    checkYCords in Server.bonus_y_expanded for checkYCords in Server.coordinatesOfRocket2Y)):
                 Server.player2Lives = Server.player2Lives + 1
                 self.label3.setText(
                     "Player2 lives--->[" + Server.player2Lives.__str__() + "] score--->[" + Server.player2Score.__str__() + "]")
+            self.bonus.hide()
+            self.bonus.move(1234, 1234)
+            Server.bonus_time = 0
+        elif Server.bonus_time == 16 and Server.currentRound == 1: # ako igraju P3 i P4
+            if (any(checkXCords in Server.bonus_x_expanded for checkXCords in Server.coordinatesOfRocket1X) and any(
+                    checkYCords in Server.bonus_y_expanded for checkYCords in Server.coordinatesOfRocket1Y)):
+                Server.player3Lives = Server.player3Lives + 1
+                self.label6.setText(
+                    "Player3 lives--->[" + Server.player3Lives.__str__() + "] score--->[" + Server.player3Score.__str__() + "]")
+            if (any(checkXCords in Server.bonus_x_expanded for checkXCords in Server.coordinatesOfRocket2X) and any(
+                    checkYCords in Server.bonus_y_expanded for checkYCords in Server.coordinatesOfRocket2Y)):
+                Server.player4Lives = Server.player4Lives + 1
+                self.label7.setText(
+                    "Player4 lives--->[" + Server.player4Lives.__str__() + "] score--->[" + Server.player4Score.__str__() + "]")
+            self.bonus.hide()
+            self.bonus.move(1234, 1234)
+            Server.bonus_time = 0
+        elif Server.bonus_time == 16 and Server.currentRound == 2: # pobednici
+            if (any(checkXCords in Server.bonus_x_expanded for checkXCords in Server.coordinatesOfRocket1X) and any(
+                    checkYCords in Server.bonus_y_expanded for checkYCords in Server.coordinatesOfRocket1Y)):
+                if Server.Win0 == 1: # ako je bio pobedio P1
+                    Server.player1Lives = Server.player1Lives + 1
+                    self.label2.setText(
+                        "Player1 lives--->[" + Server.player1Lives.__str__() + "] score--->[" + Server.player1Score.__str__() + "]")
+                elif Server.Win0 == 2: # ako je bio pobedio P2
+                    Server.player2Lives = Server.player2Lives + 1
+                    self.label3.setText(
+                        "Player2 lives--->[" + Server.player2Lives.__str__() + "] score--->[" + Server.player2Score.__str__() + "]")
+            if (any(checkXCords in Server.bonus_x_expanded for checkXCords in Server.coordinatesOfRocket2X) and any(
+                    checkYCords in Server.bonus_y_expanded for checkYCords in Server.coordinatesOfRocket2Y)):
+                if Server.Win1 == 3:  # ako je bio pobedio P3
+                    Server.player3Lives = Server.player3Lives + 1
+                    self.label6.setText(
+                        "Player3 lives--->[" + Server.player3Lives.__str__() + "] score--->[" + Server.player3Score.__str__() + "]")
+                elif Server.Win1 == 4:  # ako je bio pobedio P4
+                    Server.player4Lives = Server.player4Lives + 1
+                    self.label7.setText(
+                        "Player4 lives--->[" + Server.player4Lives.__str__() + "] score--->[" + Server.player4Score.__str__() + "]")
             self.bonus.hide()
             self.bonus.move(1234, 1234)
             Server.bonus_time = 0

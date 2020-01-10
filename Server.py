@@ -50,3 +50,5 @@ currentRound = 0 # oznacava koja je runda
                     # 0 - Player1 vs. Player2
                     # 1 - Player3 vs. Player4
                     # 2 - Win0 vs. Win1
+
+tournamentActivated = False

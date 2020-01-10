@@ -112,12 +112,18 @@ class Asteroid(QLabel):
 
             if (any(checkXCords in thisAsteroidXCoords for checkXCords in Server.coordinatesOfRocket1X) and any(
                     checkYCords in thisAsteroidYCoords for checkYCords in Server.coordinatesOfRocket1Y)):#provera za raketu1 da li je udarena
-                Server.player1Lives = Server.player1Lives - 1
-                self.myScene.label2.setText("Player1 lives--->[" + Server.player1Lives.__str__() + "] score--->[" + Server.player1Score.__str__() + "]")
-                Server.activeAsteroids[self.uniqueIdenfier] = 1
-                self.hide()
+                if Server.currentRound == 0 or Server.Win0 == 1:
+                    Server.player1Lives = Server.player1Lives - 1
+                    self.myScene.label2.setText("Player1 lives--->[" + Server.player1Lives.__str__() + "] score--->[" + Server.player1Score.__str__() + "]")
+                    Server.activeAsteroids[self.uniqueIdenfier] = 1
+                    self.hide()
+                elif Server.currentRound == 1 or Server.Win1 == 3:
+                    Server.player3Lives = Server.player3Lives - 1
+                    self.myScene.label6.setText("Player3 lives--->[" + Server.player3Lives.__str__() + "] score--->[" + Server.player3Score.__str__() + "]")
+                    Server.activeAsteroids[self.uniqueIdenfier] = 1
+                    self.hide()
                 print("ASTEROID IS DESTROYED TOO!!!")
-                if Server.player1Lives == 0:#ako je izgubio sve zivote da iskoci iz igrce
+                if Server.player1Lives == 0 or Server.player3Lives == 0:#ako je izgubio sve zivote da iskoci iz igrce
                     player_id = 1
                     self.myScene.game_is_over(player_id)
 
@@ -125,12 +131,20 @@ class Asteroid(QLabel):
 
             if (any(checkXCords in thisAsteroidXCoords for checkXCords in Server.coordinatesOfRocket2X) and any(
                     checkYCords in thisAsteroidYCoords for checkYCords in Server.coordinatesOfRocket2Y)):#provera za raketu2 da li je udarena
-                Server.player2Lives = Server.player2Lives - 1
-                self.myScene.label3.setText("Player2 lives--->[" + Server.player2Lives.__str__() + "] score--->[" + Server.player2Score.__str__() + "]")
-                Server.activeAsteroids[self.uniqueIdenfier] = 1
-                self.hide()
+                # provera obuhvata turnir i multiplayer jer ce currentRound uvek inicjalno biti 0
+                if Server.currentRound == 0 or Server.Win0 == 2:
+                    Server.player2Lives = Server.player2Lives - 1
+                    self.myScene.label3.setText("Player2 lives--->[" + Server.player2Lives.__str__() + "] score--->[" + Server.player2Score.__str__() + "]")
+                    Server.activeAsteroids[self.uniqueIdenfier] = 1
+                    self.hide()
+                elif Server.currentRound == 1 or Server.Win1 == 4:
+                    Server.player4Lives = Server.player4Lives - 1
+                    self.myScene.label7.setText(
+                        "Player4 lives--->[" + Server.player4Lives.__str__() + "] score--->[" + Server.player4Score.__str__() + "]")
+                    Server.activeAsteroids[self.uniqueIdenfier] = 1
+                    self.hide()
                 print("ASTEROID IS DESTROYED TOO!!!")
-                if Server.player2Lives == 0:#ako je izgubio sve zivote da iskoci iz igrce
+                if Server.player2Lives == 0 or Server.player4Lives == 0:#ako je izgubio sve zivote da iskoci iz igrce
                     player_id = 2
                     self.myScene.game_is_over(player_id)
 
@@ -153,15 +167,26 @@ class Asteroid(QLabel):
                         for yb in range(3):
                             expandBulletY.append(val2 + yb)
                         if any(cy in expandBulletY for cy in thisAsteroidYCoords) and key == key2:
-                            Server.activeAsteroids[self.uniqueIdenfier] = 1
-                            Server.player1Score = Server.player1Score + 300
-                            self.myScene.label2.setText("Player1 lives--->[" + Server.player1Lives.__str__() + "] score--->[" + Server.player1Score.__str__() + "]")
-                            self.hide()
-                            self.yFull = 1234
-                            self.xFull = 1234
-                            self.check_for_level_up()
-                            params3 = True
-                            break
+                            if Server.currentRound == 0 or Server.Win0 == 1:
+                                Server.activeAsteroids[self.uniqueIdenfier] = 1
+                                Server.player1Score = Server.player1Score + 300
+                                self.myScene.label2.setText("Player1 lives--->[" + Server.player1Lives.__str__() + "] score--->[" + Server.player1Score.__str__() + "]")
+                                self.hide()
+                                self.yFull = 1234
+                                self.xFull = 1234
+                                self.check_for_level_up()
+                                params3 = True
+                                break
+                            elif Server.currentRound == 1 or Server.Win1 == 3:
+                                Server.activeAsteroids[self.uniqueIdenfier] = 1
+                                Server.player3Score = Server.player3Score + 300
+                                self.myScene.label6.setText("Player3 lives--->[" + Server.player3Lives.__str__() + "] score--->[" + Server.player3Score.__str__() + "]")
+                                self.hide()
+                                self.yFull = 1234
+                                self.xFull = 1234
+                                self.check_for_level_up()
+                                params3 = True
+                                break
 
             expandBulletY.clear()
             expandBulletX.clear()
@@ -175,15 +200,26 @@ class Asteroid(QLabel):
                         expandBulletY.clear()
                         expandBulletY.append(val2)
                         if any(cy in expandBulletY for cy in thisAsteroidYCoords) and key == key2:
-                            Server.activeAsteroids[self.uniqueIdenfier] = 1
-                            Server.player2Score = Server.player2Score + 300
-                            self.myScene.label3.setText("Player2 lives--->[" + Server.player2Lives.__str__() + "] score--->[" + Server.player2Score.__str__() + "]")
-                            self.hide()
-                            self.yFull = 1234
-                            self.xFull = 1234
-                            self.check_for_level_up()
-                            params3 = True
-                            break
+                            if Server.currentRound == 0 or Server.Win0 == 2:
+                                Server.activeAsteroids[self.uniqueIdenfier] = 1
+                                Server.player2Score = Server.player2Score + 300
+                                self.myScene.label3.setText("Player2 lives--->[" + Server.player2Lives.__str__() + "] score--->[" + Server.player2Score.__str__() + "]")
+                                self.hide()
+                                self.yFull = 1234
+                                self.xFull = 1234
+                                self.check_for_level_up()
+                                params3 = True
+                                break
+                            elif Server.currentRound == 1 or Server.Win0 == 4:
+                                Server.activeAsteroids[self.uniqueIdenfier] = 1
+                                Server.player4Score = Server.player4Score + 300
+                                self.myScene.label7.setText("Player4 lives--->[" + Server.player4Lives.__str__() + "] score--->[" + Server.player4Score.__str__() + "]")
+                                self.hide()
+                                self.yFull = 1234
+                                self.xFull = 1234
+                                self.check_for_level_up()
+                                params3 = True
+                                break
 
             expandBulletY.clear()
             expandBulletX.clear()
@@ -199,6 +235,9 @@ class Asteroid(QLabel):
         else:
             self.yFull = 1234
             self.xFull = 1234
+
+        if Server.tournamentActivated == True:
+            self.tounamentCheck()
 
     def timerEvent(self, a0: 'QTimerEvent'):
         self.whileTrue()
@@ -220,4 +259,11 @@ class Asteroid(QLabel):
             Server.num_of_active_asteroids = Server.level
             self.myScene.label4.setText("Level : " + Server.level.__str__())
             self.myScene.createAsteroids()
+
+    def tounamentCheck(self):
+        if Server.currentRound == 0 and Server.player1Lives == 0 and Server.player2Lives == 0:
+            Server.currentRound = 1
+            self.myScene.label6.show()
+            self.myScene.label7.show()
+            self.myScene.setPlayers(self.myScene.label2, self.myScene.label3)
 
