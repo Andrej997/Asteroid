@@ -60,9 +60,7 @@ class GameScene(QGraphicsScene):
 
         self.queue.put('go')
         self.createAsteroids()
-        #tt = Thread(target=self.infiniteFunction)
-        #tt.daemon = True
-        #tt.start()
+
         print("DONE")
 
         self.label2 = QLabel(

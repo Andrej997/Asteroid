@@ -3,6 +3,7 @@ from welcome_scene import *
 from mode_scene import *
 from game_scene import *
 from about_scene import *
+from tournament import *
 import Server
 from  music import musicPlayer
 from multiprocessing import Process
@@ -33,6 +34,7 @@ class MainWindow(QGraphicsView):
         self.modeScene.singlPlyBtn.clicked.connect(self.Singleplayer)
         self.modeScene.returnBtn.clicked.connect(self.ReturnToWelcome)
         self.modeScene.multiPlayerBtn.clicked.connect(self.Multiplayer)
+        #self.modeScene.tournamentBtn.clicked.connect(self.MultiplayerTournament)
         self.setScene(self.modeScene)
 
     def AboutGame(self):
@@ -50,6 +52,10 @@ class MainWindow(QGraphicsView):
     def Multiplayer(self):
         self.gameScene = GameScene(self, self.widths, self.heights, 2)#last parameter is number of players
         self.setScene(self.gameScene)
+
+    def MultiplayerTournament(self):
+        self.tournament = Tournament(self, self.widths, self.heights)
+        self.setScene(self.tournament)
 
     def ReturnToWelcome(self):
         self.setScene(self.welcomeScene)

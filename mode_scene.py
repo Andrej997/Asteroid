@@ -45,6 +45,18 @@ class ModeScene(QGraphicsScene):
         self.multiPlayerBtn.move(250, 165)
         self.addWidget(self.multiPlayerBtn)
 
+        self.tournamentBtn = QPushButton("Tournament")
+        self.tournamentBtn.setStyleSheet("QPushButton{"
+                                          "color: white; background-color: transparent; font:bold; border-style: outset; border-width: 2px; border-color: white"
+                                          "}"
+                                          "QPushButton:hover{"
+                                          "background-color: #3F7FBF"
+                                          "}")
+        self.tournamentBtn.resize(100, 50)
+        self.tournamentBtn.move(250, 230)
+        self.addWidget(self.tournamentBtn)
+
+
         self.returnBtn = QPushButton("Return")
         self.returnBtn.setStyleSheet("QPushButton{"
                                      "color: white; background-color: transparent; font:bold; border-style: outset; border-width: 2px; border-color: white"
@@ -53,6 +65,6 @@ class ModeScene(QGraphicsScene):
                                      "background-color: #C14242"
                                      "}")
         self.returnBtn.resize(100, 50)
-        self.returnBtn.move(250, 230)
+        self.returnBtn.move(250, 230 + 65)
         self.addWidget(self.returnBtn)
 

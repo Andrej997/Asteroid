@@ -12,6 +12,10 @@ player1Lives = 3
 player1Hitted = 0
 player2Lives = 3
 player2Hitted = 0
+player3Lives = 3
+player3Hitted = 0
+player4Lives = 3
+player4Hitted = 0
 
 player1Score = 0
 player2Score = 0
@@ -39,3 +43,10 @@ bonus_x_coordinate = 0
 bonus_x_expanded = []
 bonus_y_coordinate = 0
 bonus_y_expanded = []
+
+Win0 = 0 # index pobednika prvog meca
+Win1 = 0 # index pobednika drugog meca
+currentRound = 0 # oznacava koja je runda
+                    # 0 - Player1 vs. Player2
+                    # 1 - Player3 vs. Player4
+                    # 2 - Win0 vs. Win1
