@@ -112,6 +112,7 @@ class Tournament(QGraphicsScene):
         elif Server.currentRound == 1:
             self.rocketnumber1.hide()
             self.rocketnumber2.hide()
+            Server.level = 1
             Server.coordinatesOfRocket1X.clear()
             Server.coordinatesOfRocket1Y.clear()
             Server.coordinatesOfRocket2X.clear()
@@ -140,6 +141,7 @@ class Tournament(QGraphicsScene):
         elif Server.currentRound == 2:#napraviti nove rakete samo im zapamtiti id zbog player naziva
             self.rocketnumber3.hide()
             self.rocketnumber4.hide()
+            Server.level = 1
             Server.coordinatesOfRocket1X.clear()
             Server.coordinatesOfRocket1Y.clear()
             Server.coordinatesOfRocket2X.clear()
@@ -256,17 +258,20 @@ class Tournament(QGraphicsScene):
             if Server.currentRound == 1:
                 self.rocketnumber4.hide()
                 self.rocketnumber4.move(1000, 1000)
-        """if Server.player1Lives == 0 and Server.player2Lives == 0:  # ako su dva playera, tek kada su oba mrtva prebaci na game_over_scene
-            self.gameOverScene = GameOver(self, self.width, self.height)
-            self.gameOverScene.returnBtn.clicked.connect(self.menus)
-            if Server.player1Score > Server.player2Score:
-                self.gameOverScene.label4.hide()
-            elif Server.player2Score > Server.player1Score:
-                self.gameOverScene.label5.hide()
-            elif Server.player1Score == Server.player2Score:
-                self.gameOverScene.label4.hide()
-                self.gameOverScene.label5.hide()
-            self.sceneParent.setScene(self.gameOverScene)"""
+        elif Server.currentRound == 2:
+            print("111111111111111111111111111111111111")
+            if playerId == 1 or playerId == 2:
+                print("222222222222222222222222222")
+                Server.coordinatesOfRocket1X.clear()
+                Server.coordinatesOfRocket1Y.clear()
+                self.rocketnumber5.hide()
+                self.rocketnumber5.move(1000, 1000)
+            elif playerId == 3 or playerId == 4:
+                print("333333333333333333333")
+                Server.coordinatesOfRocket2X.clear()
+                Server.coordinatesOfRocket2Y.clear()
+                self.rocketnumber6.hide()
+                self.rocketnumber6.move(1000, 1000)
 
     def menus(self):
         self.sceneParent.ExitGame()
