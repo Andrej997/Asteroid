@@ -17,10 +17,6 @@ activeSmallAsteroids = []
 
 class Tournament(QGraphicsScene):
     def __init__(self, parent, width, height):
-        super().__init__(parent)
-        Server.tournamentActivated = True
-        global activeBigAsteroids
-        global activeMediumAsteroids
         global activeSmallAsteroids
         self.width = width
         self.height = height

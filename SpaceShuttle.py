@@ -32,6 +32,31 @@ rocketsList = ['Images/rocketship.png', 'Images/rocketship (1).png', 'Images/roc
                'Images/rocketship (68).png', 'Images/rocketship (69).png', 'Images/rocketship (70).png',
                'Images/rocketship (71).png']
 
+rocketsList1 = ['Images/rocketship2.png', 'Images/rocketship2 (1).png', 'Images/rocketship2 (2).png',
+               'Images/rocketship2 (3).png', 'Images/rocketship2 (4).png', 'Images/rocketship2 (5).png'
+               , 'Images/rocketship2 (6).png', 'Images/rocketship2 (7).png', 'Images/rocketship2 (8).png'
+               , 'Images/rocketship2 (9).png', 'Images/rocketship2 (10).png', 'Images/rocketship2 (11).png'
+               , 'Images/rocketship2 (12).png', 'Images/rocketship2 (13).png', 'Images/rocketship2 (14).png'
+               , 'Images/rocketship2 (15).png', 'Images/rocketship2 (16).png', 'Images/rocketship2 (17).png'
+               , 'Images/rocketship2 (18).png', 'Images/rocketship2 (19).png', 'Images/rocketship2 (20).png'
+               , 'Images/rocketship2 (21).png', 'Images/rocketship2 (22).png', 'Images/rocketship2 (23).png'
+               , 'Images/rocketship2 (24).png', 'Images/rocketship2 (25).png', 'Images/rocketship2 (26).png'
+               , 'Images/rocketship2 (27).png', 'Images/rocketship2 (28).png', 'Images/rocketship2 (29).png'
+               , 'Images/rocketship2 (30).png', 'Images/rocketship2 (31).png', 'Images/rocketship2 (32).png'
+               , 'Images/rocketship2 (33).png', 'Images/rocketship2 (35).png', 'Images/rocketship2 (36).png'
+               , 'Images/rocketship2 (37).png', 'Images/rocketship2 (38).png', 'Images/rocketship2 (39).png'
+               , 'Images/rocketship2 (40).png', 'Images/rocketship2 (41).png', 'Images/rocketship2 (42).png'
+               , 'Images/rocketship2 (43).png', 'Images/rocketship2 (44).png', 'Images/rocketship2 (45).png'
+               , 'Images/rocketship2 (46).png', 'Images/rocketship2 (47).png', 'Images/rocketship2 (48).png'
+               , 'Images/rocketship2 (49).png', 'Images/rocketship2 (50).png', 'Images/rocketship2 (51).png'
+               , 'Images/rocketship2 (52).png', 'Images/rocketship2 (53).png', 'Images/rocketship2 (54).png'
+               , 'Images/rocketship2 (55).png', 'Images/rocketship2 (56).png', 'Images/rocketship2 (57).png'
+               , 'Images/rocketship2 (58).png', 'Images/rocketship2 (59).png', 'Images/rocketship2 (60).png'
+               , 'Images/rocketship2 (61).png', 'Images/rocketship2 (62).png', 'Images/rocketship2 (63).png'
+               , 'Images/rocketship2 (64).png', 'Images/rocketship2 (65).png', 'Images/rocketship2 (66).png'
+               , 'Images/rocketship2 (67).png', 'Images/rocketship2 (68).png', 'Images/rocketship2 (69).png'
+               , 'Images/rocketship2 (70).png', 'Images/rocketship2 (71).png']
+
 
 class SpaceShuttle(QLabel):
     upRocket1 = pyqtSignal()
@@ -93,6 +118,7 @@ class SpaceShuttle(QLabel):
             tmp = 0
             # end region
         elif self.numJMBG == 2:
+            #self.setPixmap(QtGui.QPixmap('Images/rocketship2.png'))
             Server.coordinatesOfRocket2X.clear()
             Server.coordinatesOfRocket2Y.clear()
             # region ->logika da se raketa gleda kao 20x20 px po x i y koordinati
@@ -165,8 +191,9 @@ class SpaceShuttle(QLabel):
 
     def left2_function(self):
         self.positionsExpand()
-        Server.i2 = (Server.i2 + 1) % 72
-        self.setRocketImage(rocketsList[Server.i2])
+        Server.i2 = (Server.i2 + 1) % 71
+        print(Server.i2)
+        self.setRocketImage(rocketsList1[Server.i2])
         self.angle = self.angle + 5
         self.moveX = cos(radians(self.angle))
         self.moveY = sin(radians(self.angle))
@@ -174,9 +201,10 @@ class SpaceShuttle(QLabel):
 
     def right2_function(self):
         self.positionsExpand()
-        Server.i2 = (Server.i2 - 1) % 72
+        Server.i2 = (Server.i2 - 1) % 71
+        print(Server.i2)
         self.angle = self.angle - 5
-        self.setRocketImage(rocketsList[Server.i2])
+        self.setRocketImage(rocketsList1[Server.i2])
         self.moveX = cos(radians(self.angle))
         self.moveY = sin(radians(self.angle))
         self.update()

@@ -273,7 +273,9 @@ class Asteroid(QLabel):
     def tounamentCheck(self):
         if Server.currentRound == 0 and Server.player1Lives == 0 and Server.player2Lives == 0:
             Server.currentRound = 1
+            self.myScene.label6.setText("aa") #dodao sam samo jer je pucalo ako se ne setuju ove labele, pucaju svakako xD
             self.myScene.label6.show()
+            self.myScene.label7.setText("aaa")
             self.myScene.label7.show()
             self.myScene.setPlayers(self.myScene.label2, self.myScene.label3)
         elif Server.currentRound == 1 and Server.player3Lives == 0 and Server.player4Lives == 0:
