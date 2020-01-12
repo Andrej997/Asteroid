@@ -43,20 +43,69 @@ rocketsList1 = ['Images/rocketship2.png', 'Images/rocketship2 (1).png', 'Images/
                , 'Images/rocketship2 (24).png', 'Images/rocketship2 (25).png', 'Images/rocketship2 (26).png'
                , 'Images/rocketship2 (27).png', 'Images/rocketship2 (28).png', 'Images/rocketship2 (29).png'
                , 'Images/rocketship2 (30).png', 'Images/rocketship2 (31).png', 'Images/rocketship2 (32).png'
-               , 'Images/rocketship2 (33).png', 'Images/rocketship2 (34).png', 'Images/rocketship2 (35).png', 'Images/rocketship2 (36).png'
-               , 'Images/rocketship2 (37).png', 'Images/rocketship2 (38).png', 'Images/rocketship2 (39).png'
-               , 'Images/rocketship2 (40).png', 'Images/rocketship2 (41).png', 'Images/rocketship2 (42).png'
-               , 'Images/rocketship2 (43).png', 'Images/rocketship2 (44).png', 'Images/rocketship2 (45).png'
-               , 'Images/rocketship2 (46).png', 'Images/rocketship2 (47).png', 'Images/rocketship2 (48).png'
-               , 'Images/rocketship2 (49).png', 'Images/rocketship2 (50).png', 'Images/rocketship2 (51).png'
-               , 'Images/rocketship2 (52).png', 'Images/rocketship2 (53).png', 'Images/rocketship2 (54).png'
-               , 'Images/rocketship2 (55).png', 'Images/rocketship2 (56).png', 'Images/rocketship2 (57).png'
-               , 'Images/rocketship2 (58).png', 'Images/rocketship2 (59).png', 'Images/rocketship2 (60).png'
-               , 'Images/rocketship2 (61).png', 'Images/rocketship2 (62).png', 'Images/rocketship2 (63).png'
-               , 'Images/rocketship2 (64).png', 'Images/rocketship2 (65).png', 'Images/rocketship2 (66).png'
-               , 'Images/rocketship2 (67).png', 'Images/rocketship2 (68).png', 'Images/rocketship2 (69).png'
-               , 'Images/rocketship2 (70).png', 'Images/rocketship2 (71).png']
+               , 'Images/rocketship2 (33).png', 'Images/rocketship2 (34).png', 'Images/rocketship2 (35).png'
+               , 'Images/rocketship2 (36).png', 'Images/rocketship2 (37).png', 'Images/rocketship2 (38).png'
+               , 'Images/rocketship2 (39).png', 'Images/rocketship2 (40).png', 'Images/rocketship2 (41).png'
+               , 'Images/rocketship2 (42).png', 'Images/rocketship2 (43).png', 'Images/rocketship2 (44).png'
+               , 'Images/rocketship2 (45).png', 'Images/rocketship2 (46).png', 'Images/rocketship2 (47).png'
+               , 'Images/rocketship2 (48).png', 'Images/rocketship2 (49).png', 'Images/rocketship2 (50).png'
+               , 'Images/rocketship2 (51).png', 'Images/rocketship2 (52).png', 'Images/rocketship2 (53).png'
+               , 'Images/rocketship2 (54).png', 'Images/rocketship2 (55).png', 'Images/rocketship2 (56).png'
+               , 'Images/rocketship2 (57).png', 'Images/rocketship2 (58).png', 'Images/rocketship2 (59).png'
+               , 'Images/rocketship2 (60).png', 'Images/rocketship2 (61).png', 'Images/rocketship2 (62).png'
+               , 'Images/rocketship2 (63).png', 'Images/rocketship2 (64).png', 'Images/rocketship2 (65).png'
+               , 'Images/rocketship2 (66).png', 'Images/rocketship2 (67).png', 'Images/rocketship2 (68).png'
+               , 'Images/rocketship2 (69).png', 'Images/rocketship2 (70).png', 'Images/rocketship2 (71).png']
 
+rocketsList2 = ['Images/rocketship3.png', 'Images/rocketship3 (1).png', 'Images/rocketship3 (2).png',
+               'Images/rocketship3 (3).png', 'Images/rocketship3 (4).png', 'Images/rocketship3 (5).png'
+               , 'Images/rocketship3 (6).png', 'Images/rocketship3 (7).png', 'Images/rocketship3 (8).png'
+               , 'Images/rocketship3 (9).png', 'Images/rocketship3 (10).png', 'Images/rocketship3 (11).png'
+               , 'Images/rocketship3 (12).png', 'Images/rocketship3 (13).png', 'Images/rocketship3 (14).png'
+               , 'Images/rocketship3 (15).png', 'Images/rocketship3 (16).png', 'Images/rocketship3 (17).png'
+               , 'Images/rocketship3 (18).png', 'Images/rocketship3 (19).png', 'Images/rocketship3 (20).png'
+               , 'Images/rocketship3 (21).png', 'Images/rocketship3 (22).png', 'Images/rocketship3 (23).png'
+               , 'Images/rocketship3 (24).png', 'Images/rocketship3 (25).png', 'Images/rocketship3 (26).png'
+               , 'Images/rocketship3 (27).png', 'Images/rocketship3 (28).png', 'Images/rocketship3 (29).png'
+               , 'Images/rocketship3 (30).png', 'Images/rocketship3 (31).png', 'Images/rocketship3 (32).png'
+               , 'Images/rocketship3 (33).png', 'Images/rocketship3 (34).png', 'Images/rocketship3 (35).png'
+               , 'Images/rocketship3 (36).png', 'Images/rocketship3 (37).png', 'Images/rocketship3 (38).png'
+               , 'Images/rocketship3 (39).png', 'Images/rocketship3 (40).png', 'Images/rocketship3 (41).png'
+               , 'Images/rocketship3 (42).png', 'Images/rocketship3 (43).png', 'Images/rocketship3 (44).png'
+               , 'Images/rocketship3 (45).png', 'Images/rocketship3 (46).png', 'Images/rocketship3 (47).png'
+               , 'Images/rocketship3 (48).png', 'Images/rocketship3 (49).png', 'Images/rocketship3 (50).png'
+               , 'Images/rocketship3 (51).png', 'Images/rocketship3 (52).png', 'Images/rocketship3 (53).png'
+               , 'Images/rocketship3 (54).png', 'Images/rocketship3 (55).png', 'Images/rocketship3 (56).png'
+               , 'Images/rocketship3 (57).png', 'Images/rocketship3 (58).png', 'Images/rocketship3 (59).png'
+               , 'Images/rocketship3 (60).png', 'Images/rocketship3 (61).png', 'Images/rocketship3 (62).png'
+               , 'Images/rocketship3 (63).png', 'Images/rocketship3 (64).png', 'Images/rocketship3 (65).png'
+               , 'Images/rocketship3 (66).png', 'Images/rocketship3 (67).png', 'Images/rocketship3 (68).png'
+               , 'Images/rocketship3 (69).png', 'Images/rocketship3 (70).png', 'Images/rocketship3 (71).png']
+
+rocketsList3 = ['Images/rocketship4.png', 'Images/rocketship4 (1).png', 'Images/rocketship4 (2).png',
+               'Images/rocketship4 (3).png', 'Images/rocketship4 (4).png', 'Images/rocketship4 (5).png'
+               , 'Images/rocketship4 (6).png', 'Images/rocketship4 (7).png', 'Images/rocketship4 (8).png'
+               , 'Images/rocketship4 (9).png', 'Images/rocketship4 (10).png', 'Images/rocketship4 (11).png'
+               , 'Images/rocketship4 (12).png', 'Images/rocketship4 (13).png', 'Images/rocketship4 (14).png'
+               , 'Images/rocketship4 (15).png', 'Images/rocketship4 (16).png', 'Images/rocketship4 (17).png'
+               , 'Images/rocketship4 (18).png', 'Images/rocketship4 (19).png', 'Images/rocketship4 (20).png'
+               , 'Images/rocketship4 (21).png', 'Images/rocketship4 (22).png', 'Images/rocketship4 (23).png'
+               , 'Images/rocketship4 (24).png', 'Images/rocketship4 (25).png', 'Images/rocketship4 (26).png'
+               , 'Images/rocketship4 (27).png', 'Images/rocketship4 (28).png', 'Images/rocketship4 (29).png'
+               , 'Images/rocketship4 (30).png', 'Images/rocketship4 (31).png', 'Images/rocketship4 (32).png'
+               , 'Images/rocketship4 (33).png', 'Images/rocketship4 (34).png', 'Images/rocketship4 (35).png'
+               , 'Images/rocketship4 (36).png', 'Images/rocketship4 (37).png', 'Images/rocketship4 (38).png'
+               , 'Images/rocketship4 (39).png', 'Images/rocketship4 (40).png', 'Images/rocketship4 (41).png'
+               , 'Images/rocketship4 (42).png', 'Images/rocketship4 (43).png', 'Images/rocketship4 (44).png'
+               , 'Images/rocketship4 (45).png', 'Images/rocketship4 (46).png', 'Images/rocketship4 (47).png'
+               , 'Images/rocketship4 (48).png', 'Images/rocketship4 (49).png', 'Images/rocketship4 (50).png'
+               , 'Images/rocketship4 (51).png', 'Images/rocketship4 (52).png', 'Images/rocketship4 (53).png'
+               , 'Images/rocketship4 (54).png', 'Images/rocketship4 (55).png', 'Images/rocketship4 (56).png'
+               , 'Images/rocketship4 (57).png', 'Images/rocketship4 (58).png', 'Images/rocketship4 (59).png'
+               , 'Images/rocketship4 (60).png', 'Images/rocketship4 (61).png', 'Images/rocketship4 (62).png'
+               , 'Images/rocketship4 (63).png', 'Images/rocketship4 (64).png', 'Images/rocketship4 (65).png'
+               , 'Images/rocketship4 (66).png', 'Images/rocketship4 (67).png', 'Images/rocketship4 (68).png'
+               , 'Images/rocketship4 (69).png', 'Images/rocketship4 (70).png', 'Images/rocketship4 (71).png']
 
 class SpaceShuttle(QLabel):
     upRocket1 = pyqtSignal()
@@ -75,9 +124,31 @@ class SpaceShuttle(QLabel):
         self.myScene = scene
         self.numJMBG = num
         if self.numJMBG == 1:
-            self.setPixmap(QtGui.QPixmap('Images/rocketship.png'))
+            if Server.tournamentActivated == 1:
+                print(Server.Win0)
+                if Server.currentRound == 0:
+                    self.setPixmap(QtGui.QPixmap('Images/rocketship.png')) #Player1 = crveni
+                elif Server.currentRound == 1:
+                    self.setPixmap(QtGui.QPixmap('Images/rocketship3.png')) #Player3 = plavi
+                elif Server.currentRound == 2 and Server.Win0 == 1:
+                    self.setPixmap(QtGui.QPixmap('Images/rocketship.png')) #Player1 = crveni
+                elif Server.currentRound == 2 and Server.Win0 == 2:
+                    self.setPixmap(QtGui.QPixmap('Images/rocketship2.png')) #Player2 = zuti
+            else:
+                self.setPixmap(QtGui.QPixmap('Images/rocketship.png')) #Player1 = crveni
         elif self.numJMBG == 2:
-            self.setPixmap(QtGui.QPixmap('Images/rocketship2.png'))
+            if Server.tournamentActivated == 1:
+                print(Server.Win1)
+                if Server.currentRound == 0:
+                    self.setPixmap(QtGui.QPixmap('Images/rocketship2.png')) #Player2 = zuti
+                elif Server.currentRound == 1:
+                    self.setPixmap(QtGui.QPixmap('Images/rocketship4.png')) #Player4 = zeleni
+                elif Server.currentRound == 2 and Server.Win1 == 3:
+                    self.setPixmap(QtGui.QPixmap('Images/rocketship3.png')) #Player3 = plavi
+                elif Server.currentRound == 2 and Server.Win1 == 4:
+                    self.setPixmap(QtGui.QPixmap('Images/rocketship4.png')) #Player4 = zeleni
+            else:   
+                self.setPixmap(QtGui.QPixmap('Images/rocketship2.png')) #Player2 = zuti #ako nije turnir znaci da je multiplayer
         self.moveX = float(0)
         self.moveY = float(1)
         self.xFull = float(270)
@@ -170,8 +241,23 @@ class SpaceShuttle(QLabel):
     def left1_function(self):
         self.positionsExpand()
 
-        Server.i = (Server.i + 1) % 72
-        self.setRocketImage(rocketsList[Server.i])
+        
+        if Server.tournamentActivated == 1:
+            if Server.currentRound == 0:
+                Server.i = (Server.i + 1) % 72
+                self.setRocketImage(rocketsList[Server.i]) #crveni
+            elif Server.currentRound == 1:
+                Server.i3 = (Server.i3 + 1) % 72
+                self.setRocketImage(rocketsList2[Server.i3]) #plavi
+            elif Server.currentRound == 2 and Server.Win0 == 1:
+                Server.i = (Server.i + 1) % 72
+                self.setRocketImage(rocketsList[Server.i]) #crveni
+            elif Server.currentRound == 2 and Server.Win0 == 2:
+                Server.i2 = (Server.i2 + 1) % 72
+                self.setRocketImage(rocketsList1[Server.i2]) #zuti
+        else:
+            Server.i = (Server.i + 1) % 72
+            self.setRocketImage(rocketsList[Server.i]) #ako nije turnir ovaj je uvek crveni
         self.angle = self.angle + 5
         self.moveX = cos(radians(self.angle))
         self.moveY = sin(radians(self.angle))
@@ -179,9 +265,24 @@ class SpaceShuttle(QLabel):
 
     def right1_function(self):
         self.positionsExpand()
-        Server.i = (Server.i - 1) % 72
+        
         self.angle = self.angle - 5
-        self.setRocketImage(rocketsList[Server.i])
+        if Server.tournamentActivated == 1:
+            if Server.currentRound == 0:
+                Server.i = (Server.i - 1) % 72
+                self.setRocketImage(rocketsList[Server.i]) #crveni
+            elif Server.currentRound == 1:
+                Server.i3 = (Server.i3 - 1) % 72
+                self.setRocketImage(rocketsList2[Server.i3]) #plavi
+            elif Server.currentRound == 2 and Server.Win0 == 1:
+                Server.i = (Server.i - 1) % 72
+                self.setRocketImage(rocketsList[Server.i]) #crveni
+            elif Server.currentRound == 2 and Server.Win0 == 2:
+                Server.i2 = (Server.i2 - 1) % 72
+                self.setRocketImage(rocketsList1[Server.i2]) #zuti
+        else:
+            Server.i = (Server.i - 1) % 72
+            self.setRocketImage(rocketsList[Server.i]) #ako nije turnir ovaj je uvek crveni
         self.moveX = cos(radians(self.angle))
         self.moveY = sin(radians(self.angle))
         self.update()
@@ -194,9 +295,23 @@ class SpaceShuttle(QLabel):
 
     def left2_function(self):
         self.positionsExpand()
-        Server.i2 = (Server.i2 + 1) % 71
-        #print(Server.i2)
-        self.setRocketImage(rocketsList1[Server.i2])
+        
+        if Server.tournamentActivated == 1:
+            if Server.currentRound == 0:
+                Server.i2 = (Server.i2 + 1) % 72
+                self.setRocketImage(rocketsList1[Server.i2]) #zuti
+            elif Server.currentRound == 1:
+                Server.i4 = (Server.i4 + 1) % 72
+                self.setRocketImage(rocketsList3[Server.i4]) #zeleni
+            elif Server.currentRound == 2 and Server.Win1 == 3:
+                Server.i3 = (Server.i3 + 1) % 72
+                self.setRocketImage(rocketsList2[Server.i3]) #plavi
+            elif Server.currentRound == 2 and Server.Win1 == 4:
+                Server.i4 = (Server.i4 + 1) % 72
+                self.setRocketImage(rocketsList3[Server.i4]) #zeleni
+        else:
+            Server.i2 = (Server.i2 + 1) % 72
+            self.setRocketImage(rocketsList1[Server.i2]) #ako nije turnir ovaj je uvek zuti
         self.angle = self.angle + 5
         self.moveX = cos(radians(self.angle))
         self.moveY = sin(radians(self.angle))
@@ -204,10 +319,24 @@ class SpaceShuttle(QLabel):
 
     def right2_function(self):
         self.positionsExpand()
-        Server.i2 = (Server.i2 - 1) % 71
-        #print(Server.i2)
+        
+        if Server.tournamentActivated == 1:
+            if Server.currentRound == 0:
+                Server.i2 = (Server.i2 - 1) % 72
+                self.setRocketImage(rocketsList1[Server.i2]) #zuti
+            elif Server.currentRound == 1:
+                Server.i4 = (Server.i4 - 1) % 72
+                self.setRocketImage(rocketsList3[Server.i4]) #zeleni
+            elif Server.currentRound == 2 and Server.Win1 == 3:
+                Server.i3 = (Server.i3 - 1) % 72
+                self.setRocketImage(rocketsList2[Server.i3]) #plavi
+            elif Server.currentRound == 2 and Server.Win1 == 4:
+                Server.i4 = (Server.i4 - 1) % 72
+                self.setRocketImage(rocketsList3[Server.i4]) #zeleni
+        else:
+            Server.i2 = (Server.i2 - 1) % 72
+            self.setRocketImage(rocketsList1[Server.i2]) #ako nije turnir ovaj je uvek zuti
         self.angle = self.angle - 5
-        self.setRocketImage(rocketsList1[Server.i2])
         self.moveX = cos(radians(self.angle))
         self.moveY = sin(radians(self.angle))
         self.update()

@@ -124,6 +124,8 @@ class Tournament(QGraphicsScene):
             Server.bulletsCollection2Y.clear()
             Server.i = 1
             Server.i2 = 1
+            Server.i3 = 1
+            Server.i4 = 1
             self.rocketnumber3 = SpaceShuttle(self.width, self.height, self, 1)
             self.rocketnumber3.resize(60,
                                       50)  # slika je 50x50 ali se glupo okrece tako da je bolje ovako da bi se uvek videla cela
@@ -153,6 +155,8 @@ class Tournament(QGraphicsScene):
             Server.bulletsCollection2Y.clear()
             Server.i = 1
             Server.i2 = 1
+            Server.i3 = 1
+            Server.i4 = 1
             if Server.player1Score > Server.player2Score:
                 Server.Win0 = 1
             elif Server.player1Score < Server.player2Score:
