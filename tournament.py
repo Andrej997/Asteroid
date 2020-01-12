@@ -85,14 +85,14 @@ class Tournament(QGraphicsScene):
             "Player3 lives--->[" + Server.player3Lives.__str__() + "] score--->[" + Server.player3Score.__str__() + "]")
         self.label6.resize(400, 30)
         self.label6.move(320, 440)
-        self.label6.setStyleSheet("font: 9pt; color: #f03a54; font:bold; background-color: transparent; ")
+        self.label6.setStyleSheet("font: 9pt; color: blue; font:bold; background-color: transparent; ")
         self.addWidget(self.label6)
 
         self.label7 = QLabel(
             "Player4 lives--->[" + Server.player4Lives.__str__() + "] score--->[" + Server.player4Score.__str__() + "]")
         self.label7.resize(400, 30)
         self.label7.move(320, 470)
-        self.label7.setStyleSheet("font: 9pt; color: yellow; font:bold; background-color: transparent; ")
+        self.label7.setStyleSheet("font: 9pt; color: green; font:bold; background-color: transparent; ")
         self.addWidget(self.label7)
 
         self.setPlayers(self.label6, self.label7)
@@ -206,23 +206,25 @@ class Tournament(QGraphicsScene):
             if Server.Win0 == 1:
                 #self.addWidget(self.rocketnumber1)
                 self.label2.setText("Player1 lives--->[" + Server.player5Lives.__str__() + "] score--->[" + Server.player5Score.__str__() + "]")
+                self.label2.setStyleSheet("font: 9pt; color: #f03a54; font:bold; background-color: transparent; ")
                 self.label2.show()
             elif Server.Win0 == 2:
                 #self.addWidget(self.rocketnumber2)
                 self.label2.setText("Player2 lives--->[" + Server.player5Lives.__str__() + "] score--->[" + Server.player5Score.__str__() + "]")
+                self.label2.setStyleSheet("font: 9pt; color: yellow; font:bold; background-color: transparent; ")
                 self.label2.show()
             # postavlja pobednika iz drugog meca
             if Server.Win1 == 3:
                 #self.addWidget(self.rocketnumber3)
                 self.label6.setText(
                     "Player3 lives--->[" + Server.player6Lives.__str__() + "] score--->[" + Server.player6Score.__str__() + "]")
-                self.label6.setStyleSheet("font: 9pt; color: yellow; font:bold; background-color: transparent; ")
+                self.label6.setStyleSheet("font: 9pt; color: blue; font:bold; background-color: transparent; ")
                 self.label6.show()
             elif Server.Win1 == 4:
                 #self.addWidget(self.rocketnumber4)
                 self.label6.setText(
                     "Player4 lives--->[" + Server.player6Lives.__str__() + "] score--->[" + Server.player6Score.__str__() + "]")
-                self.label6.setStyleSheet("font: 9pt; color: yellow; font:bold; background-color: transparent; ")
+                self.label6.setStyleSheet("font: 9pt; color: green; font:bold; background-color: transparent; ")
                 self.label6.show()
 
     def createAsteroids(self):
@@ -308,8 +310,10 @@ class Tournament(QGraphicsScene):
                 self.gameOverScene.label5.hide()
                 if Server.Win0 == 1:
                     self.gameOverScene.label6.setText("Player1 Win")
+                    self.gameOverScene.label6.setStyleSheet("font: 9pt; color: red; font:bold; background-color: transparent; ")
                 else:
                     self.gameOverScene.label6.setText("Player2 Win")
+                    self.gameOverScene.label6.setStyleSheet("font: 9pt; color: yellow; font:bold; background-color: transparent; ")
             elif Server.player5Score < Server.player6Score:
                 self.gameOverScene.label4.hide()
                 self.gameOverScene.label3.hide()
@@ -317,8 +321,10 @@ class Tournament(QGraphicsScene):
                 self.gameOverScene.label5.hide()
                 if Server.Win1 == 3:
                     self.gameOverScene.label6.setText("Player3 Win")
+                    self.gameOverScene.label6.setStyleSheet("font: 9pt; color: blue; font:bold; background-color: transparent; ")
                 else:
                     self.gameOverScene.label6.setText("Player4 Win")
+                    self.gameOverScene.label6.setStyleSheet("font: 9pt; color: green; font:bold; background-color: transparent; ")
             else:
                 self.gameOverScene.label4.hide()
                 self.gameOverScene.label3.hide()

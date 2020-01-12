@@ -138,11 +138,15 @@ class Asteroid(QLabel):
                         Server.player5Lives = Server.player5Lives - 1
                         self.myScene.label2.setText(
                             "Player1 lives--->[" + Server.player5Lives.__str__() + "] score--->[" + Server.player5Score.__str__() + "]")
+                        self.myScene.label2.setStyleSheet(
+                            "font: 9pt; color: #f03a54; font:bold; background-color: transparent; ")
                         Server.activeAsteroids[self.uniqueIdenfier] = 1
                         self.hide()
                     elif Server.currentRound == 2 and Server.Win0 == 2:
                         Server.player5Lives = Server.player5Lives - 1
                         self.myScene.label2.setText("Player2 lives--->[" + Server.player5Lives.__str__() + "] score--->[" + Server.player5Score.__str__() + "]")
+                        self.myScene.label2.setStyleSheet(
+                            "font: 9pt; color: yellow; font:bold; background-color: transparent; ")
                         Server.activeAsteroids[self.uniqueIdenfier] = 1
                         self.hide()
                     print("ASTEROID IS DESTROYED TOO!!!")
@@ -196,12 +200,16 @@ class Asteroid(QLabel):
                     elif Server.currentRound == 2 and Server.Win1 == 3:
                         Server.player6Lives = Server.player6Lives - 1
                         self.myScene.label6.setText("Player3 lives--->[" + Server.player6Lives.__str__() + "] score--->[" + Server.player6Score.__str__() + "]")
+                        self.myScene.label6.setStyleSheet(
+                            "font: 9pt; color: blue; font:bold; background-color: transparent; ")
                         Server.activeAsteroids[self.uniqueIdenfier] = 1
                         self.hide()
                     elif Server.currentRound == 2 and Server.Win1 == 4:
                         Server.player6Lives = Server.player6Lives - 1
                         self.myScene.label6.setText(
                             "Player4 lives--->[" + Server.player6Lives.__str__() + "] score--->[" + Server.player6Score.__str__() + "]")
+                        self.myScene.label6.setStyleSheet(
+                            "font: 9pt; color: green; font:bold; background-color: transparent; ")
                         Server.activeAsteroids[self.uniqueIdenfier] = 1
                         self.hide()
                     print("ASTEROID IS DESTROYED TOO!!!")
@@ -256,7 +264,7 @@ class Asteroid(QLabel):
                             elif Server.currentRound == 1:
                                 Server.activeAsteroids[self.uniqueIdenfier] = 1
                                 Server.player3Score = Server.player3Score + 300
-                                self.myScene.label6.setText("Player2 lives--->[" + Server.player3Lives.__str__() + "] score--->[" + Server.player3Score.__str__() + "]")
+                                self.myScene.label6.setText("Player3 lives--->[" + Server.player3Lives.__str__() + "] score--->[" + Server.player3Score.__str__() + "]")
                                 self.hide()
                                 self.yFull = 1234
                                 self.xFull = 1234
@@ -269,6 +277,8 @@ class Asteroid(QLabel):
                                 print("wino1")
                                 print(Server.player5Score)
                                 self.myScene.label2.setText("Player1 lives--->[" + Server.player5Lives.__str__() + "] score--->[" + Server.player5Score.__str__() + "]")
+                                self.myScene.label2.setStyleSheet(
+                                    "font: 9pt; color: #f03a54; font:bold; background-color: transparent; ")
                                 self.hide()
                                 self.yFull = 1234
                                 self.xFull = 1234
@@ -281,6 +291,8 @@ class Asteroid(QLabel):
                                 print("wino 2")
                                 print(Server.player5Score)
                                 self.myScene.label2.setText("Player2 lives--->[" + Server.player5Lives.__str__() + "] score--->[" + Server.player5Score.__str__() + "]")
+                                self.myScene.label2.setStyleSheet(
+                                    "font: 9pt; color: yellow; font:bold; background-color: transparent; ")
                                 self.hide()
                                 self.yFull = 1234
                                 self.xFull = 1234
@@ -326,6 +338,8 @@ class Asteroid(QLabel):
                                 print("wino 3")
                                 print(Server.player6Score)
                                 self.myScene.label6.setText("Player3 lives--->[" + Server.player6Lives.__str__() + "] score--->[" + Server.player6Score.__str__() + "]")
+                                self.myScene.label6.setStyleSheet(
+                                    "font: 9pt; color: blue; font:bold; background-color: transparent; ")
                                 self.hide()
                                 self.yFull = 1234
                                 self.xFull = 1234
@@ -338,6 +352,8 @@ class Asteroid(QLabel):
                                 print("wino 4")
                                 print(Server.player6Score)
                                 self.myScene.label6.setText("Player4 lives--->[" + Server.player6Lives.__str__() + "] score--->[" + Server.player6Score.__str__() + "]")
+                                self.myScene.label6.setStyleSheet(
+                                    "font: 9pt; color: green; font:bold; background-color: transparent; ")
                                 self.hide()
                                 self.yFull = 1234
                                 self.xFull = 1234
