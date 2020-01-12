@@ -55,6 +55,9 @@ currentRound = 0 # oznacava koja je runda
                     # 1 - Player3 vs. Player4
                     # 2 - Win0 vs. Win1
 
+Died = 0 # promenljiva za slucaj kad je nereseno u polufinalima, ide dalje onaj koji je druze izdrzao
+Died2 = 0 # promenljiva za slucaj kad je nereseno u polufinalima, ide dalje onaj koji je druze izdrzao
+
 tournamentActivated = False
 
 i = 1

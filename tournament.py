@@ -155,14 +155,26 @@ class Tournament(QGraphicsScene):
             Server.i2 = 1
             if Server.player1Score > Server.player2Score:
                 Server.Win0 = 1
-            else:#ako je nereseno handlati
+            elif Server.player1Score < Server.player2Score:
                 Server.Win0 = 2
+            elif Server.player1Score == Server.player2Score:
+                if Server.Died == 1: # ako je p1 prvi poginuo
+                    Server.Win0 = 1
+                else:
+                    Server.Win0 = 2
 
             if Server.player3Score > Server.player4Score:
                 Server.Win1 = 3
-            else:#ako je nereseno handlati
+            elif Server.player3Score < Server.player4Score:
                 Server.Win1 = 4
-
+            elif Server.player3Score == Server.player4Score:
+                if Server.Died2 == 3:
+                    Server.Win1 = 3
+                else:
+                    Server.Win1 = 4
+            print("Server.Died -> " + Server.Died.__str__())
+            print("Win0 -> " + Server.Win0.__str__())
+            print("Win1 -> " + Server.Win1.__str__())
             Server.player1Lives = 3
             Server.player2Lives = 3
             Server.player3Lives = 3

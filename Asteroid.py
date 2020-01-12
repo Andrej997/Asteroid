@@ -148,6 +148,8 @@ class Asteroid(QLabel):
                     print("ASTEROID IS DESTROYED TOO!!!")
                     if (Server.player1Lives == 0 and Server.currentRound == 0):#ako je izgubio sve zivote da iskoci iz igrce
                         player_id = 10#rocket1
+                        print("1111111111ARISMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+                        Server.Died = 1
                         self.tounamentCheck()
                         self.myScene.game_is_over(player_id)
                     elif (Server.player5Lives == 0 and Server.currentRound == 2 and Server.Win0 == 1):
@@ -156,6 +158,7 @@ class Asteroid(QLabel):
                         self.myScene.game_is_over(player_id)
                     elif (Server.player3Lives == 0 and Server.currentRound == 1):
                         player_id = 31#rocket3
+                        Server.Died2 = 3
                         self.tounamentCheck()
                         self.myScene.game_is_over(player_id)
                     elif (Server.player5Lives == 0 and Server.currentRound == 2 and Server.Win0 == 2):
@@ -204,6 +207,7 @@ class Asteroid(QLabel):
                     print("ASTEROID IS DESTROYED TOO!!!")
                     if (Server.player2Lives == 0 and Server.currentRound == 0):#ako je izgubio sve zivote da iskoci iz igrce
                         player_id = 20#rocket2
+                        Server.Died = 2
                         self.tounamentCheck()
                         self.myScene.game_is_over(player_id)
                     elif (Server.player6Lives == 0 and Server.currentRound == 2 and Server.Win1 == 3):
@@ -212,6 +216,7 @@ class Asteroid(QLabel):
                         self.myScene.game_is_over(player_id)
                     elif (Server.player4Lives == 0 and Server.currentRound == 1):
                         player_id = 41#rocket4
+                        Server.Died2 = 4
                         self.tounamentCheck()
                         self.myScene.game_is_over(player_id)
                     elif (Server.player6Lives == 0 and Server.currentRound == 2 and Server.Win1 == 4):
