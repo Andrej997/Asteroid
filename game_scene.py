@@ -90,7 +90,7 @@ class GameScene(QGraphicsScene):
     def createAsteroids(self):
         o = 0
         for o in range(Server.level):
-            self.asteroid_0 = Asteroid(self.width, self.height, self, Server.asteroid_id.__str__(), False)
+            self.asteroid_0 = Asteroid(self.width, self.height, self, Server.asteroid_id.__str__(), False, 0, 0, 3)
             self.asteroid_0.setFocus()  # mozda i ne mora posto je timer tamo
             self.asteroid_0.setStyleSheet("background:transparent")
             self.asteroid_0.resize(60, 50)
@@ -98,6 +98,32 @@ class GameScene(QGraphicsScene):
             activeBigAsteroids.append(self.asteroid_0)
             Server.activeAsteroids[Server.asteroid_id.__str__()] = 0
             Server.asteroid_id = Server.asteroid_id.__int__() + 1
+            #print(Server.asteroid_id)
+
+    def createMediumAsteroids(self, xFull, yFull):
+        o = 0
+        for o in range(2):
+            self.asteroid_0 = Asteroid(self.width, self.height, self, Server.asteroid_id.__str__(), False, xFull, yFull, 2)
+            self.asteroid_0.setFocus()  # mozda i ne mora posto je timer tamo
+            self.asteroid_0.setStyleSheet("background:transparent")
+            self.asteroid_0.resize(60, 50)
+            self.addWidget(self.asteroid_0)
+            activeMediumAsteroids.append(self.asteroid_0)
+            Server.activeAsteroids[Server.asteroid_id.__str__()] = 0
+            Server.asteroid_id = Server.asteroid_id.__int__() + 1
+            #print(Server.asteroid_id)
+    def createSmallAsteroids(self, xFull, yFull):
+        o = 0
+        for o in range(2):
+            self.asteroid_0 = Asteroid(self.width, self.height, self, Server.asteroid_id.__str__(), False, xFull, yFull, 1)
+            self.asteroid_0.setFocus()  # mozda i ne mora posto je timer tamo
+            self.asteroid_0.setStyleSheet("background:transparent")
+            self.asteroid_0.resize(60, 50)
+            self.addWidget(self.asteroid_0)
+            activeSmallAsteroids.append(self.asteroid_0)
+            Server.activeAsteroids[Server.asteroid_id.__str__()] = 0
+            Server.asteroid_id = Server.asteroid_id.__int__() + 1
+            #print(Server.asteroid_id)
 
     def game_is_over(self, playerId):#ako je game over proveri za kog igraca je game over ako je multiplayer, onog drugog pusti da jos igra
         if self.players_number == 1:#ako je singleplyaer cim ima 0 lives znaci mrtav je znaci game_over je
