@@ -43,7 +43,7 @@ rocketsList1 = ['Images/rocketship2.png', 'Images/rocketship2 (1).png', 'Images/
                , 'Images/rocketship2 (24).png', 'Images/rocketship2 (25).png', 'Images/rocketship2 (26).png'
                , 'Images/rocketship2 (27).png', 'Images/rocketship2 (28).png', 'Images/rocketship2 (29).png'
                , 'Images/rocketship2 (30).png', 'Images/rocketship2 (31).png', 'Images/rocketship2 (32).png'
-               , 'Images/rocketship2 (33).png', 'Images/rocketship2 (35).png', 'Images/rocketship2 (36).png'
+               , 'Images/rocketship2 (33).png', 'Images/rocketship2 (34).png', 'Images/rocketship2 (35).png', 'Images/rocketship2 (36).png'
                , 'Images/rocketship2 (37).png', 'Images/rocketship2 (38).png', 'Images/rocketship2 (39).png'
                , 'Images/rocketship2 (40).png', 'Images/rocketship2 (41).png', 'Images/rocketship2 (42).png'
                , 'Images/rocketship2 (43).png', 'Images/rocketship2 (44).png', 'Images/rocketship2 (45).png'
@@ -74,7 +74,10 @@ class SpaceShuttle(QLabel):
         self.height = h
         self.myScene = scene
         self.numJMBG = num
-        self.setPixmap(QtGui.QPixmap('Images/rocketship.png'))
+        if self.numJMBG == 1:
+            self.setPixmap(QtGui.QPixmap('Images/rocketship.png'))
+        elif self.numJMBG == 2:
+            self.setPixmap(QtGui.QPixmap('Images/rocketship2.png'))
         self.moveX = float(0)
         self.moveY = float(1)
         self.xFull = float(270)
@@ -192,7 +195,7 @@ class SpaceShuttle(QLabel):
     def left2_function(self):
         self.positionsExpand()
         Server.i2 = (Server.i2 + 1) % 71
-        print(Server.i2)
+        #print(Server.i2)
         self.setRocketImage(rocketsList1[Server.i2])
         self.angle = self.angle + 5
         self.moveX = cos(radians(self.angle))
@@ -202,7 +205,7 @@ class SpaceShuttle(QLabel):
     def right2_function(self):
         self.positionsExpand()
         Server.i2 = (Server.i2 - 1) % 71
-        print(Server.i2)
+        #print(Server.i2)
         self.angle = self.angle - 5
         self.setRocketImage(rocketsList1[Server.i2])
         self.moveX = cos(radians(self.angle))

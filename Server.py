@@ -15,12 +15,16 @@ player2Hitted = 0
 player3Lives = 3
 player3Hitted = 0
 player4Lives = 3
+player5Lives = 3
+player6Lives = 3
 player4Hitted = 0
 
 player1Score = 0
 player2Score = 0
 player3Score = 0
 player4Score = 0
+player5Score = 0
+player6Score = 0
 
 #metkoviCoordsX = []
 #metkoviCoordsY = []

@@ -90,7 +90,7 @@ class GameScene(QGraphicsScene):
     def createAsteroids(self):
         o = 0
         for o in range(Server.level):
-            self.asteroid_0 = Asteroid(self.width, self.height, self, Server.asteroid_id.__str__())
+            self.asteroid_0 = Asteroid(self.width, self.height, self, Server.asteroid_id.__str__(), False)
             self.asteroid_0.setFocus()  # mozda i ne mora posto je timer tamo
             self.asteroid_0.setStyleSheet("background:transparent")
             self.asteroid_0.resize(60, 50)
@@ -104,6 +104,7 @@ class GameScene(QGraphicsScene):
             self.gameOverScene = GameOver(self, self.width, self.height)
             self.gameOverScene.returnBtn.clicked.connect(self.menus)
             self.gameOverScene.label4.hide()#hide that player2 is winner
+            self.gameOverScene.label6.hide()#hide that player2 is winner
             self.gameOverScene.label3.hide()#hide player2 score bcs this is singleplayer
             self.sceneParent.setScene(self.gameOverScene)
 
@@ -122,6 +123,7 @@ class GameScene(QGraphicsScene):
             if Server.player1Lives == 0 and Server.player2Lives == 0:#ako su dva playera, tek kada su oba mrtva prebaci na game_over_scene
                 self.gameOverScene = GameOver(self, self.width, self.height)
                 self.gameOverScene.returnBtn.clicked.connect(self.menus)
+                self.gameOverScene.label6.hide()
                 if Server.player1Score > Server.player2Score:
                     self.gameOverScene.label4.hide()
                 elif Server.player2Score > Server.player1Score:

@@ -59,3 +59,10 @@ class GameOver(QGraphicsScene):
         self.label5.move(400, 440)
         self.label5.setStyleSheet("font: 12pt; color: #f03a54; font:bold; background-color: transparent; ")
         self.addWidget(self.label5)
+
+        self.label6 = QLabel("tournament winner is")
+        self.label6.resize(400, 30)
+        self.label6.move(100, 250)
+        self.label6.setStyleSheet("font: 9pt; color: blue; font:bold; background-color: transparent; ")
+        self.addWidget(self.label6)
+        #self.label6.hide()
