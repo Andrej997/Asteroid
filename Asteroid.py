@@ -536,4 +536,40 @@ class Asteroid(QLabel):
                 Server.player2Score = Server.player2Score + 1000
                 self.myScene.label3.setText(
                     "Player2 lives--->[" + Server.player2Lives.__str__() + "] score--->[" + Server.player2Score.__str__() + "]")
-        #dodati jos logiku za turnir kad je da isto doda po 1000 poena svakom igracu koji je ziv i presao je na sl nivo
+        else:
+            if Server.currentRound == 0:
+                if Server.player1Lives != 0:
+                    Server.player1Score = Server.player1Score + 1000
+                    self.myScene.label2.setText(
+                        "Player1 lives--->[" + Server.player1Lives.__str__() + "] score--->[" + Server.player1Score.__str__() + "]")
+                if Server.player2Lives != 0:
+                    Server.player2Score = Server.player2Score + 1000
+                    self.myScene.label3.setText(
+                        "Player2 lives--->[" + Server.player2Lives.__str__() + "] score--->[" + Server.player2Score.__str__() + "]")
+            elif Server.currentRound == 1 and Server.level >= 2: # da ne bi automatski povecao
+                if Server.player3Lives != 0:
+                    Server.player3Score = Server.player3Score + 1000
+                    self.myScene.label6.setText(
+                        "Player3 lives--->[" + Server.player3Lives.__str__() + "] score--->[" + Server.player3Score.__str__() + "]")
+                if Server.player4Lives != 0:
+                    Server.player4Score = Server.player4Score + 1000
+                    self.myScene.label7.setText(
+                        "Player4 lives--->[" + Server.player4Lives.__str__() + "] score--->[" + Server.player4Score.__str__() + "]")
+            elif Server.currentRound == 2 and Server.level >= 2:
+                if Server.Win0 == 1 and Server.player5Lives != 0:
+                    Server.player5Score = Server.player5Score + 1000
+                    self.myScene.label2.setText(
+                        "Player1 lives--->[" + Server.player5Lives.__str__() + "] score--->[" + Server.player5Score.__str__() + "]")
+                elif Server.Win0 == 2 and Server.player5Lives != 0:
+                    Server.player5Score = Server.player5Score + 1000
+                    self.myScene.label3.setText(
+                        "Player2 lives--->[" + Server.player5Lives.__str__() + "] score--->[" + Server.player5Score.__str__() + "]")
+
+                if Server.Win1 == 3 and Server.player6Lives != 0:
+                    Server.player6Score = Server.player6Score + 1000
+                    self.myScene.label6.setText(
+                        "Player3 lives--->[" + Server.player6Lives.__str__() + "] score--->[" + Server.player6Score.__str__() + "]")
+                elif Server.Win1 == 4 and Server.player6Lives != 0:
+                    Server.player6Score = Server.player6Score + 1000
+                    self.myScene.label7.setText(
+                        "Player4 lives--->[" + Server.player6Lives.__str__() + "] score--->[" + Server.player6Score.__str__() + "]")
