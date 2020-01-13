@@ -17,32 +17,22 @@ tmpss = 0
 
 
 class Asteroid(QLabel):
-    def __init__(self, w, h, scene: QGraphicsScene, uniqueIdenfier, isTour, x, y, size):
+    def __init__(self, w, h, scene: QGraphicsScene, uniqueIdenfier, isTour, asteroid_size):
         super().__init__()
         global i
         global tmpss
-        #self.size = 3
-        self.size = size
+        self.size = 3
         self.am_i_alive = 0
         self.width = w
         self.height = h
         self.myScene = scene
         self.is_tournament = isTour
         self.uniqueIdenfier = uniqueIdenfier
+        self.level_of_current_asterid = asteroid_size
         self.moveX = float(0)
         self.moveY = float(1)
         self.xFull = float(float(random.randrange(0, 500)))#pocetne koordinate asteroida
         self.yFull = float(float(random.randrange(0, 450)))#pocetne koordinate asteroida
-        # if x != 0:
-        #     self.xFull = x
-        # else:
-        #     self.xFull = float(float(random.randrange(0, 500)))#pocetne koordinate asteroida
-
-        # if y != 0:
-        #     self.yFull = y
-        # else:
-        #     self.yFull = float(float(random.randrange(0, 450)))#pocetne koordinate asteroida
-
         tmpss = tmpss + 20
         self.angle = 90
         self.timer = QBasicTimer()
@@ -54,15 +44,13 @@ class Asteroid(QLabel):
     def setAssteroidSize(self, fullPath):
         global levelOfAsteroid
         bigImage = QPixmap(fullPath)
-        if self.size == 3:
+        if self.level_of_current_asterid == 3:
             cropedImage = bigImage.scaled(80, 80, Qt.IgnoreAspectRatio, Qt.FastTransformation)
-        elif self.size == 2:
+        elif self.level_of_current_asterid == 2:
             cropedImage = bigImage.scaled(50, 50, Qt.IgnoreAspectRatio, Qt.FastTransformation)
         else:
             cropedImage = bigImage.scaled(30, 30, Qt.IgnoreAspectRatio, Qt.FastTransformation)
         return cropedImage
-
-    
 
 
     def whileTrue(self):
@@ -71,13 +59,18 @@ class Asteroid(QLabel):
         global tmp
         global coordinatesOfRocketsss
         global levelOfAsteroid
-        levelOfAsteroid = self.size
         global isDestroyedThisObj1
         if Server.activeAsteroids[self.uniqueIdenfier] == 0:
-            ast_0 = (ast_0 + 1) % 4
+            ast_0 += 1
+            # if(numberObj == 3):
+            # numberObj = 0
+            ast_0 = ast_0 % 4
+            #        print(ast_0)
             startPath = "Images/AsteroidsImg/large/c100"
             endPath = ".png"
-            
+            # if(numberObj % 2 == 0):
+            #     i = (i - 1) % 16
+            # else:
             i = (i + 1) % 16
             if i < 10:
                 fullPath = (startPath + '0' + str(i) + endPath)
@@ -127,34 +120,34 @@ class Asteroid(QLabel):
                         "Player1 lives--->[" + Server.player1Lives.__str__() + "] score--->[" + Server.player1Score.__str__() + "]")
                     Server.activeAsteroids[self.uniqueIdenfier] = 1
                     self.hide()
-                    if self.size == 3:
-                        self.myScene.createMediumAsteroids(self.xFull, self.yFull)
-                    elif self.size == 2:
-                        self.myScene.createSmallAsteroids(self.xFull, self.yFull)
 
+                    if self.level_of_current_asterid == 3:
+                        self.myScene.createMediumAsteroids()
+                        self.level_of_current_asterid = 2
+                    elif self.level_of_current_asterid == 2:
+                        self.myScene.createSmallAsteroids()
+                        self.level_of_current_asterid = 1
                     print("ASTEROID IS DESTROYED TOO!!!")
                     if Server.player1Lives == 0:  # ako je izgubio sve zivote da iskoci iz igrce
                         player_id = 1
                         self.myScene.game_is_over(player_id)
                 else:
+                    if self.level_of_current_asterid == 3:
+                        self.myScene.createMediumAsteroids()
+                        self.level_of_current_asterid = 2
+                    elif self.level_of_current_asterid == 2:
+                        self.myScene.createSmallAsteroids()
+                        self.level_of_current_asterid = 1
                     if Server.currentRound == 0:
                         Server.player1Lives = Server.player1Lives - 1
                         self.myScene.label2.setText("Player1 lives--->[" + Server.player1Lives.__str__() + "] score--->[" + Server.player1Score.__str__() + "]")
                         Server.activeAsteroids[self.uniqueIdenfier] = 1
                         self.hide()
-                        if self.size == 3:
-                            self.myScene.createMediumAsteroids(self.xFull, self.yFull)
-                        elif self.size == 2:
-                            self.myScene.createSmallAsteroids(self.xFull, self.yFull)
                     elif Server.currentRound == 1:
                         Server.player3Lives = Server.player3Lives - 1
                         self.myScene.label6.setText("Player3 lives--->[" + Server.player3Lives.__str__() + "] score--->[" + Server.player3Score.__str__() + "]")
                         Server.activeAsteroids[self.uniqueIdenfier] = 1
                         self.hide()
-                        if self.size == 3:
-                            self.myScene.createMediumAsteroids(self.xFull, self.yFull)
-                        elif self.size == 2:
-                            self.myScene.createSmallAsteroids(self.xFull, self.yFull)
                     elif Server.currentRound == 2 and Server.Win0 == 1:
                         Server.player5Lives = Server.player5Lives - 1
                         self.myScene.label2.setText(
@@ -163,10 +156,6 @@ class Asteroid(QLabel):
                             "font: 9pt; color: #f03a54; font:bold; background-color: transparent; ")
                         Server.activeAsteroids[self.uniqueIdenfier] = 1
                         self.hide()
-                        if self.size == 3:
-                            self.myScene.createMediumAsteroids(self.xFull, self.yFull)
-                        elif self.size == 2:
-                            self.myScene.createSmallAsteroids(self.xFull, self.yFull)
                     elif Server.currentRound == 2 and Server.Win0 == 2:
                         Server.player5Lives = Server.player5Lives - 1
                         self.myScene.label2.setText("Player2 lives--->[" + Server.player5Lives.__str__() + "] score--->[" + Server.player5Score.__str__() + "]")
@@ -174,10 +163,6 @@ class Asteroid(QLabel):
                             "font: 9pt; color: yellow; font:bold; background-color: transparent; ")
                         Server.activeAsteroids[self.uniqueIdenfier] = 1
                         self.hide()
-                        if self.size == 3:
-                            self.myScene.createMediumAsteroids(self.xFull, self.yFull)
-                        elif self.size == 2:
-                            self.myScene.createSmallAsteroids(self.xFull, self.yFull)
                     print("ASTEROID IS DESTROYED TOO!!!")
                     if (Server.player1Lives == 0 and Server.currentRound == 0):#ako je izgubio sve zivote da iskoci iz igrce
                         player_id = 10#rocket1
@@ -210,34 +195,34 @@ class Asteroid(QLabel):
                         "Player2 lives--->[" + Server.player2Lives.__str__() + "] score--->[" + Server.player2Score.__str__() + "]")
                     Server.activeAsteroids[self.uniqueIdenfier] = 1
                     self.hide()
-                    if self.size == 3:
-                        self.myScene.createMediumAsteroids(self.xFull, self.yFull)
-                    elif self.size == 2:
-                        self.myScene.createSmallAsteroids(self.xFull, self.yFull)
+                    if self.level_of_current_asterid == 3:
+                        self.myScene.createMediumAsteroids()
+                        self.level_of_current_asterid = 2
+                    elif self.level_of_current_asterid == 2:
+                        self.myScene.createSmallAsteroids()
+                        self.level_of_current_asterid = 1
                     print("ASTEROID IS DESTROYED TOO!!!")
                     if Server.player2Lives == 0:  # ako je izgubio sve zivote da iskoci iz igrce
                         player_id = 2
                         self.myScene.game_is_over(player_id)
                 else:
+                    if self.level_of_current_asterid == 3:
+                        self.myScene.createMediumAsteroids()
+                        self.level_of_current_asterid = 2
+                    elif self.level_of_current_asterid == 2:
+                        self.myScene.createSmallAsteroids()
+                        self.level_of_current_asterid = 1
                     if Server.currentRound == 0:
                         Server.player2Lives = Server.player2Lives - 1
                         self.myScene.label3.setText("Player2 lives--->[" + Server.player2Lives.__str__() + "] score--->[" + Server.player2Score.__str__() + "]")
                         Server.activeAsteroids[self.uniqueIdenfier] = 1
                         self.hide()
-                        if self.size == 3:
-                            self.myScene.createMediumAsteroids(self.xFull, self.yFull)
-                        elif self.size == 2:
-                            self.myScene.createSmallAsteroids(self.xFull, self.yFull)
                     elif Server.currentRound == 1:
                         Server.player4Lives = Server.player4Lives - 1
                         self.myScene.label7.setText(
                             "Player4 lives--->[" + Server.player4Lives.__str__() + "] score--->[" + Server.player4Score.__str__() + "]")
                         Server.activeAsteroids[self.uniqueIdenfier] = 1
                         self.hide()
-                        if self.size == 3:
-                            self.myScene.createMediumAsteroids(self.xFull, self.yFull)
-                        elif self.size == 2:
-                            self.myScene.createSmallAsteroids(self.xFull, self.yFull)
                     elif Server.currentRound == 2 and Server.Win1 == 3:
                         Server.player6Lives = Server.player6Lives - 1
                         self.myScene.label6.setText("Player3 lives--->[" + Server.player6Lives.__str__() + "] score--->[" + Server.player6Score.__str__() + "]")
@@ -245,10 +230,6 @@ class Asteroid(QLabel):
                             "font: 9pt; color: blue; font:bold; background-color: transparent; ")
                         Server.activeAsteroids[self.uniqueIdenfier] = 1
                         self.hide()
-                        if self.size == 3:
-                            self.myScene.createMediumAsteroids(self.xFull, self.yFull)
-                        elif self.size == 2:
-                            self.myScene.createSmallAsteroids(self.xFull, self.yFull)
                     elif Server.currentRound == 2 and Server.Win1 == 4:
                         Server.player6Lives = Server.player6Lives - 1
                         self.myScene.label6.setText(
@@ -257,10 +238,6 @@ class Asteroid(QLabel):
                             "font: 9pt; color: green; font:bold; background-color: transparent; ")
                         Server.activeAsteroids[self.uniqueIdenfier] = 1
                         self.hide()
-                        if self.size == 3:
-                            self.myScene.createMediumAsteroids(self.xFull, self.yFull)
-                        elif self.size == 2:
-                            self.myScene.createSmallAsteroids(self.xFull, self.yFull)
                     print("ASTEROID IS DESTROYED TOO!!!")
                     if (Server.player2Lives == 0 and Server.currentRound == 0):#ako je izgubio sve zivote da iskoci iz igrce
                         player_id = 20#rocket2
@@ -300,21 +277,19 @@ class Asteroid(QLabel):
                         for yb in range(3):
                             expandBulletY.append(val2 + yb)
                         if any(cy in expandBulletY for cy in thisAsteroidYCoords) and key == key2:
+                            if self.level_of_current_asterid == 3:
+                                self.myScene.createMediumAsteroids()
+                                self.level_of_current_asterid = 2
+                            elif self.level_of_current_asterid == 2:
+                                self.myScene.createSmallAsteroids()
+                                self.level_of_current_asterid = 1
                             if Server.currentRound == 0:
                                 Server.activeAsteroids[self.uniqueIdenfier] = 1
                                 Server.player1Score = Server.player1Score + 300
                                 self.myScene.label2.setText("Player1 lives--->[" + Server.player1Lives.__str__() + "] score--->[" + Server.player1Score.__str__() + "]")
                                 self.hide()
-                                self.yFull = 0
-                                self.xFull = 0
-                                if self.size == 3:
-                                    self.myScene.createMediumAsteroids(self.xFull, self.yFull)
-                                elif self.size == 2:
-                                    self.myScene.createSmallAsteroids(self.xFull, self.yFull)
-                                
-                                #print(self.xFull)
-                                #print(self.yFull)
-                                
+                                self.yFull = 1234
+                                self.xFull = 1234
                                 self.check_for_level_up()
                                 params3 = True
                                 break
@@ -325,11 +300,6 @@ class Asteroid(QLabel):
                                 self.hide()
                                 self.yFull = 1234
                                 self.xFull = 1234
-                                if self.size == 3:
-                                    self.myScene.createMediumAsteroids(self.xFull, self.yFull)
-                                elif self.size == 2:
-                                    self.myScene.createSmallAsteroids(self.xFull, self.yFull)
-                                
                                 self.check_for_level_up()
                                 params3 = True
                                 break
@@ -344,11 +314,6 @@ class Asteroid(QLabel):
                                 self.hide()
                                 self.yFull = 1234
                                 self.xFull = 1234
-                                if self.size == 3:
-                                    self.myScene.createMediumAsteroids(self.xFull, self.yFull)
-                                elif self.size == 2:
-                                    self.myScene.createSmallAsteroids(self.xFull, self.yFull)
-                                
                                 self.check_for_level_up()
                                 params3 = True
                                 break
@@ -363,10 +328,6 @@ class Asteroid(QLabel):
                                 self.hide()
                                 self.yFull = 1234
                                 self.xFull = 1234
-                                if self.size == 3:
-                                    self.myScene.createMediumAsteroids(self.xFull, self.yFull)
-                                elif self.size == 2:
-                                    self.myScene.createSmallAsteroids(self.xFull, self.yFull)
                                 self.check_for_level_up()
                                 params3 = True
                                 break
@@ -383,15 +344,17 @@ class Asteroid(QLabel):
                         expandBulletY.clear()
                         expandBulletY.append(val2)
                         if any(cy in expandBulletY for cy in thisAsteroidYCoords) and key == key2:
+                            if self.level_of_current_asterid == 3:
+                                self.myScene.createMediumAsteroids()
+                                self.level_of_current_asterid = 2
+                            elif self.level_of_current_asterid == 2:
+                                self.myScene.createSmallAsteroids()
+                                self.level_of_current_asterid = 1
                             if Server.currentRound == 0:
                                 Server.activeAsteroids[self.uniqueIdenfier] = 1
                                 Server.player2Score = Server.player2Score + 300
                                 self.myScene.label3.setText("Player2 lives--->[" + Server.player2Lives.__str__() + "] score--->[" + Server.player2Score.__str__() + "]")
                                 self.hide()
-                                if self.size == 3:
-                                    self.myScene.createMediumAsteroids(self.xFull, self.yFull)
-                                elif self.size == 2:
-                                    self.myScene.createSmallAsteroids(self.xFull, self.yFull)
                                 self.yFull = 1234
                                 self.xFull = 1234
                                 self.check_for_level_up()
@@ -404,10 +367,6 @@ class Asteroid(QLabel):
                                 self.hide()
                                 self.yFull = 1234
                                 self.xFull = 1234
-                                if self.size == 3:
-                                    self.myScene.createMediumAsteroids(self.xFull, self.yFull)
-                                elif self.size == 2:
-                                    self.myScene.createSmallAsteroids(self.xFull, self.yFull)
                                 self.check_for_level_up()
                                 params3 = True
                                 break
@@ -422,10 +381,6 @@ class Asteroid(QLabel):
                                 self.hide()
                                 self.yFull = 1234
                                 self.xFull = 1234
-                                if self.size == 3:
-                                    self.myScene.createMediumAsteroids(self.xFull, self.yFull)
-                                elif self.size == 2:
-                                    self.myScene.createSmallAsteroids(self.xFull, self.yFull)
                                 self.check_for_level_up()
                                 params3 = True
                                 break
@@ -440,10 +395,6 @@ class Asteroid(QLabel):
                                 self.hide()
                                 self.yFull = 1234
                                 self.xFull = 1234
-                                if self.size == 3:
-                                    self.myScene.createMediumAsteroids(self.xFull, self.yFull)
-                                elif self.size == 2:
-                                    self.myScene.createSmallAsteroids(self.xFull, self.yFull)
                                 self.check_for_level_up()
                                 params3 = True
                                 break
@@ -471,26 +422,10 @@ class Asteroid(QLabel):
 
 
     def check_for_level_up(self):
-        #Server.num_of_active_asteroids = Server.num_of_active_asteroids - 1
-        zivi = 0
-        broj = 0
-        o = 0
-        for o in range(len(Server.activeAsteroids)):
-            if Server.activeAsteroids[str(broj)] == 0:
-                zivi = zivi + 1
-                #print(Server.activeAsteroids)
-            #print(Server.activeAsteroids[str(broj)])
-            broj = broj + 1
-        #brojnoStanje = range(len(Server.activeAsteroids))
-        #Server.num_of_active_asteroids = Server.level
-        print(zivi)
-        Server.num_of_active_asteroids = zivi
+        Server.num_of_active_asteroids = Server.num_of_active_asteroids - 1
+        print("Perica merica")
         if Server.num_of_active_asteroids == 0:
             Server.bar_jedan_je_ziv_asteroid = False
-        else:
-            Server.bar_jedan_je_ziv_asteroid = True
-
-        #del Server.activeAsteroids[self.uniqueIdenfier]
 
         if Server.bar_jedan_je_ziv_asteroid == True:
             print("Jos je bar jedan ziv asteroid")
@@ -498,24 +433,46 @@ class Asteroid(QLabel):
             print("Svi asteroidi su mrtvi")
             Server.level = Server.level + 1
             Server.bar_jedan_je_ziv_asteroid = True
-            
+            Server.num_of_active_asteroids = 7 * Server.level
             self.myScene.label4.setText("Level : " + Server.level.__str__())
             self.myScene.createAsteroids()
+
 
     def tounamentCheck(self):
         if self.is_tournament == True:
             if Server.currentRound == 0 and Server.player1Lives == 0 and Server.player2Lives == 0:
+                Server.level = 0
                 Server.currentRound = 1
                 Server.bar_jedan_je_ziv_asteroid = False
-                Server.num_of_active_asteroids = 1
                 self.myScene.label6.show()
                 self.myScene.label7.show()
                 self.myScene.setPlayers(self.myScene.label2, self.myScene.label3)
+                if self.is_tournament == True:
+                    for key, value in Server.activeAsteroids.items():  # sakrij preostale asteroide
+                        # do something with value
+                        Server.activeAsteroids[key] = 1
+                    if len(Server.activeBigAsteroids) != 0:
+                        vals = len(Server.activeBigAsteroids).__int__()
+                        for valueArray in range(vals):
+                            Server.activeBigAsteroids[valueArray].hide()
+                            Server.activeBigAsteroids[valueArray].move(1234, 1234)
+                            # self.asteroid_0.hide()
+                            # self.asteroid_0.move(1234, 1234)
+
             elif Server.currentRound == 1 and Server.player3Lives == 0 and Server.player4Lives == 0:
+                Server.level = 0
                 Server.currentRound = 2
                 Server.bar_jedan_je_ziv_asteroid = False
-                Server.num_of_active_asteroids = 1
                 self.myScene.setPlayers(self.myScene.label6, self.myScene.label7)
+                if self.is_tournament == True:
+                    for key, value in Server.activeAsteroids.items():  # sakrij preostale asteroide
+                        # do something with value
+                        Server.activeAsteroids[key] = 1
+                    if len(Server.activeBigAsteroids) != 0:
+                        vals = len(Server.activeBigAsteroids).__int__()
+                        for valueArray in range(vals):
+                            Server.activeBigAsteroids[valueArray].hide()
+                            Server.activeBigAsteroids[valueArray].move(1234, 1234)
 
         elif self.is_tournament == False:
             print("Not tour")

@@ -11,7 +11,7 @@ import time
 import random
 from key_notifier import KeyNotifier
 
-activeBigAsteroids = []
+
 activeMediumAsteroids = []
 activeSmallAsteroids = []
 
@@ -19,7 +19,6 @@ class Tournament(QGraphicsScene):
     def __init__(self, parent, width, height):
         super().__init__(parent)
         Server.tournamentActivated = True
-        global activeBigAsteroids
         global activeMediumAsteroids
         global activeSmallAsteroids
         self.width = width
@@ -229,50 +228,42 @@ class Tournament(QGraphicsScene):
 
     def createAsteroids(self):
         o = 0
-        for key, value in Server.activeAsteroids.items():  # sakrij preostale asteroide
-            # do something with value
-            Server.activeAsteroids[key] = 1
-        if len(activeBigAsteroids) != 0:
-            vals = len(activeBigAsteroids).__int__()
-            for valueArray in range(vals):
-                activeBigAsteroids[valueArray].hide()
-                activeBigAsteroids[valueArray].move(1234, 1234)
-                #self.asteroid_0.hide()
-                #self.asteroid_0.move(1234, 1234)
+        print("Create big for second rounds")
+        print(Server.level)
         for o in range(Server.level):
-            self.asteroid_0 = Asteroid(self.width, self.height, self, Server.asteroid_id.__str__(), True, 0, 0, 3)
+            self.asteroid_0 = Asteroid(self.width, self.height, self, Server.asteroid_id.__str__(), True, 3)
             self.asteroid_0.setFocus()  # mozda i ne mora posto je timer tamo
             self.asteroid_0.setStyleSheet("background:transparent")
             self.asteroid_0.resize(60, 50)
             self.addWidget(self.asteroid_0)
-            activeBigAsteroids.append(self.asteroid_0)
+            Server.activeBigAsteroids.append(self.asteroid_0)
             Server.activeAsteroids[Server.asteroid_id.__str__()] = 0
             Server.asteroid_id = Server.asteroid_id.__int__() + 1
 
-    def createMediumAsteroids(self, xFull, yFull):
+    def createMediumAsteroids(self):
         o = 0
         for o in range(2):
-            self.asteroid_0 = Asteroid(self.width, self.height, self, Server.asteroid_id.__str__(), False, xFull, yFull, 2)
+            self.asteroid_0 = Asteroid(self.width, self.height, self, Server.asteroid_id.__str__(), True, 2)
             self.asteroid_0.setFocus()  # mozda i ne mora posto je timer tamo
             self.asteroid_0.setStyleSheet("background:transparent")
             self.asteroid_0.resize(60, 50)
             self.addWidget(self.asteroid_0)
-            activeMediumAsteroids.append(self.asteroid_0)
+            Server.activeBigAsteroids.append(self.asteroid_0)
             Server.activeAsteroids[Server.asteroid_id.__str__()] = 0
             Server.asteroid_id = Server.asteroid_id.__int__() + 1
 
-    def createSmallAsteroids(self, xFull, yFull):
+    def createSmallAsteroids(self):
         o = 0
         for o in range(2):
-            self.asteroid_0 = Asteroid(self.width, self.height, self, Server.asteroid_id.__str__(), False, xFull, yFull, 1)
+            self.asteroid_0 = Asteroid(self.width, self.height, self, Server.asteroid_id.__str__(), True, 1)
             self.asteroid_0.setFocus()  # mozda i ne mora posto je timer tamo
             self.asteroid_0.setStyleSheet("background:transparent")
             self.asteroid_0.resize(60, 50)
             self.addWidget(self.asteroid_0)
-            activeSmallAsteroids.append(self.asteroid_0)
+            Server.activeBigAsteroids.append(self.asteroid_0)
             Server.activeAsteroids[Server.asteroid_id.__str__()] = 0
             Server.asteroid_id = Server.asteroid_id.__int__() + 1
-            
+
     def game_is_over(self,
                      playerId):  # ako je game over proveri za kog igraca je game over ako je multiplayer, onog drugog pusti da jos igra
         """if self.players_number == 1:  # ako je singleplyaer cim ima 0 lives znaci mrtav je znaci game_over je
@@ -425,8 +416,6 @@ class Tournament(QGraphicsScene):
             elif Server.currentRound == 2 and Server.player5Lives > 0:
                 self.rocketnumber5.fireRocket1.emit()
 
-
-
     def timerEvent(self, a0: 'QTimerEvent'):
         if Server.bonus_time < 15:
             Server.bonus_time = Server.bonus_time + 1
@@ -497,4 +486,3 @@ class Tournament(QGraphicsScene):
             self.bonus.hide()
             self.bonus.move(1234, 1234)
             Server.bonus_time = 0
-

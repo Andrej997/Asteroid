@@ -4,9 +4,9 @@ coordinatesOfRocket2X = []
 coordinatesOfRocket2Y = []
 
 activeAsteroids = {}
-bar_jedan_je_ziv_asteroid = False
+bar_jedan_je_ziv_asteroid = True
 asteroid_id = 0
-num_of_active_asteroids = 1
+num_of_active_asteroids = 7
 
 player1Lives = 3
 player1Hitted = 0
@@ -65,6 +65,4 @@ i2 = 1
 i3 = 1
 i4 = 1
 
-# activeBigAsteroids = []
-# activeMediumAsteroids = []
-# activeSmallAsteroids = []
+activeBigAsteroids = []
