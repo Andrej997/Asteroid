@@ -211,8 +211,8 @@ class SpaceShuttle(QLabel):
 
     def up1_function(self):
         self.positionsExpand()
-        self.yFull = float(self.yFull).__sub__(self.moveY * 8)
-        self.xFull = float(self.xFull).__add__(self.moveX * 8)
+        self.yFull = float(self.yFull).__sub__(self.moveY * 8 * ((Server.level // 10) + 1))#puno je da ide *Server.level, mnogo bi ubrzao, a mora * jer samo + radi shift
+        self.xFull = float(self.xFull).__add__(self.moveX * 8 * ((Server.level // 10) + 1))
         self.move(self.xFull, self.yFull)
         if (math.floor(self.yFull) <= -20):
             self.yFull = 500
@@ -225,8 +225,8 @@ class SpaceShuttle(QLabel):
         self.update()
 
     def up2_function(self):
-        self.yFull = float(self.yFull).__sub__(self.moveY * 8)
-        self.xFull = float(self.xFull).__add__(self.moveX * 8)
+        self.yFull = float(self.yFull).__sub__(self.moveY * 8 * ((Server.level // 10) + 1))
+        self.xFull = float(self.xFull).__add__(self.moveX * 8 * ((Server.level // 10) + 1))
         self.move(self.xFull, self.yFull)
         if (math.floor(self.yFull) <= -20):
             self.yFull = 500

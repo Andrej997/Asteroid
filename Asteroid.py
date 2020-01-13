@@ -87,7 +87,7 @@ class Asteroid(QLabel):
             self.moveX = cos(radians(self.angle))
             self.moveY = sin(radians(self.angle))
             if self.level_of_current_asterid == 3:
-                self.yFull = float(self.yFull).__sub__(self.moveY * Server.level + 1)
+                self.yFull = float(self.yFull).__sub__(self.moveY * Server.level + 1)#moze i (self.moveY * ((Server.level // 10) + 1) jer ovako trenutno dosta brze ubrzava
                 self.xFull = float(self.xFull).__add__(self.moveX * Server.level + 1)
             elif self.level_of_current_asterid == 2:
                 self.yFull = float(self.yFull).__sub__(self.moveY * Server.level + 2)
@@ -513,8 +513,6 @@ class Asteroid(QLabel):
                         for valueArray in range(vals):
                             Server.activeBigAsteroids[valueArray].hide()
                             Server.activeBigAsteroids[valueArray].move(1234, 1234)
-                            # self.asteroid_0.hide()
-                            # self.asteroid_0.move(1234, 1234)
 
             elif Server.currentRound == 1 and Server.player3Lives == 0 and Server.player4Lives == 0:
                 Server.level = 0
@@ -569,7 +567,7 @@ class Asteroid(QLabel):
                         "Player1 lives--->[" + Server.player5Lives.__str__() + "] score--->[" + Server.player5Score.__str__() + "]")
                 elif Server.Win0 == 2 and Server.player5Lives != 0:
                     Server.player5Score = Server.player5Score + 1000
-                    self.myScene.label3.setText(
+                    self.myScene.label2.setText(
                         "Player2 lives--->[" + Server.player5Lives.__str__() + "] score--->[" + Server.player5Score.__str__() + "]")
 
                 if Server.Win1 == 3 and Server.player6Lives != 0:
@@ -578,5 +576,5 @@ class Asteroid(QLabel):
                         "Player3 lives--->[" + Server.player6Lives.__str__() + "] score--->[" + Server.player6Score.__str__() + "]")
                 elif Server.Win1 == 4 and Server.player6Lives != 0:
                     Server.player6Score = Server.player6Score + 1000
-                    self.myScene.label7.setText(
+                    self.myScene.label6.setText(
                         "Player4 lives--->[" + Server.player6Lives.__str__() + "] score--->[" + Server.player6Score.__str__() + "]")
