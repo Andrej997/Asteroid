@@ -65,4 +65,6 @@ i2 = 1
 i3 = 1
 i4 = 1
 
+is_multiplayer = False
+
 activeBigAsteroids = []

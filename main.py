@@ -47,10 +47,12 @@ class MainWindow(QGraphicsView):
 
     def Singleplayer(self):
         self.gameScene = GameScene(self, self.widths, self.heights, 1)#last parameter is number of players
+        Server.is_multiplayer = False
         self.setScene(self.gameScene)
 
     def Multiplayer(self):
         self.gameScene = GameScene(self, self.widths, self.heights, 2)#last parameter is number of players
+        Server.is_multiplayer = True
         self.setScene(self.gameScene)
 
     def MultiplayerTournament(self):
