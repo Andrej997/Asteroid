@@ -86,8 +86,15 @@ class Asteroid(QLabel):
 
             self.moveX = cos(radians(self.angle))
             self.moveY = sin(radians(self.angle))
-            self.yFull = float(self.yFull).__sub__(self.moveY * 3)
-            self.xFull = float(self.xFull).__add__(self.moveX * 2)
+            if self.level_of_current_asterid == 3:
+                self.yFull = float(self.yFull).__sub__(self.moveY * Server.level + 1)
+                self.xFull = float(self.xFull).__add__(self.moveX * Server.level + 1)
+            elif self.level_of_current_asterid == 2:
+                self.yFull = float(self.yFull).__sub__(self.moveY * Server.level + 2)
+                self.xFull = float(self.xFull).__add__(self.moveX * Server.level + 2)
+            elif self.level_of_current_asterid == 1:
+                self.yFull = float(self.yFull).__sub__(self.moveY * Server.level + 3)
+                self.xFull = float(self.xFull).__add__(self.moveX * Server.level + 3)
             self.move(self.xFull, self.yFull)
 
             #region unistavanje asteroida

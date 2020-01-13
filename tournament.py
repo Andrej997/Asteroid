@@ -325,7 +325,7 @@ class Tournament(QGraphicsScene):
                 self.gameOverScene.label5.hide()
                 if Server.Win0 == 1:
                     self.gameOverScene.label6.setText("Player1 Win")
-                    self.gameOverScene.label6.setStyleSheet("font: 9pt; color: red; font:bold; background-color: transparent; ")
+                    self.gameOverScene.label6.setStyleSheet("font: 9pt; color: #f03a54; font:bold; background-color: transparent; ")
                 else:
                     self.gameOverScene.label6.setText("Player2 Win")
                     self.gameOverScene.label6.setStyleSheet("font: 9pt; color: yellow; font:bold; background-color: transparent; ")
