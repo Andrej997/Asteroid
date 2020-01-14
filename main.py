@@ -4,6 +4,8 @@ from mode_scene import *
 from game_scene import *
 from about_scene import *
 from tournament import *
+from Network_Game.game_scene_network import *
+import Network_Game.network_constants
 import Server
 from  music import musicPlayer
 from multiprocessing import Process
@@ -26,6 +28,7 @@ class MainWindow(QGraphicsView):
         self.modeScene = None
         self.gameScene = None
         self.aboutScene = None
+        self.networkScene = None
         self.setScene(self.welcomeScene)
         self.show()        
 
@@ -35,6 +38,7 @@ class MainWindow(QGraphicsView):
         self.modeScene.returnBtn.clicked.connect(self.ReturnToWelcome)
         self.modeScene.multiPlayerBtn.clicked.connect(self.Multiplayer)
         self.modeScene.tournamentBtn.clicked.connect(self.MultiplayerTournament)
+        self.modeScene.network.clicked.connect(self.NetworkGame)
         self.setScene(self.modeScene)
 
     def AboutGame(self):
@@ -61,6 +65,18 @@ class MainWindow(QGraphicsView):
 
     def ReturnToWelcome(self):
         self.setScene(self.welcomeScene)
+
+    def NetworkGame(self):
+        self.networkScene = NetworkScene(self, self.widths, self.heights)
+        self.networkScene.checkPlayers.clicked.connect(self.CheckConnections)
+        if Server.second_player_is_here == True:
+            self.setScene(self.networkScene)
+            self.networkScene.alfa()
+        else:
+            self.setScene(self.networkScene)
+
+    def CheckConnections(self):
+        self.networkScene.alfa()
 
 
 if __name__ == '__main__':

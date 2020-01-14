@@ -39,7 +39,7 @@ rocket1_bulletsCounter = 0
 rocket2_bulletsCounter = 0
 maximum_of_bullets = 16
 
-level = 1   #globalna promenljiva koja odredjuje trenutni nivo
+level = 5   #globalna promenljiva koja odredjuje trenutni nivo
             #i na osnovu nje se kreiraju asteroidi
 
 bonus_time = 0 #bonus dolazi na svakih 10 sekundi [5*2]
@@ -66,7 +66,6 @@ i3 = 1
 i4 = 1
 
 is_multiplayer = False
-
 activeBigAsteroids = []
 
 second_player_is_here = False

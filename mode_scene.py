@@ -65,6 +65,16 @@ class ModeScene(QGraphicsScene):
                                      "background-color: #C14242"
                                      "}")
         self.returnBtn.resize(100, 50)
-        self.returnBtn.move(250, 230 + 65)
+        self.returnBtn.move(250, 360)
         self.addWidget(self.returnBtn)
 
+        self.network = QPushButton("Network")
+        self.network.setStyleSheet("QPushButton{"
+                                   "color: white; background-color: transparent; font:bold; border-style: outset; border-width: 2px; border-color: white"
+                                   "}"
+                                   "QPushButton:hover{"
+                                   "background-color: #C14242"
+                                   "}")
+        self.network.resize(100, 50)
+        self.network.move(250, 295)
+        self.addWidget(self.network)
