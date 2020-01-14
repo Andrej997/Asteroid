@@ -154,6 +154,7 @@ class NetworkScene(QGraphicsScene):
                     break
 
     def start_new_game(self):
+        self.set_up_scores_labels()
         if Server.second_player_is_here == False:
             self.rocketnumber1 = SpaceShuttle(self.width, self.height, self, 1)
             self.rocketnumber1.resize(60,
@@ -303,3 +304,95 @@ class NetworkScene(QGraphicsScene):
             #activeBigAsteroids.append(self.asteroid_0)
             Server.activeAsteroids[Server.asteroid_id.__str__()] = 0
             Server.asteroid_id = Server.asteroid_id.__int__() + 1
+
+    def createMediumAsteroids(self):
+        o = 0
+        for o in range(2):
+            self.asteroid_position_counter += 1
+            self.asteroid_0 = NetworkAsteroid(self.width, self.height, self, Server.asteroid_id.__str__(), False, 2, self.asteroid_position_counter)
+            self.asteroid_0.setFocus()  # mozda i ne mora posto je timer tamo
+            self.asteroid_0.setStyleSheet("background:transparent")
+            self.asteroid_0.resize(60, 50)
+            self.addWidget(self.asteroid_0)
+            #activeBigAsteroids.append(self.asteroid_0)
+            Server.activeAsteroids[Server.asteroid_id.__str__()] = 0
+            Server.asteroid_id = Server.asteroid_id.__int__() + 1
+
+    def createSmallAsteroids(self):
+        o = 0
+        for o in range(2):
+            self.asteroid_position_counter += 1
+            self.asteroid_0 = NetworkAsteroid(self.width, self.height, self, Server.asteroid_id.__str__(), False, 1, self.asteroid_position_counter)
+            self.asteroid_0.setFocus()  # mozda i ne mora posto je timer tamo
+            self.asteroid_0.setStyleSheet("background:transparent")
+            self.asteroid_0.resize(60, 50)
+            self.addWidget(self.asteroid_0)
+            #activeBigAsteroids.append(self.asteroid_0)
+            Server.activeAsteroids[Server.asteroid_id.__str__()] = 0
+            Server.asteroid_id = Server.asteroid_id.__int__() + 1
+
+    def set_up_scores_labels(self):
+        self.label11 = QLabel(
+            "Player1 lives--->[" + Server.player1Lives.__str__() + "] score--->[" + Server.player1Score.__str__() + "]")
+        self.label11.resize(400, 30)
+        self.label11.move(5, 440)
+        self.label11.setStyleSheet("font: 9pt; color: #f03a54; font:bold; background-color: transparent; ")
+        self.addWidget(self.label11)
+
+        self.label22 = QLabel(
+            "Player2 lives--->[" + Server.player2Lives.__str__() + "] score--->[" + Server.player2Score.__str__() + "]")
+        self.label22.resize(400, 30)
+        self.label22.move(5, 470)
+        self.label22.setStyleSheet("font: 9pt; color: yellow; font:bold; background-color: transparent; ")
+        self.addWidget(self.label22)
+
+        self.label33 = QLabel(
+            "Player3 lives--->[" + Server.player3Lives.__str__() + "] score--->[" + Server.player3Score.__str__() + "]")
+        self.label33.resize(400, 30)
+        self.label33.move(320, 440)
+        self.label33.setStyleSheet("font: 9pt; color: blue; font:bold; background-color: transparent; ")
+        self.addWidget(self.label33)
+
+        self.label44 = QLabel(
+            "Player4 lives--->[" + Server.player4Lives.__str__() + "] score--->[" + Server.player4Score.__str__() + "]")
+        self.label44.resize(400, 30)
+        self.label44.move(320, 470)
+        self.label44.setStyleSheet("font: 9pt; color: green; font:bold; background-color: transparent; ")
+        self.addWidget(self.label44)
+
+        self.labelLevel = QLabel("Level : " + Server.level.__str__())
+        self.labelLevel.resize(400, 30)
+        self.labelLevel.move(500, 10)
+        self.labelLevel.setStyleSheet("font: 9pt; color: white; font: bold; background-color: transparent;")
+        self.addWidget(self.labelLevel)
+
+    def game_is_over(self, playerId):  # ako je game over proveri za kog igraca je game over ako je multiplayer, onog drugog pusti da jos igra
+        if playerId == 1:
+            Server.coordinatesOfRocket1X.clear()
+            Server.coordinatesOfRocket1Y.clear()
+            self.rocketnumber1.hide()
+            self.rocketnumber1.move(1000, 1000)
+        elif playerId == 2:
+            Server.coordinatesOfRocket2X.clear()
+            Server.coordinatesOfRocket2Y.clear()
+            self.rocketnumber2.hide()
+            self.rocketnumber2.move(1000, 1000)
+
+        if Server.player1Lives == 0 and Server.player2Lives == 0:  # ako su dva playera, tek kada su oba mrtva prebaci na game_over_scene
+            self.gameOverScene = GameOver(self, self.width, self.height)
+            self.gameOverScene.returnBtn.clicked.connect(self.menus)
+            self.gameOverScene.label6.hide()
+            #self.gameOverScene.label2.hide()
+            self.gameOverScene.label3.hide()
+            self.gameOverScene.label4.hide()
+            self.gameOverScene.label5.hide()
+            if Server.player1Score > Server.player2Score:
+                self.gameOverScene.label2.setText("Network game winner is Player1.")
+            else:
+                self.gameOverScene.label2.setText("Network game winner is Player2.")
+                self.gameOverScene.label2.setStyleSheet("font: 9pt; color: yellow; font:bold; background-color: transparent; ")
+            self.gameOverScene.label2.move(140, 350)
+            self.sceneParent.setScene(self.gameOverScene)
+
+    def menus(self):
+        self.sceneParent.ExitGame()

@@ -31,8 +31,8 @@ class NetworkAsteroid(QLabel):
         self.level_of_current_asterid = asteroid_size
         self.moveX = float(0)
         self.moveY = float(1)
-        self.xFull = float(1 + positionCounter*30)#pocetne koordinate asteroida
-        self.yFull = float(1 + positionCounter*30)#pocetne koordinate asteroida
+        self.xFull = float(1 + positionCounter*12)#pocetne koordinate asteroida
+        self.yFull = float(1 + positionCounter*12)#pocetne koordinate asteroida
         tmpss = tmpss + 20
         self.angle = 90
         self.timer = QBasicTimer()
@@ -55,14 +55,14 @@ class NetworkAsteroid(QLabel):
 
     def whileTrue(self):
         global i
-        global ast_0
+        #global ast_0
         global tmp
         global coordinatesOfRocketsss
         global levelOfAsteroid
         global isDestroyedThisObj1
         if Server.activeAsteroids[self.uniqueIdenfier] == 0:
-            ast_0 += 1
-            ast_0 = ast_0 % 4
+            #ast_0 += 1
+            #ast_0 = ast_0 % 4
             startPath = "Images/AsteroidsImg/large/c100"
             endPath = ".png"
             i = (i + 1) % 16
@@ -73,10 +73,10 @@ class NetworkAsteroid(QLabel):
 
             cropedImage = self.setAssteroidSize(fullPath)
             self.setImage(cropedImage)
-            if (ast_0 % 2 == 0):
-                self.angle = self.angle - ast_0
-            else:
-                self.angle = self.angle + ast_0
+            #if (ast_0 % 2 == 0):
+            #    self.angle = self.angle - ast_0
+            #else:
+            #    self.angle = self.angle + ast_0
 
             self.moveX = cos(radians(self.angle))
             self.moveY = sin(radians(self.angle))
@@ -120,6 +120,19 @@ class NetworkAsteroid(QLabel):
                     Server.activeAsteroids[self.uniqueIdenfier] = 1
                     self.hide()
                     print("ASTEROID IS DESTROYED TOO!!!")
+                    if self.level_of_current_asterid == 3:
+                        self.myScene.createMediumAsteroids()
+                        self.level_of_current_asterid = 2
+                    elif self.level_of_current_asterid == 2:
+                        self.myScene.createSmallAsteroids()
+                        self.level_of_current_asterid = 1
+
+
+                    self.myScene.label11.setText("Player1 lives--->[" + Server.player1Lives.__str__() + "] score--->[" + Server.player1Score.__str__() + "]")
+                    self.check_for_level_up()
+                if Server.player1Lives == 0:  # ako je izgubio sve zivote da iskoci iz igrce
+                    player_id = 1
+                    self.myScene.game_is_over(player_id)
 
             if (any(checkXCords in thisAsteroidXCoords for checkXCords in Server.coordinatesOfRocket2X) and any(
                     checkYCords in thisAsteroidYCoords for checkYCords in Server.coordinatesOfRocket2Y)):#provera za raketu2 da li je udarena
@@ -128,7 +141,22 @@ class NetworkAsteroid(QLabel):
                     Server.activeAsteroids[self.uniqueIdenfier] = 1
                     self.hide()
                     print("ASTEROID IS DESTROYED TOO!!!")
+                    if self.level_of_current_asterid == 3:
+                        self.myScene.createMediumAsteroids()
+                        self.level_of_current_asterid = 2
+                    elif self.level_of_current_asterid == 2:
+                        self.myScene.createSmallAsteroids()
+                        self.level_of_current_asterid = 1
 
+
+
+
+                    self.myScene.label22.setText(
+                        "Player2 lives--->[" + Server.player2Lives.__str__() + "] score--->[" + Server.player2Score.__str__() + "]")
+                    self.check_for_level_up()
+                if Server.player2Lives == 0:  # ako je izgubio sve zivote da iskoci iz igrce
+                    player_id = 2
+                    self.myScene.game_is_over(player_id)
               #  self.check_for_level_up()
 
             expandBulletX = []
@@ -147,8 +175,19 @@ class NetworkAsteroid(QLabel):
                             expandBulletY.append(val2 + yb)
                         if any(cy in expandBulletY for cy in thisAsteroidYCoords) and key == key2:
                             asteroid_size_for_points = self.level_of_current_asterid
+                            if self.level_of_current_asterid == 3:
+                                self.myScene.createMediumAsteroids()
+                                self.level_of_current_asterid = 2
+                            elif self.level_of_current_asterid == 2:
+                                self.myScene.createSmallAsteroids()
+                                self.level_of_current_asterid = 1
+
+                            self.check_for_level_up()
                             if Server.currentRound == 0:
                                 Server.activeAsteroids[self.uniqueIdenfier] = 1
+                                Server.player1Score += 300
+                                self.myScene.label11.setText(
+                                    "Player1 lives--->[" + Server.player1Lives.__str__() + "] score--->[" + Server.player1Score.__str__() + "]")
                                 self.hide()
                                 self.yFull = 1234
                                 self.xFull = 1234
@@ -168,13 +207,25 @@ class NetworkAsteroid(QLabel):
                         expandBulletY.append(val2)
                         if any(cy in expandBulletY for cy in thisAsteroidYCoords) and key == key2:
                             asteroid_size_for_points = self.level_of_current_asterid
+                            if self.level_of_current_asterid == 3:
+                                self.myScene.createMediumAsteroids()
+                                self.level_of_current_asterid = 2
+                            elif self.level_of_current_asterid == 2:
+                                self.myScene.createSmallAsteroids()
+                                self.level_of_current_asterid = 1
+
+                            self.check_for_level_up()
                             if Server.currentRound == 0:
                                 Server.activeAsteroids[self.uniqueIdenfier] = 1
+                                Server.player2Score += 300
+                                self.myScene.label22.setText(
+                                    "Player2 lives--->[" + Server.player2Lives.__str__() + "] score--->[" + Server.player2Score.__str__() + "]")
                                 self.hide()
                                 self.yFull = 1234
                                 self.xFull = 1234
                                 params3 = True
                                 break
+
 
             expandBulletY.clear()
             expandBulletX.clear()
@@ -194,4 +245,21 @@ class NetworkAsteroid(QLabel):
     def timerEvent(self, a0: 'QTimerEvent'):
         self.whileTrue()
 
+
+    def check_for_level_up(self):
+        Server.num_of_active_asteroids = Server.num_of_active_asteroids - 1
+        print("Perica merica")
+        if Server.num_of_active_asteroids == 0:
+            Server.bar_jedan_je_ziv_asteroid = False
+
+        if Server.bar_jedan_je_ziv_asteroid == True:
+            print("Jos je bar jedan ziv asteroid")
+        elif Server.bar_jedan_je_ziv_asteroid == False:
+            print("Svi asteroidi su mrtvi")
+            Server.level = Server.level + 1
+            Server.bar_jedan_je_ziv_asteroid = True
+            Server.num_of_active_asteroids = 7 * Server.level
+            #self.bonus_1000_points_for_lvl_pass()
+            self.myScene.labelLevel.setText("Level : " + Server.level.__str__())
+            self.myScene.createAsteroids()
 
