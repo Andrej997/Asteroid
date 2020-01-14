@@ -20,10 +20,17 @@ def fnc():
             print("Connected to:", addr)
             allConnections.append(conn)
             cl_counter += 1
-            id_of_client = allConnections[num_of_connected_clients].recv(2048).decode()
-            print(id_of_client)
+            #id_of_client = allConnections[num_of_connected_clients].recv(2048).decode()
+            if cl_counter == 1:
+                print("connectovan prvi client")
+                you_are_first = "1"
+                allConnections[0].sendall(you_are_first.encode('utf8'))
+            #print(id_of_client)
             if cl_counter == 2:
+                print("connected second")
                 wait = "go"
+                second = "2"
+                allConnections[1].sendall(second.encode('utf8'))
                 allConnections[0].sendall(wait.encode('utf8'))
                 allConnections[1].sendall(wait.encode('utf8'))
 

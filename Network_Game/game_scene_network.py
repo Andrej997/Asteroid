@@ -21,8 +21,18 @@ PORT = 50005        # The same port as used by the server
 class NetworkScene(QGraphicsScene):
     def __init__(self, parent, width, height):
         super().__init__(parent)
-        #Server.second_player_is_here = True
-        Server.second_player_is_here = False
+        self.connects()
+        #self.omega()
+        text = ''
+        bin = self.s.recv(2048)
+        text += str(bin, 'utf-8')
+        print(text)
+        if text == "1":
+            Server.second_player_is_here = False
+            #print("labela.")
+        elif text == "2":
+            Server.second_player_is_here = True
+
         self.label = QLabel()
         self.pixmap = QPixmap('Images/img2.png')
         self.label.setPixmap(self.pixmap)
@@ -63,7 +73,7 @@ class NetworkScene(QGraphicsScene):
             self.key_notifier.key_signal.connect(self.__update_position__)
             self.key_notifier.start()
 
-            self.omega("pera")
+            #self.omega("pera")
         elif Server.second_player_is_here == True:
             self.width = width
             self.height = height
@@ -94,10 +104,12 @@ class NetworkScene(QGraphicsScene):
             self.key_notifier.key_signal.connect(self.__update_position__)
             self.key_notifier.start()
 
-            self.omega("player2")
-    def omega(self, mssg):
+            #self.omega("player2")
+
+    def connects(self):
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.s.connect((HOST, PORT))
+    def omega(self, mssg):
         #self.s.setblocking(0)
         text2send = '1'
         self.s.sendall(text2send.encode('utf8'))
