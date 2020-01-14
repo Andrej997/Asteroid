@@ -15,7 +15,8 @@ import socket
 from Network_Game.network_asteroids import *
 import Server
 
-HOST = 'localhost'  # The remote host
+#HOST = '192.168.0.1'  # The remote host
+HOST = 'localhost'
 PORT = 50005        # The same port as used by the server
 
 class NetworkScene(QGraphicsScene):
@@ -44,10 +45,10 @@ class NetworkScene(QGraphicsScene):
             self.height = height
             self.setSceneRect(0, 0, self.width - 2, self.height - 2)
             self.sceneParent = parent
-            self.timer = QBasicTimer()
+
             self.queue = mp.Queue()
             self.queueForPlayer2 = mp.Queue()
-            self.timer.start(5, self)
+
 
             self.label2 = QLabel("Waiting for other clients to connect.")
             self.label2.resize(400, 30)
@@ -130,6 +131,8 @@ class NetworkScene(QGraphicsScene):
                     tt = Thread(target=self.recevee)
                     tt.daemon = True
                     tt.start()
+                    self.timer = QBasicTimer()
+                    self.timer.start(5, self)
                     break
         elif Server.second_player_is_here == True:
             while True:
@@ -241,6 +244,10 @@ class NetworkScene(QGraphicsScene):
                 elif val_str == "444":
                     self.rocketnumber1.fireRocket1.emit()
         elif Server.second_player_is_here == True:
+            while not self.queueToSend.empty():
+                vals = self.queueToSend.get()
+                val_str = vals.__str__()
+                self.s.sendall(val_str.encode('utf8'))
             while not self.queue.empty():
                 val = self.queue.get()
                 # print("dobio")
@@ -262,10 +269,6 @@ class NetworkScene(QGraphicsScene):
                     self.rocketnumber2.leftRocket2.emit()
                 elif val_str == "888":
                     self.rocketnumber2.fireRocket2.emit()
-            while not self.queueToSend.empty():
-                vals = self.queueToSend.get()
-                val_str = vals.__str__()
-                self.s.sendall(val_str.encode('utf8'))
 
     def recevee(self):
         if Server.second_player_is_here == False:

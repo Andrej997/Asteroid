@@ -1,8 +1,10 @@
 # Echo server program
 import socket
 import threading
+from multiprocessing import Process
 
-server = ''
+#server = '192.168.0.1'
+server = '' # bilo koja adresa
 port = 50005
 allConnections = []
 
@@ -34,36 +36,39 @@ def fnc():
                 allConnections[0].sendall(wait.encode('utf8'))
                 allConnections[1].sendall(wait.encode('utf8'))
 
-                t1 = threading.Thread(name="Hello1", target=recevee)  # tell thread what the target function is
-                t1.start()  # tell the thread to execute the target
-                t12 = threading.Thread(name="Hello1", target=recevee2)  # tell thread what the target function is
-                t12.start()  # tell the thread to execute the target
+                #t1 = threading.Thread(name="Hello1", target=recevee)  # tell thread what the target function is
+                #t1.start()  # tell the thread to execute the target
+                #t12 = threading.Thread(name="Hello1", target=recevee2)  # tell thread what the target function is
+                #t12.start()  # tell the thread to execute the target
+                start_processing_data(allConnections)
 
                 while True:
                     #da se main ne zavrsi
                     marko = "tatic"
+                    #print(marko)
 
             num_of_connected_clients += 1
 
+def start_processing_data(connections_process):
+    recv_process_client1 = Process(target=recevee, args=(connections_process[0], connections_process[1]))
+    recv_process_client2 = Process(target=recevee2, args=(connections_process[1], connections_process[0]))
+
+    recv_process_client1.start()
+    recv_process_client2.start()
 
 
-def recevee():
+def recevee(client1, client2):
     while True:
-        print("recevee1")
-        message_is = allConnections[1].recv(2048).decode()
-        print("recevee2")
-        print(message_is)
-        allConnections[0].sendall(message_is.encode('utf8'))
-        allConnections[1].sendall(message_is.encode('utf8'))
+        message_is = client2.recv(2048).decode()
+        client1.sendall(message_is.encode('utf8'))
+        client2.sendall(message_is.encode('utf8'))
 
-def recevee2():
+def recevee2(client2, client1):
     while True:
-        print("pera zdera")
-        message_is = allConnections[0].recv(2048).decode()
-        print(message_is)
-        allConnections[0].sendall(message_is.encode('utf8'))
-        allConnections[1].sendall(message_is.encode('utf8'))
+        message_is = client1.recv(2048).decode()
+        client1.sendall(message_is.encode('utf8'))
+        client2.sendall(message_is.encode('utf8'))
 
 if __name__ == '__main__':
-        fnc()
+    fnc()
 
