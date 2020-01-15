@@ -1,10 +1,11 @@
 # Echo server program
 import socket
 import threading
+import time
 from multiprocessing import Process
 
-#server = '192.168.0.1'
-server = '' # bilo koja adresa
+server = '192.168.0.1'
+#server = '' # bilo koja adresa
 port = 50005
 allConnections = []
 
@@ -46,6 +47,7 @@ def fnc():
                     #da se main ne zavrsi
                     marko = "tatic"
                     #print(marko)
+                    time.sleep(5)
 
             num_of_connected_clients += 1
 

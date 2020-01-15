@@ -13,10 +13,11 @@ from key_notifier import KeyNotifier
 # Echo client program
 import socket
 from Network_Game.network_asteroids import *
+from Network_Game.network_spaceshuttle import *
 import Server
 
-#HOST = '192.168.0.1'  # The remote host
-HOST = 'localhost'
+HOST = '192.168.0.1'  # The remote host
+#HOST = 'localhost'
 PORT = 50005        # The same port as used by the server
 
 class NetworkScene(QGraphicsScene):
@@ -156,29 +157,51 @@ class NetworkScene(QGraphicsScene):
     def start_new_game(self):
         self.set_up_scores_labels()
         if Server.second_player_is_here == False:
-            self.rocketnumber1 = SpaceShuttle(self.width, self.height, self, 1)
+            self.rocketnumber1 = NetworkSpaceShuttle(self.width, self.height, self, 1)
             self.rocketnumber1.resize(60,
                                       50)  # slika je 50x50 ali se glupo okrece tako da je bolje ovako da bi se uvek videla cela
             self.rocketnumber1.setStyleSheet("background:transparent")
             self.addWidget(self.rocketnumber1)
 
-            self.rocketnumber2 = SpaceShuttle(self.width, self.height, self, 2)
+            self.rocketnumber2 = NetworkSpaceShuttle(self.width, self.height, self, 2)
             self.rocketnumber2.resize(60,
                                       50)  # slika je 50x50 ali se glupo okrece tako da je bolje ovako da bi se uvek videla cela
             self.rocketnumber2.setStyleSheet("background:transparent")
             self.addWidget(self.rocketnumber2)
+            self.rocketnumber3 = NetworkSpaceShuttle(self.width, self.height, self, 3)
+            self.rocketnumber3.resize(60,
+                                      50)  # slika je 50x50 ali se glupo okrece tako da je bolje ovako da bi se uvek videla cela
+            self.rocketnumber3.setStyleSheet("background:transparent")
+            self.addWidget(self.rocketnumber3)
+
+            self.rocketnumber4 = NetworkSpaceShuttle(self.width, self.height, self, 4)
+            self.rocketnumber4.resize(60,
+                                      50)  # slika je 50x50 ali se glupo okrece tako da je bolje ovako da bi se uvek videla cela
+            self.rocketnumber4.setStyleSheet("background:transparent")
+            self.addWidget(self.rocketnumber4)
         elif Server.second_player_is_here == True:
-            self.rocketnumber1 = SpaceShuttle(self.width, self.height, self, 1)
+            self.rocketnumber1 = NetworkSpaceShuttle(self.width, self.height, self, 1)
             self.rocketnumber1.resize(60,
                                       50)  # slika je 50x50 ali se glupo okrece tako da je bolje ovako da bi se uvek videla cela
             self.rocketnumber1.setStyleSheet("background:transparent")
             self.addWidget(self.rocketnumber1)
 
-            self.rocketnumber2 = SpaceShuttle(self.width, self.height, self, 2)
+            self.rocketnumber2 = NetworkSpaceShuttle(self.width, self.height, self, 2)
             self.rocketnumber2.resize(60,
                                       50)  # slika je 50x50 ali se glupo okrece tako da je bolje ovako da bi se uvek videla cela
             self.rocketnumber2.setStyleSheet("background:transparent")
             self.addWidget(self.rocketnumber2)
+            self.rocketnumber3 = NetworkSpaceShuttle(self.width, self.height, self, 3)
+            self.rocketnumber3.resize(60,
+                                      50)  # slika je 50x50 ali se glupo okrece tako da je bolje ovako da bi se uvek videla cela
+            self.rocketnumber3.setStyleSheet("background:transparent")
+            self.addWidget(self.rocketnumber3)
+
+            self.rocketnumber4 = NetworkSpaceShuttle(self.width, self.height, self, 4)
+            self.rocketnumber4.resize(60,
+                                      50)  # slika je 50x50 ali se glupo okrece tako da je bolje ovako da bi se uvek videla cela
+            self.rocketnumber4.setStyleSheet("background:transparent")
+            self.addWidget(self.rocketnumber4)
 
 
     def keyPressEvent(self, event):
@@ -188,36 +211,64 @@ class NetworkScene(QGraphicsScene):
         self.key_notifier.rem_key(event.key())
 
     def __update_position__(self, key):
-        if Server.second_player_is_here == False:
+        if Server.second_player_is_here == False:#prebaciti dole ovo da ima u oba ifaa
             if key == Qt.Key_Up and Server.player1Lives > 0:
                 #self.rocketnumber1.upRocket1.emit()
                 self.ply1 = True
                 self.queue.put(111)
-            if key == Qt.Key_Right and Server.player1Lives > 0:
+            elif key == Qt.Key_Right and Server.player1Lives > 0:
                 #self.rocketnumber1.rightRocket1.emit()
                 self.ply1 = True
                 self.queue.put(222)
-            if key == Qt.Key_Left and Server.player1Lives > 0:
+            elif key == Qt.Key_Left and Server.player1Lives > 0:
                 #self.rocketnumber1.leftRocket1.emit()
                 self.ply1 = True
                 self.queue.put(333)
-            if key == Qt.Key_Space and Server.player1Lives > 0:
+            elif key == Qt.Key_Space and Server.player1Lives > 0:
                 #self.rocketnumber1.fireRocket1.emit()
                 self.ply1 = True
                 self.queue.put(444)
-        elif Server.second_player_is_here == True:
-            if key == Qt.Key_W and Server.player2Lives > 0:  # dodata logika da moze da se pomera samo ako je idalje ziva ta raketa
+            elif key == Qt.Key_W and Server.player2Lives > 0:  # dodata logika da moze da se pomera samo ako je idalje ziva ta raketa
+                #self.rocketnumber2.upRocket2.emit()
+                self.queue.put(1111)
+            elif key == Qt.Key_A and Server.player2Lives > 0:
+                #self.rocketnumber2.leftRocket2.emit()
+                self.queue.put(2222)
+            elif key == Qt.Key_D and Server.player2Lives > 0:
+                #self.rocketnumber2.rightRocket2.emit()
+                self.queue.put(3333)
+            elif key == Qt.Key_S and Server.player2Lives > 0:
+                #self.rocketnumber2.fireRocket2.emit()
+                self.queue.put(4444)
+        elif Server.second_player_is_here == True:#tacnije tipa ovde ide if ket == up que.put(1111), if key == down que.put(2222) i onda provere i oba queue dole
+            if key == Qt.Key_W and Server.player3Lives > 0:  # dodata logika da moze da se pomera samo ako je idalje ziva ta raketa
                 #self.rocketnumber2.upRocket2.emit()
                 self.queueToSend.put(555)
-            if key == Qt.Key_A and Server.player2Lives > 0:
+            elif key == Qt.Key_A and Server.player3Lives > 0:
                 #self.rocketnumber2.leftRocket2.emit()
                 self.queueToSend.put(777)
-            if key == Qt.Key_D and Server.player2Lives > 0:
+            elif key == Qt.Key_D and Server.player3Lives > 0:
                 #self.rocketnumber2.rightRocket2.emit()
                 self.queueToSend.put(666)
-            if key == Qt.Key_S and Server.player2Lives > 0:
+            elif key == Qt.Key_S and Server.player3Lives > 0:
                 #self.rocketnumber2.fireRocket2.emit()
                 self.queueToSend.put(888)
+            elif key == Qt.Key_Up and Server.player4Lives > 0:
+                # self.rocketnumber1.upRocket1.emit()
+                #self.ply1 = True
+                self.queueToSend.put(5555)
+            elif key == Qt.Key_Right and Server.player4Lives > 0:
+                # self.rocketnumber1.rightRocket1.emit()
+                #self.ply1 = True
+                self.queueToSend.put(6666)
+            elif key == Qt.Key_Left and Server.player4Lives > 0:
+                # self.rocketnumber1.leftRocket1.emit()
+                #self.ply1 = True
+                self.queueToSend.put(7777)
+            elif key == Qt.Key_Space and Server.player4Lives > 0:
+                # self.rocketnumber1.fireRocket1.emit()
+                #self.ply1 = True
+                self.queueToSend.put(8888)
 
     def timerEvent(self, a0: 'QTimerEvent'):
         if Server.second_player_is_here == False:
@@ -229,13 +280,13 @@ class NetworkScene(QGraphicsScene):
                 vals = self.queueForPlayer2.get()
                 val_str = vals.__str__()
                 if val_str == "555":
-                    self.rocketnumber2.upRocket2.emit()
+                    self.rocketnumber3.upRocket3.emit()#napraviti signale i za raketu 3 i za raketu 4
                 elif val_str == "666":
-                    self.rocketnumber2.rightRocket2.emit()
+                    self.rocketnumber3.rightRocket3.emit()
                 elif val_str == "777":
-                    self.rocketnumber2.leftRocket2.emit()
+                    self.rocketnumber3.leftRocket3.emit()
                 elif val_str == "888":
-                    self.rocketnumber2.fireRocket2.emit()
+                    self.rocketnumber3.fireRocket3.emit()
                 elif val_str == "111":
                     self.rocketnumber1.upRocket1.emit()
                 elif val_str == "222":
@@ -244,6 +295,22 @@ class NetworkScene(QGraphicsScene):
                     self.rocketnumber1.leftRocket1.emit()
                 elif val_str == "444":
                     self.rocketnumber1.fireRocket1.emit()
+                elif val_str == "1111":
+                    self.rocketnumber2.upRocket2.emit()
+                elif val_str == "2222":
+                    self.rocketnumber2.leftRocket2.emit()
+                elif val_str == "3333":
+                    self.rocketnumber2.rightRocket2.emit()
+                elif val_str == "4444":
+                    self.rocketnumber2.fireRocket2.emit()
+                elif val_str == "5555":
+                    self.rocketnumber4.upRocket4.emit()
+                elif val_str == "6666":
+                    self.rocketnumber4.rightRocket4.emit()
+                elif val_str == "7777":
+                    self.rocketnumber4.leftRocket4.emit()
+                elif val_str == "8888":
+                    self.rocketnumber4.fireRocket4.emit()
         elif Server.second_player_is_here == True:
             while not self.queueToSend.empty():
                 vals = self.queueToSend.get()
@@ -263,13 +330,29 @@ class NetworkScene(QGraphicsScene):
                 elif val_str == "444":
                     self.rocketnumber1.fireRocket1.emit()
                 elif val_str == "555":
-                    self.rocketnumber2.upRocket2.emit()
+                    self.rocketnumber3.upRocket3.emit()
                 elif val_str == "666":
-                    self.rocketnumber2.rightRocket2.emit()
+                    self.rocketnumber3.rightRocket3.emit()
                 elif val_str == "777":
-                    self.rocketnumber2.leftRocket2.emit()
+                    self.rocketnumber3.leftRocket3.emit()
                 elif val_str == "888":
+                    self.rocketnumber3.fireRocket3.emit()
+                elif val_str == "1111":
+                    self.rocketnumber2.upRocket2.emit()
+                elif val_str == "2222":
+                    self.rocketnumber2.leftRocket2.emit()
+                elif val_str == "3333":
+                    self.rocketnumber2.rightRocket2.emit()
+                elif val_str == "4444":
                     self.rocketnumber2.fireRocket2.emit()
+                elif val_str == "5555":
+                    self.rocketnumber4.upRocket4.emit()
+                elif val_str == "6666":
+                    self.rocketnumber4.rightRocket4.emit()
+                elif val_str == "7777":
+                    self.rocketnumber4.leftRocket4.emit()
+                elif val_str == "8888":
+                    self.rocketnumber4.fireRocket4.emit()
 
     def recevee(self):
         if Server.second_player_is_here == False:
@@ -377,8 +460,20 @@ class NetworkScene(QGraphicsScene):
             Server.coordinatesOfRocket2Y.clear()
             self.rocketnumber2.hide()
             self.rocketnumber2.move(1000, 1000)
+        elif playerId == 3:
+            Server.coordinatesOfRocket3X.clear()
+            Server.coordinatesOfRocket3Y.clear()
+            self.rocketnumber3.hide()
+            self.rocketnumber3.move(1000, 1000)
+        elif playerId == 4:
+            Server.coordinatesOfRocket4X.clear()
+            Server.coordinatesOfRocket4Y.clear()
+            self.rocketnumber4.hide()
+            self.rocketnumber4.move(1000, 1000)
 
-        if Server.player1Lives == 0 and Server.player2Lives == 0:  # ako su dva playera, tek kada su oba mrtva prebaci na game_over_scene
+
+        """skupa provera jako
+        if Server.player1Lives == 0 and Server.player2Lives == 0 and Server.player3Lives == 0 and Server.player4Lives == 0:  # ako su dva playera, tek kada su oba mrtva prebaci na game_over_scene
             self.gameOverScene = GameOver(self, self.width, self.height)
             self.gameOverScene.returnBtn.clicked.connect(self.menus)
             self.gameOverScene.label6.hide()
@@ -386,13 +481,20 @@ class NetworkScene(QGraphicsScene):
             self.gameOverScene.label3.hide()
             self.gameOverScene.label4.hide()
             self.gameOverScene.label5.hide()
-            if Server.player1Score > Server.player2Score:
+            if Server.player1Score >= Server.player2Score and Server.player1Score >= Server.player3Score and Server.player1Score >= Server.player4Score:
                 self.gameOverScene.label2.setText("Network game winner is Player1.")
-            else:
+            elif Server.player2Score >= Server.player1Score and Server.player2Score >= Server.player3Score and Server.player2Score >= Server.player4Score:
                 self.gameOverScene.label2.setText("Network game winner is Player2.")
                 self.gameOverScene.label2.setStyleSheet("font: 9pt; color: yellow; font:bold; background-color: transparent; ")
+            elif Server.player3Score >= Server.player1Score and Server.player3Score >= Server.player2Score and Server.player3Score >= Server.player4Score:
+                self.gameOverScene.label2.setText("Network game winner is Player3.")
+                self.gameOverScene.label2.setStyleSheet("font: 9pt; color: blue; font:bold; background-color: transparent; ")
+            elif Server.player4Score >= Server.player1Score and Server.player4Score >= Server.player2Score and Server.player4Score >= Server.player3Score:
+                self.gameOverScene.label2.setText("Network game winner is Player2.")
+                self.gameOverScene.label2.setStyleSheet("font: 9pt; color: green; font:bold; background-color: transparent; ")
+
             self.gameOverScene.label2.move(140, 350)
             self.sceneParent.setScene(self.gameOverScene)
-
+        """
     def menus(self):
         self.sceneParent.ExitGame()

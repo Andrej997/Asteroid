@@ -2,6 +2,10 @@ coordinatesOfRocket1X = []
 coordinatesOfRocket1Y = []
 coordinatesOfRocket2X = []
 coordinatesOfRocket2Y = []
+coordinatesOfRocket3X = []
+coordinatesOfRocket3Y = []
+coordinatesOfRocket4X = []
+coordinatesOfRocket4Y = []
 
 activeAsteroids = {}
 bar_jedan_je_ziv_asteroid = True
@@ -33,10 +37,17 @@ bulletsCollection1X = {}
 bulletsCollection1Y = {}
 bulletsCollection2X = {}
 bulletsCollection2Y = {}
+bulletsCollection3X = {}
+bulletsCollection3Y = {}
+bulletsCollection4X = {}
+bulletsCollection4Y = {}
+
 bulletIDS = 0
 bulletsCounter = 0
 rocket1_bulletsCounter = 0
 rocket2_bulletsCounter = 0
+rocket3_bulletsCounter = 0
+rocket4_bulletsCounter = 0
 maximum_of_bullets = 16
 
 level = 1   #globalna promenljiva koja odredjuje trenutni nivo
