@@ -16,8 +16,8 @@ from Network_Game.network_asteroids import *
 from Network_Game.network_spaceshuttle import *
 import Server
 
-# HOST = '192.168.0.1'  # The remote host
-HOST = 'localhost'
+HOST = '192.168.0.1'  # The remote host
+#HOST = 'localhost'
 PORT = 50005  # The same port as used by the server
 
 

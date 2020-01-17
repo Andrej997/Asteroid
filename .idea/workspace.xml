@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d38018df-b388-4fa6-b4dd-34c1cdb8e34e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Asteroid.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Asteroid.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Asteroid.py" beforeDir="false" afterPath="$PROJECT_DIR$/Asteroid.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Network_Game/game_scene_network.py" beforeDir="false" afterPath="$PROJECT_DIR$/Network_Game/game_scene_network.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Network_Game/network_server.py" beforeDir="false" afterPath="$PROJECT_DIR$/Network_Game/network_server.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,30 +184,30 @@
       <screen x="1366" y="0" width="1360" height="728" />
     </state>
     <state width="552" height="453" key="DebuggerActiveHint/0.0.1366.728/1366.0.1360.728@1366.0.1360.728" timestamp="1578866374795" />
-    <state width="1345" height="143" key="GridCell.Tab.0.bottom" timestamp="1578890049848">
+    <state width="1345" height="143" key="GridCell.Tab.0.bottom" timestamp="1579257382141">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1345" height="217" key="GridCell.Tab.0.bottom/0.0.1366.728/1366.0.1360.728@0.0.1366.728" timestamp="1578838148863" />
     <state width="1339" height="161" key="GridCell.Tab.0.bottom/0.0.1366.728/1366.0.1360.728@1366.0.1360.728" timestamp="1578872065511" />
-    <state width="1345" height="143" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1578890049848" />
-    <state width="1345" height="143" key="GridCell.Tab.0.center" timestamp="1578890049848">
+    <state width="1345" height="143" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1579257382141" />
+    <state width="1345" height="143" key="GridCell.Tab.0.center" timestamp="1579257382141">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1345" height="217" key="GridCell.Tab.0.center/0.0.1366.728/1366.0.1360.728@0.0.1366.728" timestamp="1578838148863" />
     <state width="1339" height="161" key="GridCell.Tab.0.center/0.0.1366.728/1366.0.1360.728@1366.0.1360.728" timestamp="1578872065510" />
-    <state width="1345" height="143" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1578890049848" />
-    <state width="1345" height="143" key="GridCell.Tab.0.left" timestamp="1578890049848">
+    <state width="1345" height="143" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1579257382141" />
+    <state width="1345" height="143" key="GridCell.Tab.0.left" timestamp="1579257382141">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1345" height="217" key="GridCell.Tab.0.left/0.0.1366.728/1366.0.1360.728@0.0.1366.728" timestamp="1578838148862" />
     <state width="1339" height="161" key="GridCell.Tab.0.left/0.0.1366.728/1366.0.1360.728@1366.0.1360.728" timestamp="1578872065510" />
-    <state width="1345" height="143" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1578890049848" />
-    <state width="1345" height="143" key="GridCell.Tab.0.right" timestamp="1578890049848">
+    <state width="1345" height="143" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1579257382141" />
+    <state width="1345" height="143" key="GridCell.Tab.0.right" timestamp="1579257382141">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1345" height="217" key="GridCell.Tab.0.right/0.0.1366.728/1366.0.1360.728@0.0.1366.728" timestamp="1578838148863" />
     <state width="1339" height="161" key="GridCell.Tab.0.right/0.0.1366.728/1366.0.1360.728@1366.0.1360.728" timestamp="1578872065511" />
-    <state width="1345" height="143" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1578890049848" />
+    <state width="1345" height="143" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1579257382141" />
     <state width="1339" height="161" key="GridCell.Tab.1.bottom" timestamp="1578872065512">
       <screen x="1366" y="0" width="1360" height="728" />
     </state>
@@ -253,7 +252,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Asteroid.py</url>
-          <line>182</line>
+          <line>189</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -268,12 +267,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Asteroid.py</url>
-          <line>129</line>
+          <line>136</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Asteroid.py</url>
-          <line>477</line>
+          <line>484</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
