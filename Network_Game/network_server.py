@@ -4,8 +4,8 @@ import threading
 import time
 from multiprocessing import Process
 
-server = '192.168.0.1'
-#server = '' # bilo koja adresa
+#server = '192.168.0.1'
+server = '' # bilo koja adresa
 port = 50005
 allConnections = []
 

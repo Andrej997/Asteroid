@@ -16,8 +16,8 @@ from Network_Game.network_asteroids import *
 from Network_Game.network_spaceshuttle import *
 import Server
 
-HOST = '192.168.0.1'  # The remote host
-#HOST = 'localhost'
+#HOST = '192.168.0.1'  # The remote host
+HOST = 'localhost'
 PORT = 50005  # The same port as used by the server
 
 
@@ -272,11 +272,7 @@ class NetworkScene(QGraphicsScene):
 
     def __update_position__2(self, key):
         if Server.second_player_is_here == False:  # prebaciti dole ovo da ima u oba ifaa
-            if key == Qt.Key_Space and Server.player1Lives > 0:
-                # self.rocketnumber1.fireRocket1.emit()
-                self.ply1 = True
-                self.queue.put(444)
-            elif key == Qt.Key_W and Server.player2Lives > 0:  # dodata logika da moze da se pomera samo ako je idalje ziva ta raketa
+            if key == Qt.Key_W and Server.player2Lives > 0:  # dodata logika da moze da se pomera samo ako je idalje ziva ta raketa
                 # self.rocketnumber2.upRocket2.emit()
                 self.queue.put(1111)
             elif key == Qt.Key_A and Server.player2Lives > 0:
@@ -306,7 +302,7 @@ class NetworkScene(QGraphicsScene):
                 # self.ply1 = True
                 self.queueToSend.put(8888)
 
-    def prnt(self):
+    def prnt(self):#send data from client1 to server
         while True:
             while not self.queue.empty():
                 val = self.queue.get()
@@ -320,7 +316,7 @@ class NetworkScene(QGraphicsScene):
                 val_str = vals.__str__()
                 self.s.sendall(val_str.encode('utf8'))
 
-    def prntCheck(self):
+    def prntCheck(self):#recv data from client1 from server and read them from queue
         while True:
             while not self.queueForPlayer2.empty():
                 vals = self.queueForPlayer2.get()
@@ -560,30 +556,33 @@ class NetworkScene(QGraphicsScene):
             self.rocketnumber4.hide()
             self.rocketnumber4.move(1000, 1000)
 
-        """skupa provera jako
-        if Server.player1Lives == 0 and Server.player2Lives == 0 and Server.player3Lives == 0 and Server.player4Lives == 0:  # ako su dva playera, tek kada su oba mrtva prebaci na game_over_scene
-            self.gameOverScene = GameOver(self, self.width, self.height)
-            self.gameOverScene.returnBtn.clicked.connect(self.menus)
-            self.gameOverScene.label6.hide()
-            #self.gameOverScene.label2.hide()
-            self.gameOverScene.label3.hide()
-            self.gameOverScene.label4.hide()
-            self.gameOverScene.label5.hide()
-            if Server.player1Score >= Server.player2Score and Server.player1Score >= Server.player3Score and Server.player1Score >= Server.player4Score:
-                self.gameOverScene.label2.setText("Network game winner is Player1.")
-            elif Server.player2Score >= Server.player1Score and Server.player2Score >= Server.player3Score and Server.player2Score >= Server.player4Score:
-                self.gameOverScene.label2.setText("Network game winner is Player2.")
-                self.gameOverScene.label2.setStyleSheet("font: 9pt; color: yellow; font:bold; background-color: transparent; ")
-            elif Server.player3Score >= Server.player1Score and Server.player3Score >= Server.player2Score and Server.player3Score >= Server.player4Score:
-                self.gameOverScene.label2.setText("Network game winner is Player3.")
-                self.gameOverScene.label2.setStyleSheet("font: 9pt; color: blue; font:bold; background-color: transparent; ")
-            elif Server.player4Score >= Server.player1Score and Server.player4Score >= Server.player2Score and Server.player4Score >= Server.player3Score:
-                self.gameOverScene.label2.setText("Network game winner is Player2.")
-                self.gameOverScene.label2.setStyleSheet("font: 9pt; color: green; font:bold; background-color: transparent; ")
+        if Server.player1Lives == 0 and Server.player2Lives == 0 and Server.player3Lives == 0 and Server.player4Lives == 0:  # ako su 4 playera, tek kada su sva 4 mrtva prebaci na game_over_scene
+            self.check_game_over_new_scene()
+    def check_game_over_new_scene(self):
+        self.gameOverScene = GameOver(self, self.width, self.height)
+        self.gameOverScene.returnBtn.clicked.connect(self.menus)
+        self.gameOverScene.label6.hide()
+        # self.gameOverScene.label2.hide()
+        self.gameOverScene.label3.hide()
+        self.gameOverScene.label4.hide()
+        self.gameOverScene.label5.hide()
+        if Server.player1Score >= Server.player2Score and Server.player1Score >= Server.player3Score and Server.player1Score >= Server.player4Score:
+            self.gameOverScene.label2.setText("Network game winner is Player1.")
+        elif Server.player2Score >= Server.player1Score and Server.player2Score >= Server.player3Score and Server.player2Score >= Server.player4Score:
+            self.gameOverScene.label2.setText("Network game winner is Player2.")
+            self.gameOverScene.label2.setStyleSheet(
+                "font: 9pt; color: yellow; font:bold; background-color: transparent; ")
+        elif Server.player3Score >= Server.player1Score and Server.player3Score >= Server.player2Score and Server.player3Score >= Server.player4Score:
+            self.gameOverScene.label2.setText("Network game winner is Player3.")
+            self.gameOverScene.label2.setStyleSheet(
+                "font: 9pt; color: blue; font:bold; background-color: transparent; ")
+        elif Server.player4Score >= Server.player1Score and Server.player4Score >= Server.player2Score and Server.player4Score >= Server.player3Score:
+            self.gameOverScene.label2.setText("Network game winner is Player4.")
+            self.gameOverScene.label2.setStyleSheet(
+                "font: 9pt; color: green; font:bold; background-color: transparent; ")
 
-            self.gameOverScene.label2.move(140, 350)
-            self.sceneParent.setScene(self.gameOverScene)
-        """
+        self.gameOverScene.label2.move(140, 350)
+        self.sceneParent.setScene(self.gameOverScene)
 
     def menus(self):
         self.sceneParent.ExitGame()
