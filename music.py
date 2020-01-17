@@ -20,4 +20,4 @@ class musicPlayer(QObject):
         self.player.setPlaylist(self.playlist)
         self.player.play()
         print("stigao do 2")
-        self.player.setMuted(True)
+        #self.player.setMuted(True)
